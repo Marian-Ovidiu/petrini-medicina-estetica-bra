@@ -1,0 +1,250 @@
+/* ============================================================
+   00 · SOGLIA
+   ============================================================ */
+
+.soglia {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+}
+
+.soglia__disegno {
+  width: min(22vw, 190px);
+  height: auto;
+  overflow: visible;
+}
+
+.soglia__profilo {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.soglia__nomen {
+  position: absolute;
+  bottom: clamp(24px, 6vh, 56px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--lume);
+  font-variant-numeric: tabular-nums;
+}
+
+body.is-soglia {
+  overflow: hidden;
+}
+
+/* ============================================================
+   Testata
+   ============================================================ */
+
+.testata {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--gut);
+  padding: clamp(16px, 2.2vw, 28px) var(--gut);
+  pointer-events: none;
+}
+
+/* La testata scorre sopra fotografie con altissimo contrasto: senza
+   un velo finisce per stare metà sul nero e metà su uno zigomo in
+   piena luce. Il velo è un gradiente, non un rettangolo. */
+.testata::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--ground) 94%, transparent),
+    color-mix(in oklab, var(--ground) 62%, transparent) 45%,
+    transparent
+  );
+  pointer-events: none;
+  z-index: -1;
+  transition: background var(--d-slow) var(--e-drive);
+}
+
+/* Il velo copre la maggior parte dei casi; su una fotografia che
+   arriva fino al bordo superiore serve anche un filo d'ombra sotto
+   le lettere, altrimenti la testata si perde su uno zigomo in luce. */
+.testata__nome,
+.testata__coda,
+.testata__nav a {
+  text-shadow: 0 1px 12px color-mix(in oklab, var(--ground) 80%, transparent);
+}
+
+.testata > * {
+  pointer-events: auto;
+}
+
+.testata__marchio {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.testata__nome {
+  font-family: var(--display);
+  font-size: clamp(17px, 1.5vw, 22px);
+  letter-spacing: 0.16em;
+  line-height: 1;
+  color: var(--figure);
+}
+
+.testata__coda {
+  color: var(--lume);
+}
+
+.testata__nav {
+  display: flex;
+  gap: clamp(14px, 2vw, 30px);
+  align-items: baseline;
+}
+
+.testata__nav a {
+  color: var(--figure);
+  position: relative;
+  padding-block: 2px;
+}
+
+/* LA LINEA, terzo stato: il filetto che si chiude sotto la voce attiva */
+.testata__nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--sanguigna);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--d-fast) var(--e-reveal);
+}
+
+.testata__nav a:hover::after,
+.testata__nav a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 720px) {
+  .testata__nav a:not(.testata__consulto) {
+    display: none;
+  }
+  /* La coda del marchio è larga quanto lo schermo e spinge la voce
+     di menù fuori dal viewport. In verticale il marchio basta da solo. */
+  .testata__coda {
+    display: none;
+  }
+  .testata__nome {
+    font-size: 16px;
+    letter-spacing: 0.2em;
+  }
+}
+
+/* ============================================================
+   01 · LUCE
+   ============================================================ */
+
+.luce {
+  position: relative;
+}
+
+.luce__pin {
+  position: relative;
+  height: 100svh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.luce__camera {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.luce__fronte {
+  position: absolute;
+  inset: 0;
+  padding: var(--gut);
+  padding-top: clamp(84px, 12vh, 130px);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  pointer-events: none;
+}
+
+/* Il rail sta a sinistra: a destra ci vive il profilo, e un'etichetta
+   sopra uno zigomo illuminato è solo sporcizia. */
+.luce__rail {
+  top: clamp(96px, 14vh, 150px);
+  left: var(--gut);
+  color: var(--lume);
+}
+
+.luce__testo {
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: clamp(0px, 2.6vw, 44px);
+  padding-bottom: clamp(8px, 2vh, 24px);
+}
+
+/* La misura sta sul claim, non sul contenitore: `ch` si risolve sul
+   font dell'elemento, e sul contenitore varrebbe metà — la frase
+   andrebbe a capo dove non deve. */
+.luce__claim {
+  color: var(--gesso);
+  max-width: 34ch;
+  text-wrap: pretty;
+  text-shadow: 0 2px 30px rgb(10 12 15 / 0.55);
+}
+
+.luce__coord {
+  max-width: 46ch;
+}
+
+.luce__coord {
+  color: var(--lume);
+}
+
+.luce__coord em {
+  font-style: italic;
+  color: var(--accent-testo);
+}
+
+.luce__invito {
+  position: absolute;
+  bottom: var(--gut);
+  right: var(--gut);
+  color: var(--lume);
+}
+
+/* Fallback: niente WebGL, o movimento ridotto.
+   La composizione arriva già montata invece di essere mutilata. */
+.luce--statica .luce__camera {
+  display: none;
+}
+
+.luce--statica .luce__pin {
+  background:
+    linear-gradient(to top, rgb(10 12 15 / 0.9), rgb(10 12 15 / 0.15) 55%),
+    url("/media/img/volto-1920.avif") center center / cover no-repeat var(--ink);
+}
+
+@media (max-width: 720px) {
+  .luce__testo {
+    max-width: none;
+  }
+  .luce__invito {
+    display: none;
+  }
+}

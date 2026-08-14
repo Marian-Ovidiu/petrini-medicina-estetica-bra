@@ -1,0 +1,230 @@
+/* ============================================================
+   02 · CANONE
+   Campitura di gesso a tutto viewport dopo l'inchiostro dell'hero.
+   Lo stacco di superficie è la transizione: nessun bordo, nessun
+   separatore, cambia il fondo del mondo.
+   ============================================================ */
+
+.canone {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(40px, 6vh, 90px);
+  padding: clamp(90px, 16vh, 200px) var(--gut) clamp(70px, 12vh, 160px);
+}
+
+@media (min-width: 900px) {
+  .canone {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+    align-items: start;
+    column-gap: clamp(40px, 7vw, 130px);
+  }
+}
+
+/* Sotto la testata: un'etichetta verticale che incrocia le voci di
+   menù è un incidente, non una scelta editoriale. */
+.canone__rail {
+  top: clamp(160px, 24vh, 300px);
+  right: var(--gut);
+}
+
+.canone__testo {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 5vh, 64px);
+  /* Il testo resta con l'occhio mentre la lastra scorre e si
+     costruisce: la lettura sta ferma, il disegno si muove. */
+  position: sticky;
+  top: clamp(110px, 18vh, 220px);
+}
+
+@media (max-width: 899px) {
+  .canone__testo {
+    position: static;
+  }
+}
+
+.canone__titolo {
+  font-size: clamp(40px, 6.6vw, 108px);
+  line-height: 0.92;
+  letter-spacing: -0.028em;
+}
+
+.canone__titolo em {
+  color: var(--sanguigna);
+}
+
+.canone__prosa {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1em;
+  max-width: 42ch;
+}
+
+/* ── la lastra ─────────────────────────────────────────────── */
+
+.canone__lastra {
+  margin: 0;
+  /* Margine a destra per le quote: la fotografia non ospita
+     interfaccia, la ospita il foglio. */
+  padding-right: clamp(84px, 9vw, 158px);
+}
+
+/* Il rapporto è quello nativo della fotografia. Tutto ciò che deve
+   restare agganciato ai landmark vive dentro questo riquadro. */
+.canone__telaio {
+  position: relative;
+  aspect-ratio: 1696 / 2528;
+}
+
+/* La lastra sta dentro un'altezza di schermo. Non è una scelta di
+   comodo: i tre terzi devono potersi vedere *insieme*, altrimenti
+   il diagramma non dimostra niente. */
+@media (min-width: 900px) {
+  .canone__lastra {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .canone__telaio {
+    height: min(74svh, 900px);
+    width: auto;
+  }
+}
+
+.canone__foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* La fotografia sta sul gesso come una lastra appoggiata, non
+     incollata: un filo d'ombra e nessun angolo arrotondato. */
+  box-shadow: 0 30px 90px -40px rgb(10 12 15 / 0.55);
+}
+
+.canone__costruzione {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* ── la luce che gira ──────────────────────────────────────────
+   Una seconda copia della fotografia, schiarita e contrastata, che
+   si vede solo dentro un alone morbido agganciato al puntatore.
+   Su un monocromo con modellato forte legge come una sorgente che
+   si sposta — ed è l'argomento della scena, non un effetto. */
+
+.canone__lastra--viva {
+  --lx: 50%;
+  --ly: 40%;
+  --luce-img: url("/media/img/volto-tre-quarti-1080.avif");
+}
+
+.canone__lastra--viva .canone__telaio::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--luce-img);
+  background-size: cover;
+  background-position: center;
+  filter: brightness(1.55) contrast(1.22);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity var(--d-mid) var(--e-reveal);
+  -webkit-mask-image: radial-gradient(
+    circle at var(--lx) var(--ly),
+    rgb(0 0 0 / 0.9) 0%,
+    rgb(0 0 0 / 0.35) 26%,
+    transparent 52%
+  );
+  mask-image: radial-gradient(
+    circle at var(--lx) var(--ly),
+    rgb(0 0 0 / 0.9) 0%,
+    rgb(0 0 0 / 0.35) 26%,
+    transparent 52%
+  );
+  pointer-events: none;
+}
+
+.canone__lastra--viva:hover .canone__telaio::after {
+  opacity: 0.62;
+}
+
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .canone__lastra--viva .canone__telaio::after {
+    display: none;
+  }
+}
+
+.canone__punti circle {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* ── quote ─────────────────────────────────────────────────── */
+
+/* Le quote escono a destra del telaio, come in un disegno tecnico:
+   la fotografia non si sporca di interfaccia. Stando dentro il
+   telaio, però, condividono il sistema di coordinate delle linee. */
+.canone__quote {
+  position: absolute;
+  inset: 0 auto 0 100%;
+  width: clamp(84px, 9vw, 158px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: var(--figure-dim);
+}
+
+.canone__quote li {
+  position: absolute;
+  left: 14px;
+  top: calc(var(--t) * 100%);
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-size: var(--t-annot);
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+
+.canone__quote span {
+  display: block;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0.08em;
+  color: var(--accent-testo);
+}
+
+.canone__scarto {
+  margin-top: clamp(18px, 2.4vh, 30px);
+  color: var(--figure-dim);
+  border-top: 1px solid var(--rule);
+  padding-top: 14px;
+  font-variant-numeric: tabular-nums;
+  text-transform: none;
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 899px) {
+  .canone__lastra {
+    padding-right: 0;
+  }
+  /* Su schermo stretto le quote uscirebbero dalla pagina. Non si
+     comprimono: cambiano ruolo, da colonna tecnica a legenda sotto
+     la lastra. La costruzione sulla foto resta intatta. */
+  .canone__quote {
+    position: static;
+    width: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 20px;
+    margin-top: 20px;
+  }
+  .canone__quote li {
+    position: static;
+    transform: none;
+  }
+}

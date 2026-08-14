@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>CANONE — Studio di Medicina Estetica</title>
+    <meta
+      name="description"
+      content="Medicina estetica costruita sull'anatomia individuale. Non trasformiamo i volti: ne comprendiamo l'architettura."
+    />
+    <meta name="theme-color" content="#0a0c0f" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400&family=IBM+Plex+Mono:wght@400;500&family=Archivo:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="preload"
+      as="image"
+      href="/media/img/volto-2560.avif"
+      type="image/avif"
+      fetchpriority="high"
+    />
+    <link rel="preload" as="image" href="/media/img/volto-matte.avif" type="image/avif" />
+    <link rel="preload" as="image" href="/media/img/macro-1600.avif" type="image/avif" />
+  </head>
+
+  <body data-ground="ink">
+    <a class="skip-link" href="#contenuto">Vai al contenuto</a>
+
+    <!-- ══════════════════════════════════════════════════════════
+         00 · SOGLIA — la linea disegna un profilo, poi si apre
+         ══════════════════════════════════════════════════════════ -->
+    <div class="soglia" id="soglia" aria-hidden="true">
+      <svg class="soglia__disegno" viewBox="0 0 300 420" fill="none" aria-hidden="true">
+        <path
+          class="soglia__profilo"
+          d="M196 22c-34-6-70 8-88 38-14 24-16 54-13 82 2 20 6 40 3 60-2 13-9 24-16 35-4 6-9 13-7 20 2 8 12 10 20 11 6 1 13 1 18 5 4 4 4 11 3 17-2 12-6 24-4 36 3 17 18 29 34 34 24 8 51 4 74-6"
+          stroke="var(--sanguigna)"
+          stroke-width="1"
+          vector-effect="non-scaling-stroke"
+        />
+      </svg>
+      <p class="soglia__nomen tech tech--annot"><span data-nomen>zygoma</span></p>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         Interfaccia persistente
+         ══════════════════════════════════════════════════════════ -->
+    <header class="testata" data-testata data-ground="ink">
+      <a class="testata__marchio" href="#soglia">
+        <span class="testata__nome">CANONE</span>
+        <span class="tech tech--annot testata__coda">Studio di Medicina Estetica</span>
+      </a>
+      <nav class="testata__nav" aria-label="Principale">
+        <a href="#topografia" class="tech">Trattamenti</a>
+        <a href="#metodo" class="tech">Metodo</a>
+        <a href="#esiti" class="tech">Esiti</a>
+        <a href="#consulto" class="tech testata__consulto">Consulto</a>
+      </nav>
+    </header>
+
+    <main id="contenuto">
+      <!-- ════════════════════════════════════════════════════════
+           01 · LUCE
+           Lo scroll è una carrellata: si parte dentro la pelle,
+           la camera arretra fino al profilo. La parola CANONE
+           vive nello spazio e passa dietro il volto.
+           ════════════════════════════════════════════════════════ -->
+      <section class="scene luce" id="luce" data-ground="ink" data-scene="luce">
+        <div class="luce__pin">
+          <canvas class="luce__camera" data-luce-canvas></canvas>
+
+          <div class="luce__fronte">
+            <p class="rail luce__rail tech tech--annot">01 — Luce</p>
+
+            <div class="luce__testo">
+              <h1 class="lead luce__claim">
+                Non trasformiamo i volti.<br />
+                <span data-claim-2>Ne comprendiamo l'architettura.</span>
+              </h1>
+              <p class="tech tech--annot luce__coord" data-luce-coord>
+                lat. <em>canon</em> — la regola della proporzione
+              </p>
+            </div>
+
+            <p class="tech tech--annot luce__invito" data-luce-invito>
+              scorri — la camera segue
+            </p>
+          </div>
+        </div>
+
+        <!-- Titolo accessibile: quello a schermo è dipinto nel canvas -->
+        <p class="visually-hidden">
+          CANONE, studio di medicina estetica. Non trasformiamo i volti, ne
+          comprendiamo l'architettura.
+        </p>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════
+           02 · CANONE
+           Dal profilo esce una linea. Costruisce la proporzione
+           classica sopra un volto reale — e mostra di quanto quel
+           volto se ne discosta. Il canone è un riferimento, non
+           un bersaglio: è tutta la filosofia dello studio.
+           ════════════════════════════════════════════════════════ -->
+      <section class="scene canone" id="canone" data-ground="gesso" data-scene="canone">
+        <p class="rail canone__rail tech tech--annot">02 — Canone</p>
+
+        <div class="canone__testo">
+          <h2 class="display canone__titolo">
+            La proporzione<br />non è un ideale.<br /><em>È una misura.</em>
+          </h2>
+          <div class="prose canone__prosa">
+            <p>
+              Il canone classico divide il volto in tre parti uguali: attaccatura
+              dei capelli, glabella, base del naso, mento. <strong>Nessun volto
+              reale rispetta quella divisione</strong> — e non è un difetto da
+              correggere.
+            </p>
+            <p>
+              Misuriamo lo scarto perché è lì che vive la somiglianza di una
+              persona con sé stessa. Il canone ci dice dove siamo. Decidere
+              quanto muoversi è un'altra cosa, e riguarda chi abbiamo davanti.
+            </p>
+          </div>
+        </div>
+
+        <figure class="canone__lastra" data-canone-lastra>
+          <!-- Il telaio ha esattamente il rapporto della fotografia:
+               è ciò che permette alla costruzione di stare sui
+               landmark invece che vicino ai landmark. -->
+          <div class="canone__telaio">
+            <img
+              class="canone__foto"
+              src="/media/img/volto-tre-quarti-1080.avif"
+              srcset="
+                /media/img/volto-tre-quarti-720.avif   720w,
+                /media/img/volto-tre-quarti-1080.avif 1080w,
+                /media/img/volto-tre-quarti-1600.avif 1600w
+              "
+              sizes="(max-width: 899px) 92vw, 42vw"
+              width="1696"
+              height="2528"
+              alt="Ritratto in tre quarti, luce radente che descrive lo zigomo e la linea mandibolare"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <!-- Coordinate rilevate sulla fotografia, non una griglia
+                 decorativa: trichion 255, glabella 505, subnasale 810,
+                 gnathion 1140 su un'altezza di 1490. -->
+            <svg
+              class="canone__costruzione"
+              viewBox="0 0 1000 1490"
+              preserveAspectRatio="xMidYMid meet"
+              aria-hidden="true"
+            >
+              <g stroke="var(--sanguigna)" fill="none" stroke-width="1"
+                 vector-effect="non-scaling-stroke">
+                <line data-c-line x1="40" y1="255" x2="960" y2="255" />
+                <line data-c-line x1="40" y1="505" x2="960" y2="505" />
+                <line data-c-line x1="40" y1="810" x2="960" y2="810" />
+                <line data-c-line x1="40" y1="1140" x2="960" y2="1140" />
+
+                <!-- L'asse mediano è curvo perché la testa è ruotata.
+                     Una retta qui sarebbe una bugia disegnata bene. -->
+                <path
+                  data-c-line
+                  d="M505 255 C 515 380 525 430 532 505 C 545 620 610 730 640 810 C 655 900 620 1050 596 1140"
+                />
+                <!-- proiezione zigomatica -->
+                <path data-c-line d="M235 730 L40 730" />
+                <!-- ramo mandibolare -->
+                <path data-c-line d="M255 895 L596 1140" />
+              </g>
+              <g fill="var(--sanguigna)">
+                <circle data-c-dot cx="505" cy="255" r="4" />
+                <circle data-c-dot cx="532" cy="505" r="4" />
+                <circle data-c-dot cx="640" cy="810" r="4" />
+                <circle data-c-dot cx="596" cy="1140" r="4" />
+                <circle data-c-dot cx="235" cy="730" r="4" />
+                <circle data-c-dot cx="255" cy="895" r="4" />
+              </g>
+            </svg>
+
+            <!-- Le quote vivono nello stesso telaio delle linee, quindi
+                 non possono scollarsi da esse. -->
+            <ul class="canone__quote tech tech--annot" aria-hidden="true">
+              <li data-c-quota style="--t: 0.171"><span>trichion</span></li>
+              <li data-c-quota style="--t: 0.339"><span>glabella</span> 28,2%</li>
+              <li data-c-quota style="--t: 0.544"><span>subnasale</span> 34,5%</li>
+              <li data-c-quota style="--t: 0.765"><span>gnathion</span> 37,3%</li>
+            </ul>
+          </div>
+
+          <figcaption class="tech canone__scarto" data-canone-scarto>
+            terzi reali 28,2 / 34,5 / 37,3 — scarto dal canone
+            <span class="tech--accent">−5,1%</span> sul terzo superiore
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════
+           03 · STRATI
+           Un piano attraversa il volto. Sopra: la fotografia.
+           Sotto: la stessa fotografia con i vettori muscolari a
+           sanguigna. Il piano è guidato dallo scroll, e la
+           nomenclatura viaggia agganciata a lui.
+           ════════════════════════════════════════════════════════ -->
+      <section class="scene strati" id="strati" data-ground="ink" data-scene="strati">
+        <div class="strati__pin" data-strati-pin>
+          <div class="strati__telaio" data-strati-telaio>
+            <img
+              class="strati__foto"
+              src="/media/img/volto-ii-1080.avif"
+              srcset="
+                /media/img/volto-ii-720.avif   720w,
+                /media/img/volto-ii-1080.avif 1080w,
+                /media/img/volto-ii-1600.avif 1600w
+              "
+              sizes="(max-width: 899px) 88vw, 42vw"
+              width="1696"
+              height="2528"
+              alt="Ritratto frontale in luce radente, usato per la lettura anatomica"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <!-- Lo strato anatomico: visibile solo sotto il piano -->
+            <div class="strati__sotto" data-strati-sotto>
+              <svg viewBox="0 0 1000 1490" preserveAspectRatio="xMidYMid meet"
+                   aria-hidden="true">
+                <g stroke="var(--sanguigna)" fill="none" stroke-width="1"
+                   vector-effect="non-scaling-stroke" opacity="0.95">
+                  <!-- frontalis: fibre verticali sulla fronte -->
+                  <path d="M300 500 L300 330 M348 498 L348 322 M396 496 L396 318 M444 498 L444 326 M492 502 L492 338" />
+                  <!-- orbicularis oculi -->
+                  <ellipse cx="245" cy="545" rx="95" ry="55" />
+                  <ellipse cx="465" cy="545" rx="90" ry="52" />
+                  <!-- zygomaticus major -->
+                  <path d="M205 655 L250 872" />
+                  <path d="M555 650 L410 872" />
+                  <!-- massetere -->
+                  <path d="M198 690 L230 940 L292 948 L252 686 Z" />
+                  <path d="M572 682 L558 930 L498 940 L520 678 Z" />
+                  <!-- orbicularis oris -->
+                  <ellipse cx="330" cy="880" rx="105" ry="45" />
+                  <!-- depressor anguli oris + mentalis -->
+                  <path d="M250 880 L272 1000 M410 880 L394 1000 M315 962 L325 1038" />
+                </g>
+              </svg>
+            </div>
+
+            <!-- Il piano. Una linea, non un bordo di rettangolo. -->
+            <div class="strati__piano" data-strati-piano>
+              <span class="tech tech--annot strati__etichetta" data-strati-etichetta>
+                superficie
+              </span>
+            </div>
+          </div>
+
+          <div class="strati__testo">
+            <h2 class="display strati__titolo">
+              Sotto la pelle<br />ci sono quattro strati.<br />
+              <em>Se ne vede uno.</em>
+            </h2>
+            <ol class="strati__elenco tech" data-strati-elenco>
+              <li><b>01</b> superficie — texture, luce, pori</li>
+              <li><b>02</b> volume — grasso profondo, sostegno</li>
+              <li><b>03</b> muscolo — movimento, espressione</li>
+              <li><b>04</b> osso — la struttura che non cambia</li>
+            </ol>
+            <p class="prose">
+              Un'iniezione che ignora questa stratigrafia produce un volto
+              gonfio. <strong>Ogni prodotto ha il suo piano.</strong> Sapere
+              dove fermarsi conta più di sapere quanto mettere.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════
+           04 · TOPOGRAFIA
+           Campitura di sanguigna. Il volto è l'interfaccia: la
+           fotografia esiste solo dentro la sagoma del profilo, e la
+           prossimità del puntatore a una regione la fa emergere.
+           ════════════════════════════════════════════════════════ -->
+      <section
+        class="scene topografia"
+        id="topografia"
+        data-ground="sanguigna"
+        data-scene="topografia"
+      >
+        <p class="rail topografia__rail tech tech--annot">04 — Topografia</p>
+
+        <header class="topografia__intro">
+          <h2 class="display topografia__titolo">
+            I trattamenti<br />non sono prodotti.<br /><em>Sono regioni.</em>
+          </h2>
+          <p class="tech topografia__istruzione" data-topo-istruzione>
+            avvicina una regione del profilo
+          </p>
+        </header>
+
+        <div class="topografia__campo" data-topo-campo>
+          <!-- La finestra: la fotografia vive solo dentro il profilo.
+               Non cambia immagine quando si sceglie una regione — è la
+               camera che spinge dentro, con origine sul landmark. Il
+               volto resta lo stesso volto per tutta la scena. -->
+          <div class="topografia__finestra" data-topo-finestra>
+            <img
+              class="topografia__profilo"
+              data-topo-profilo
+              src="/media/img/profilo.avif"
+              alt="Profilo, usato come mappa delle regioni di trattamento"
+              width="1100" height="1536"
+              loading="lazy" decoding="async"
+            />
+          </div>
+
+          <!-- I punti sono bottoni veri: la scena si attraversa anche
+               da tastiera, non solo col mouse. -->
+          <ul class="topografia__punti" data-topo-punti>
+            <li><button type="button" data-topo-regione="fronte"
+                style="--px: 40%; --py: 14%"><span>fronte</span></button></li>
+            <li><button type="button" data-topo-regione="perioculare"
+                style="--px: 31%; --py: 30%"><span>perioculare</span></button></li>
+            <li><button type="button" data-topo-regione="zigomo"
+                style="--px: 46%; --py: 42%"><span>zigomo</span></button></li>
+            <li><button type="button" data-topo-regione="labbra"
+                style="--px: 17%; --py: 63%"><span>labbra</span></button></li>
+            <li><button type="button" data-topo-regione="mento"
+                style="--px: 25%; --py: 78%"><span>mento</span></button></li>
+            <li><button type="button" data-topo-regione="mandibola"
+                style="--px: 51%; --py: 80%"><span>mandibola</span></button></li>
+          </ul>
+        </div>
+
+        <!-- Il dossier. Non una card: una scheda clinica. -->
+        <div class="topografia__dossier" data-topo-dossier aria-live="polite">
+          <p class="tech tech--annot topografia__lat" data-d-lat>regio frontalis</p>
+          <h3 class="display topografia__nome" data-d-nome>Fronte</h3>
+          <!-- Il dettaglio macro sta nel dossier, non nella finestra:
+               è documentazione a corredo del testo clinico, e lì la
+               fotografia ravvicinata ha un motivo per esserci. -->
+          <img class="topografia__macro" data-d-macro alt="" aria-hidden="true"
+               src="/media/img/zygoma-560.avif" width="560" height="700" loading="lazy" />
+          <dl class="topografia__voci">
+            <div><dt class="tech tech--annot">obiettivo</dt><dd data-d-obiettivo></dd></div>
+            <div><dt class="tech tech--annot">ragionamento</dt><dd data-d-ragionamento></dd></div>
+            <div><dt class="tech tech--annot">procedura</dt><dd data-d-procedura></dd></div>
+            <div><dt class="tech tech--annot">durata</dt><dd data-d-durata></dd></div>
+            <div><dt class="tech tech--annot">recupero</dt><dd data-d-recupero></dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════
+           05 · METODO — respiro editoriale, quasi nessun movimento
+           ════════════════════════════════════════════════════════ -->
+      <section class="scene metodo" id="metodo" data-ground="gesso" data-scene="metodo">
+        <p class="rail metodo__rail tech tech--annot">05 — Metodo</p>
+        <h2 class="display display--colossal metodo__titolo">Metodo</h2>
+        <ol class="metodo__passi">
+          <li>
+            <p class="tech tech--annot">01 — anamnesi</p>
+            <h3 class="lead">Prima si guarda, e si guarda a lungo.</h3>
+            <p class="prose">
+              Fotografia standardizzata, analisi delle proporzioni, studio del
+              movimento. Nessuna decisione al primo incontro.
+            </p>
+          </li>
+          <li>
+            <p class="tech tech--annot">02 — progetto</p>
+            <h3 class="lead">Il piano si scrive prima di aprire una siringa.</h3>
+            <p class="prose">
+              Regioni, piani anatomici, volumi, sequenza. Quello che non
+              tratteremo è parte del progetto quanto quello che tratteremo.
+            </p>
+          </li>
+          <li>
+            <p class="tech tech--annot">03 — esecuzione</p>
+            <h3 class="lead">Poco per volta, mai tutto insieme.</h3>
+            <p class="prose">
+              Sedute distinte, dosi conservative, controllo a distanza. Si può
+              sempre aggiungere. Togliere è un'altra storia.
+            </p>
+          </li>
+          <li>
+            <p class="tech tech--annot">04 — verifica</p>
+            <h3 class="lead">Il risultato si giudica in movimento.</h3>
+            <p class="prose">
+              Controllo a quattordici giorni e a tre mesi, sul volto fermo e sul
+              volto che parla. Un viso corretto che non si muove è un errore.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════
+           06 · MEDICO — le credenziali sono il livello tecnico
+           ════════════════════════════════════════════════════════ -->
+      <section class="scene medico" id="medico" data-ground="ink" data-scene="medico">
+        <figure class="medico__ritratto">
+          <img
+            src="/media/img/medico-1080.avif"
+            srcset="/media/img/medico-720.avif 720w, /media/img/medico-1080.avif 1080w, /media/img/medico-1600.avif 1600w"
+            sizes="(max-width: 899px) 88vw, 40vw"
+            width="1856" height="2320"
+            alt="Ritratto della direttrice sanitaria dello studio"
+            loading="lazy" decoding="async"
+          />
+        </figure>
+        <div class="medico__testo">
+          <p class="rail medico__rail tech tech--annot">06 — Medico</p>
+          <h2 class="display medico__nome">Dott.ssa<br />Elena Vasari</h2>
+          <p class="lead medico__frase">
+            «Il volto di una persona non è un problema da risolvere. È il primo
+            documento che leggo, e l'ultimo che voglio contraddire.»
+          </p>
+          <dl class="medico__credenziali tech">
+            <div><dt>formazione</dt><dd>Medicina e Chirurgia, Università di Torino — 2006</dd></div>
+            <div><dt>specializzazione</dt><dd>Chirurgia Plastica, Ricostruttiva ed Estetica — 2012</dd></div>
+            <div><dt>perfezionamento</dt><dd>Anatomia facciale applicata, cadaver lab — Parigi, Vienna</dd></div>
+            <div><dt>iscrizione</dt><dd>Ordine dei Medici Chirurghi e degli Odontoiatri</dd></div>
+            <div><dt>esercizio</dt><dd>oltre 4.000 procedure iniettive dal 2012</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════
+           07 · ESITI
+           Casi clinici, non gallerie. Il ritratto resta fermo e lo
+           scroll attraversa il tempo, mentre il ragionamento si
+           annota a lato.
+           ════════════════════════════════════════════════════════ -->
+      <section class="scene esiti" id="esiti" data-ground="gesso" data-scene="esiti">
+        <p class="rail esiti__rail tech tech--annot">07 — Esiti</p>
+        <header class="esiti__intro">
+          <h2 class="display esiti__titolo">
+            Se si vede<br />il trattamento,<br /><em>è andata male.</em>
+          </h2>
+          <p class="prose">
+            Non pubblichiamo trasformazioni. Pubblichiamo casi: la condizione di
+            partenza, l'obiettivo, il ragionamento e cosa è cambiato davvero.
+          </p>
+        </header>
+
+        <article class="esiti__caso" data-esiti-caso>
+          <div class="esiti__lastra" data-esiti-lastra>
+            <img class="esiti__stato" data-stato="t0"
+                 src="/media/img/caso-i-1080.avif" width="1856" height="2320"
+                 alt="Documentazione clinica, profilo, condizione di partenza"
+                 loading="lazy" decoding="async" />
+            <img class="esiti__stato" data-stato="t90"
+                 src="/media/img/caso-i-t90-1080.avif" width="1856" height="2320"
+                 alt="Documentazione clinica, profilo, a novanta giorni"
+                 loading="lazy" decoding="async" />
+            <p class="tech tech--annot esiti__marca" data-esiti-marca>T0</p>
+          </div>
+
+          <ol class="esiti__tempo" data-esiti-tempo>
+            <li data-t="t0">
+              <p class="tech tech--annot">T0 — condizione di partenza</p>
+              <p class="prose">
+                Perdita di proiezione zigomatica, appoggio della guancia sul
+                solco naso-genieno, contorno mandibolare poco leggibile di
+                profilo. Nessuna richiesta di cambiamento: la richiesta era
+                «sembro stanca».
+              </p>
+            </li>
+            <li data-t="t14">
+              <p class="tech tech--annot">T+14 giorni — dopo la prima seduta</p>
+              <p class="prose">
+                Ripristino del sostegno profondo sull'arco zigomatico. Volume
+                minimo, piano sovraperiosteo. Nessun intervento sul solco: si
+                attende che il sostegno lo riduca da solo.
+              </p>
+            </li>
+            <li data-t="t90">
+              <p class="tech tech--annot">T+90 giorni — verifica</p>
+              <p class="prose">
+                Il solco si è ridotto senza essere trattato. Rifinitura del
+                bordo mandibolare. <strong>Il volto non è cambiato: ha
+                ripreso appoggio.</strong>
+              </p>
+            </li>
+          </ol>
+
+          <p class="tech tech--annot esiti__avvertenza">
+            Le immagini di questa pagina sono simulazioni visive prodotte per la
+            presentazione dello studio, non documentazione di pazienti reali.
+            Gli esiti individuali variano.
+          </p>
+        </article>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════
+           08 · CONSULTO — anamnesi, non "Book Now"
+           ════════════════════════════════════════════════════════ -->
+      <section class="scene consulto" id="consulto" data-ground="ink" data-scene="consulto">
+        <div class="consulto__testo">
+          <p class="rail consulto__rail tech tech--annot">08 — Consulto</p>
+          <h2 class="display consulto__titolo">
+            Il primo incontro<br /><em>non prevede aghi.</em>
+          </h2>
+          <p class="prose">
+            Sono quaranta minuti di analisi: fotografia standardizzata, studio
+            delle proporzioni e del movimento, discussione di cosa è ragionevole
+            attendersi. Alla fine riceve un progetto scritto. Può fermarsi lì.
+          </p>
+          <p class="tech consulto__costo">
+            consulto <span class="tech--accent">120 €</span> — scalato dal primo
+            trattamento
+          </p>
+        </div>
+
+        <form class="consulto__modulo" data-consulto novalidate>
+          <p class="tech tech--annot consulto__intestazione">scheda di anamnesi</p>
+
+          <div class="campo">
+            <label class="tech" for="c-nome">nome e cognome</label>
+            <input id="c-nome" name="nome" type="text" autocomplete="name" required />
+          </div>
+          <div class="campo">
+            <label class="tech" for="c-email">email</label>
+            <input id="c-email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="campo">
+            <label class="tech" for="c-eta">anno di nascita</label>
+            <input id="c-eta" name="eta" type="text" inputmode="numeric" pattern="[0-9]{4}" />
+          </div>
+          <div class="campo">
+            <label class="tech" for="c-motivo">cosa la porta qui</label>
+            <textarea id="c-motivo" name="motivo" rows="3"
+              placeholder="Descriva con parole sue, non con nomi di trattamenti."></textarea>
+          </div>
+          <div class="campo campo--precedenti">
+            <label class="tech" for="c-precedenti">trattamenti precedenti</label>
+            <textarea id="c-precedenti" name="precedenti" rows="2"
+              placeholder="Tipo, sede, data approssimativa. Anche se non ricorda i nomi."></textarea>
+          </div>
+
+          <button class="consulto__invio" type="submit">
+            <span>Richiedi il consulto</span>
+          </button>
+          <p class="tech tech--annot consulto__nota" data-consulto-esito>
+            Risposta entro due giorni lavorativi. Nessun dato viene usato per
+            finalità diverse dalla prenotazione.
+          </p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="pieno" data-ground="ink">
+      <p class="tech tech--annot">
+        CANONE — Studio di Medicina Estetica · Direttrice sanitaria Dott.ssa
+        Elena Vasari · Torino
+      </p>
+      <p class="tech tech--annot pieno__legale">
+        Le immagini del sito sono simulazioni visive, non documentazione di
+        pazienti. Nessun contenuto sostituisce una valutazione medica.
+      </p>
+    </footer>
+
+    <noscript>
+      <style>
+        .soglia { display: none; }
+      </style>
+    </noscript>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

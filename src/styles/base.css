@@ -1,0 +1,208 @@
+@import "./tokens.css";
+
+/* ============================================================
+   Reset mirato — non un reset generico
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Lenis guida lo scroll: niente smooth nativo che ci combatta contro */
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--gesso);
+  font-family: var(--body);
+  font-size: var(--t-body);
+  line-height: 1.45;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior-y: none;
+}
+
+/* Lo sfondo del documento segue la scena attiva, così le transizioni
+   fra campiture non lampeggiano ai bordi del viewport. */
+body {
+  transition: background-color var(--d-slow) var(--e-drive);
+}
+
+img,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--sanguigna);
+  color: var(--gesso);
+}
+
+/* ============================================================
+   Voci tipografiche
+   ============================================================ */
+
+.display {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: var(--t-display);
+  line-height: 0.82;
+  letter-spacing: -0.025em;
+  font-optical-sizing: auto;
+  margin: 0;
+}
+
+.display--colossal {
+  font-size: var(--t-colossal);
+  line-height: 0.78;
+  letter-spacing: -0.035em;
+}
+
+.display em {
+  font-style: italic;
+  font-weight: 300;
+}
+
+/* La voce clinica. Latino anatomico, misure, protocolli. */
+.tech {
+  font-family: var(--tech);
+  font-size: var(--t-tech);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--figure-dim);
+}
+
+.tech--annot {
+  font-size: var(--t-annot);
+  letter-spacing: 0.2em;
+}
+
+.tech--accent {
+  color: var(--accent-testo);
+}
+
+.lead {
+  font-family: var(--body);
+  font-size: var(--t-lead);
+  line-height: 1.24;
+  letter-spacing: -0.012em;
+  font-weight: 300;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.prose {
+  max-width: 46ch;
+  color: var(--figure-dim);
+  font-weight: 300;
+}
+
+.prose strong {
+  color: var(--figure);
+  font-weight: 400;
+}
+
+/* Etichetta verticale — corre lungo il bordo delle scene */
+.rail {
+  position: absolute;
+  writing-mode: vertical-rl;
+  font-family: var(--tech);
+  font-size: var(--t-annot);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--figure-dim);
+}
+
+/* ============================================================
+   Scene
+   ============================================================ */
+
+.scene {
+  position: relative;
+  background: var(--ground);
+  color: var(--figure);
+  /* Nessuna scena dichiara un bordo: le transizioni sono
+     responsabilità della scena che precede. */
+}
+
+.scene__inner {
+  padding-inline: var(--gut);
+}
+
+/* ============================================================
+   Accessibilità
+   ============================================================ */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  padding: 12px 20px;
+  background: var(--sanguigna);
+  color: var(--gesso);
+  font-family: var(--tech);
+  font-size: var(--t-tech);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transform: translateY(-120%);
+  transition: transform var(--d-fast) var(--e-reveal);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Reduced motion: il concept sopravvive, la coreografia no.
+   Le scene diventano composizioni statiche già "arrivate". */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

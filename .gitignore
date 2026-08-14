@@ -1,0 +1,12 @@
+node_modules/
+dist/
+
+# Screenshot di QA: si rigenerano con `node scripts/qa.mjs`
+qa/
+
+# I PNG grezzi di Higgsfield pesano oltre 100 MB e non finiscono mai in
+# pagina: `npm run media` li converte negli AVIF di public/media/img,
+# che invece sono versionati. Restando fuori dal repo non vengono
+# toccati dai cambi di ramo — che è quello che vogliamo, visto che
+# rigenerarli costa crediti.
+public/media/raw/

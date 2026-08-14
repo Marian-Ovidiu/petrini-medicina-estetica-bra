@@ -1,0 +1,365 @@
+/* ============================================================
+   03 · STRATI
+   ============================================================ */
+
+.strati {
+  position: relative;
+}
+
+.strati__pin {
+  min-height: 100svh;
+  display: grid;
+  align-items: center;
+  gap: clamp(36px, 5vh, 70px);
+  padding: clamp(90px, 14vh, 170px) var(--gut) clamp(70px, 12vh, 150px);
+}
+
+@media (min-width: 900px) {
+  .strati__pin {
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1fr);
+    column-gap: clamp(40px, 6vw, 110px);
+  }
+}
+
+.strati__telaio {
+  position: relative;
+  aspect-ratio: 1696 / 2528;
+  overflow: hidden;
+  justify-self: start;
+}
+
+@media (min-width: 900px) {
+  .strati__telaio {
+    height: min(74svh, 880px);
+    width: auto;
+  }
+}
+
+.strati__foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Lo strato anatomico esiste su tutta la lastra ma è ritagliato dal
+   piano: quello che sta sopra il piano non lo vede. Il taglio è una
+   clip, non una dissolvenza — un piano che attraversa ha un bordo. */
+/* Il piano scende e lascia dietro di sé ciò che ha attraversato:
+   sopra la linea si vede l'anatomia, sotto resta la fotografia
+   intatta. È il verso opposto a quello istintivo, ed è quello giusto
+   — il piano *ha già letto* la parte che sta sopra. */
+.strati__sotto {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(0 0 calc(100% - var(--piano, 0%)) 0);
+  background: rgb(10 12 15 / 0.46);
+}
+
+.strati__sotto svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.strati__piano {
+  position: absolute;
+  left: -6%;
+  right: -6%;
+  top: var(--piano, 0%);
+  height: 1px;
+  background: var(--sanguigna);
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* L'etichetta viaggia col piano e finisce sia sul fondo sia sulla
+   fotografia: colore accessibile più pastiglia, come le targhette
+   di TOPOGRAFIA. Stesso problema, stessa soluzione. */
+.strati__etichetta {
+  position: absolute;
+  right: 0;
+  bottom: 7px;
+  color: var(--accent-testo);
+  background: var(--ink);
+  padding: 3px 7px;
+  white-space: nowrap;
+}
+
+.strati__testo {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3.4vh, 44px);
+}
+
+.strati__titolo {
+  font-size: clamp(34px, 4.6vw, 76px);
+  line-height: 0.98;
+}
+
+.strati__titolo em {
+  color: var(--sanguigna);
+}
+
+.strati__elenco {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--rule);
+}
+
+.strati__elenco li {
+  display: flex;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--figure-dim);
+  transition: color var(--d-fast) var(--e-reveal);
+}
+
+.strati__elenco b {
+  color: var(--figure-dim);
+  font-weight: 400;
+  transition: color var(--d-fast) var(--e-reveal);
+}
+
+/* Lo strato che il piano sta attraversando si accende. L'elenco non
+   è una legenda: è la posizione del piano, scritta. */
+.strati__elenco li[data-attivo] {
+  color: var(--figure);
+}
+
+.strati__elenco li[data-attivo] b {
+  color: var(--sanguigna);
+}
+
+/* ============================================================
+   04 · TOPOGRAFIA
+   Campitura piena di sanguigna. È qui che la palette smette di
+   essere un accento e diventa una dichiarazione.
+   ============================================================ */
+
+.topografia {
+  position: relative;
+  /* La campitura rossa deve occupare almeno uno schermo intero:
+     è il momento in cui la palette diventa una dichiarazione, e
+     una striscia non dichiara niente. */
+  min-height: 100svh;
+  align-content: center;
+  /* Il padding alto tiene il contenuto lontano dalla testata fissa;
+     il centraggio fa il resto. Se il contenuto cresce oltre lo
+     schermo la scena si allunga invece di finirci sotto. */
+  padding: clamp(120px, 17vh, 190px) var(--gut) clamp(80px, 12vh, 140px);
+  display: grid;
+  gap: clamp(30px, 4vh, 54px);
+}
+
+@media (min-width: 1000px) {
+  .topografia {
+    /* Il dossier ha bisogno di larghezza vera: comprimerlo lo fa
+       andare a capo ogni tre parole e la scheda clinica diventa
+       una colonna di frammenti. */
+    grid-template-columns: minmax(0, 0.9fr) auto minmax(26ch, 1.15fr);
+    align-items: center;
+    column-gap: clamp(28px, 3.4vw, 60px);
+  }
+}
+
+.topografia__rail {
+  top: clamp(160px, 24vh, 300px);
+  right: var(--gut);
+}
+
+.topografia__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.topografia__titolo {
+  font-size: clamp(34px, 4.4vw, 74px);
+  line-height: 0.98;
+}
+
+.topografia__titolo em {
+  color: var(--ink);
+}
+
+.topografia__istruzione {
+  color: var(--gesso);
+  opacity: 0.78;
+  transition: opacity var(--d-mid) var(--e-reveal);
+}
+
+.topografia__campo {
+  position: relative;
+  justify-self: center;
+}
+
+/* La finestra: la fotografia esiste solo dentro la sagoma del
+   profilo. Sul rosso pieno, il volto diventa un ritaglio nella
+   campitura invece di un'immagine appoggiata sopra. */
+.topografia__finestra {
+  position: relative;
+  width: min(34vw, 340px);
+  aspect-ratio: 1100 / 1536;
+  /* Maschera in alfa: il PNG porta il ritaglio nel proprio canale
+     alfa, che è la modalità predefinita di mask-image. */
+  -webkit-mask-image: url("/media/img/profilo-mask.png");
+  mask-image: url("/media/img/profilo-mask.png");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+@media (max-width: 999px) {
+  .topografia__finestra {
+    width: min(72vw, 380px);
+  }
+}
+
+/* La spinta dentro la regione. L'origine della scala è il landmark
+   stesso, quindi la camera entra *in quel punto* invece di ingrandire
+   il centro dell'immagine. */
+.topografia__profilo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: var(--ox, 50%) var(--oy, 50%);
+  transform: scale(var(--zoom, 1));
+  transition: transform 1.05s var(--e-drive), transform-origin 1.05s var(--e-drive);
+}
+
+.topografia__punti {
+  position: absolute;
+  inset: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.topografia__punti button {
+  position: absolute;
+  left: var(--px);
+  top: var(--py);
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+}
+
+/* Il punto è piccolo; l'area cliccabile no. Sotto i 44px il tocco
+   diventa una lotteria. */
+.topografia__punti button::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gesso);
+  transition: transform var(--d-fast) var(--e-snap), background var(--d-fast) linear;
+}
+
+.topografia__punti button[data-attivo]::before,
+.topografia__punti button:hover::before,
+.topografia__punti button:focus-visible::before {
+  transform: scale(2.1);
+  background: var(--ink);
+}
+
+/* L'etichetta cade sopra una fotografia in movimento e sopra il
+   rosso pieno: il solo colore del testo non basta a garantirle un
+   contrasto. Una pastiglia d'inchiostro glielo garantisce ovunque,
+   e la fa somigliare a una targhetta da schema anatomico. */
+.topografia__punti span {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 16px);
+  transform: translateX(-50%);
+  font-family: var(--tech);
+  font-size: var(--t-annot);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--gesso);
+  background: var(--ink);
+  padding: 3px 7px;
+  opacity: 0;
+  transition: opacity var(--d-fast) var(--e-reveal);
+}
+
+.topografia__punti button[data-attivo] span,
+.topografia__punti button:hover span,
+.topografia__punti button:focus-visible span {
+  opacity: 1;
+}
+
+/* ── dossier ─────────────────────────────────────────────────── */
+
+.topografia__dossier {
+  align-self: center;
+  max-width: 42ch;
+  border-top: 1px solid var(--rule);
+  padding-top: 20px;
+}
+
+.topografia__lat {
+  color: var(--figure-dim);
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0.12em;
+}
+
+.topografia__nome {
+  font-size: clamp(28px, 3vw, 48px);
+  line-height: 1;
+  margin: 6px 0 18px;
+}
+
+.topografia__macro {
+  width: 96px;
+  height: 120px;
+  object-fit: cover;
+  float: right;
+  margin: 0 0 10px 18px;
+  transition: opacity var(--d-mid) var(--e-reveal);
+}
+
+.topografia__voci {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.topografia__voci > div {
+  display: grid;
+  grid-template-columns: 11ch minmax(0, 1fr);
+  gap: 14px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+
+.topografia__voci dt {
+  color: var(--figure-dim);
+}
+
+.topografia__voci dd {
+  margin: 0;
+  font-size: clamp(13px, 0.88vw, 15px);
+  line-height: 1.38;
+  font-weight: 300;
+}
+
+@media (max-width: 640px) {
+  .topografia__voci > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
