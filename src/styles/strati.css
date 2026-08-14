@@ -312,9 +312,10 @@
   left: 50%;
   top: calc(50% + 16px);
   transform: translateX(-50%);
-  font-family: var(--tech);
+  font-family: var(--body);
+  font-weight: 500;
   font-size: var(--t-annot);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
   color: var(--latte);
@@ -348,8 +349,9 @@
 .topografia__lat {
   color: var(--figure-dim);
   font-style: italic;
+  font-family: var(--tech);
   text-transform: none;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
 }
 
 .topografia__nome {

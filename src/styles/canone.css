@@ -83,7 +83,10 @@
 @media (min-width: 900px) {
   .canone__lastra {
     display: flex;
-    justify-content: flex-start;
+    /* In colonna: la didascalia è sorella del telaio, e in riga
+       diventava una seconda colonna che finiva sopra le quote. */
+    flex-direction: column;
+    align-items: flex-start;
   }
   .canone__telaio {
     height: min(74svh, 900px);
@@ -195,6 +198,7 @@
   font-style: italic;
   text-transform: none;
   letter-spacing: 0.08em;
+  font-family: var(--tech);
   color: var(--accent-testo);
 }
 
@@ -204,8 +208,9 @@
   border-top: 1px solid var(--rule);
   padding-top: 14px;
   font-variant-numeric: tabular-nums;
+  font-family: var(--tech);
   text-transform: none;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
 }
 
 @media (max-width: 899px) {

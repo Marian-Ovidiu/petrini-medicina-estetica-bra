@@ -113,12 +113,17 @@ a {
   font-weight: 300;
 }
 
-/* La voce clinica. Latino anatomico, misure, protocolli. */
+/* Etichetta d'interfaccia.
+   Era monospazio maiuscolo con tracking largo: quella combinazione —
+   mono + maiuscolo + spaziatura — è la firma del sito d'agenzia, e
+   sopra una navigazione suona come un manifesto invece che come un
+   menù. Il maiuscolo resta, ma su un grotesco e con il tracking
+   stretto: legge come interfaccia. */
 .tech {
-  font-family: var(--tech);
+  font-family: var(--body);
   font-size: var(--t-tech);
-  font-weight: 400;
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   line-height: 1.5;
   color: var(--figure-dim);
@@ -126,8 +131,14 @@ a {
 
 .tech--annot {
   font-size: var(--t-annot);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.06em;
 }
+
+/* Il monospazio (--tech) sopravvive solo dove il testo è già
+   minuscolo: nomenclatura latina, quote, note a piè di scheda. Lì
+   porta significato — è come si scrivono i referti — e senza il
+   maiuscolo non ha il tono che si voleva togliere. Quelle regole
+   dichiarano `font-family: var(--tech)` dove vivono. */
 
 .tech--accent {
   color: var(--accent-testo);
@@ -158,9 +169,12 @@ a {
 .rail {
   position: absolute;
   writing-mode: vertical-rl;
-  font-family: var(--tech);
+  font-family: var(--body);
+  font-weight: 500;
   font-size: var(--t-annot);
-  letter-spacing: 0.3em;
+  /* In verticale un filo di tracking in più: le lettere impilate si
+     impastano prima di quelle in riga. */
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--figure-dim);
 }
@@ -207,9 +221,10 @@ a {
   background: var(--pece);
   color: var(--latte);
   border-bottom: 2px solid var(--marker);
-  font-family: var(--tech);
+  font-family: var(--body);
+  font-weight: 500;
   font-size: var(--t-tech);
-  letter-spacing: 0.14em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   transform: translateY(-120%);
   transition: transform var(--d-fast) var(--e-reveal);

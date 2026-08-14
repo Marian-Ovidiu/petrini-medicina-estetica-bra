@@ -144,6 +144,8 @@
 .medico__credenziali dd {
   margin: 0;
   color: var(--figure-dim);
+  /* minuscolo: qui il monospazio resta, ed è voce clinica */
+  font-family: var(--tech);
   text-transform: none;
   letter-spacing: 0.04em;
 }
@@ -281,6 +283,8 @@
   grid-column: 1 / -1;
   max-width: 66ch;
   color: var(--figure-dim);
+  /* minuscolo: qui il monospazio resta, ed è voce clinica */
+  font-family: var(--tech);
   text-transform: none;
   letter-spacing: 0.06em;
   border-top: 1px solid var(--rule);
@@ -407,9 +411,10 @@
 .consulto__invio {
   align-self: flex-start;
   margin-top: clamp(26px, 4vh, 46px);
-  font-family: var(--tech);
+  font-family: var(--body);
+  font-weight: 500;
   font-size: var(--t-tech);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--figure);
   padding: 14px 0;
@@ -435,6 +440,8 @@
 
 .consulto__nota {
   color: var(--figure-dim);
+  /* minuscolo: qui il monospazio resta, ed è voce clinica */
+  font-family: var(--tech);
   text-transform: none;
   letter-spacing: 0.06em;
   max-width: 46ch;
@@ -458,6 +465,8 @@
 
 .pieno p {
   margin: 0;
+  /* minuscolo: qui il monospazio resta, ed è voce clinica */
+  font-family: var(--tech);
   text-transform: none;
   letter-spacing: 0.06em;
 }

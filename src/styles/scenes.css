@@ -28,6 +28,9 @@
   left: 50%;
   transform: translateX(-50%);
   color: var(--fumo);
+  font-family: var(--tech);
+  text-transform: none;
+  letter-spacing: 0.06em;
   font-variant-numeric: tabular-nums;
 }
 
