@@ -1,26 +1,53 @@
 /* ============================================================
-   CANONE — design tokens
-   Palette da disegno anatomico rinascimentale: carta, gesso,
-   sanguigna, inchiostro. Nessun beige-rosa-oro.
+   CANONE — design tokens · edizione brand Petrini
+
+   La palette sorgente (petrinistudiodentistico.it) è lime #93E336 +
+   magenta #EF3984 su bianco, con #484848 per il testo.
+
+   Due problemi da risolvere prima di poterla usare qui:
+
+   1. IL BRAND NON HA UN SCURO. #484848 è un medio: usato come fondo
+      renderebbe ogni scena slavata, e tutta la costruzione — la
+      fotografia scontornata, la tipografia occlusa, la linea — vive
+      sul contrasto fra un fondo profondo e una superficie chiara.
+      Invece di importare un nero estraneo, il lime viene portato in
+      fondo alla propria scala di valore: --pece è il verde del brand
+      a luminosità quasi zero. Appartiene alla famiglia.
+
+   2. IL LIME È TIMIDO NELLA SORGENTE. Sul sito originale occupa una
+      barra e qualche velatura. Qui fa il contrario: una scena intera
+      è lime pieno. È il momento in cui il brand smette di decorare e
+      dichiara. Le velature restano, ma come carta.
    ============================================================ */
 
 :root {
-  /* — superfici — */
-  --ink: #0a0c0f;
-  --ink-2: #12161b;
-  --gesso: #ede7dc;
-  --gesso-2: #e2dace;
-  --velo: #d6ccbe;
-  --sanguigna: #a8462c;
-  --sanguigna-2: #8e3822;
-  --lume: #8a959b;
+  /* — le primitive del brand — */
+  --lime: #93e336; /* il colore del marchio, a piena saturazione */
+  --lime-cupo: #6ea826;
+  --tenero: #dbffc2; /* la velatura chiara della sorgente */
+  --latte: #f8fff2; /* il bianco lavato di verde: la carta */
+  --latte-2: #eef7e6;
+
+  /* Il verde del brand a luminosità quasi nulla. Non è un nero
+     neutro: contro il lime si legge come profondità dello stesso
+     colore, non come un secondo colore. */
+  --pece: #0e1207;
+  --pece-2: #18200f;
+
+  /* Il magenta della sorgente. Qui non è un accento decorativo:
+     è la matita dermografica con cui si segna un volto prima di
+     intervenire. Da lì prende il ruolo di LA LINEA. */
+  --marker: #ef3984;
+  --marker-cupo: #a81850; /* per il testo piccolo su fondo chiaro */
+  --fumo: #7c8a72; /* verde-grigio, per le annotazioni sul scuro */
 
   /* — ruoli, riassegnati per scena via data-ground — */
-  --ground: var(--ink);
-  --figure: var(--gesso);
-  --figure-dim: color-mix(in oklab, var(--gesso) 45%, transparent);
-  --rule: color-mix(in oklab, var(--gesso) 16%, transparent);
-  --accent: var(--sanguigna);
+  --ground: var(--pece);
+  --figure: var(--latte);
+  --figure-dim: color-mix(in oklab, var(--latte) 62%, var(--pece));
+  --rule: color-mix(in oklab, var(--latte) 16%, transparent);
+  --accent: var(--marker);
+  --accent-testo: var(--marker);
 
   /* — tipografia — */
   --display: "Bodoni Moda", "Didot", "Bodoni 72", serif;
@@ -42,45 +69,77 @@
 
   /* — motion, art-directed: nessun easing di default — */
   --e-reveal: cubic-bezier(0.16, 0.84, 0.24, 1); /* entra e si posa */
-  --e-drive: cubic-bezier(0.62, 0.02, 0.2, 1);   /* movimento di camera */
-  --e-snap: cubic-bezier(0.3, 1.4, 0.4, 1);      /* aggancio meccanico */
+  --e-drive: cubic-bezier(0.62, 0.02, 0.2, 1); /* movimento di camera */
+  --e-snap: cubic-bezier(0.3, 1.4, 0.4, 1); /* aggancio meccanico */
   --d-fast: 0.32s;
   --d-mid: 0.72s;
   --d-slow: 1.4s;
 }
 
 /* Le scene ridipingono i ruoli. Le campiture sono piene, mai sfumate
-   senza motivo: INK, GESSO e SANGUIGNA si alternano a tutto viewport. */
-/* Due accenti, non uno.
-   `--accent` vale per linee, campiture e display: la grafica e il
-   testo grande passano con 3:1. `--accent-testo` vale per le
-   annotazioni: sotto i 18px serve 4.5:1, e la sanguigna piena su
-   inchiostro non ci arriva. Tenerli separati evita di schiarire il
-   colore del marchio per colpa di un'etichetta da 10px. */
+   senza motivo: PECE, LATTE e LIME si alternano a tutto viewport.
 
-[data-ground="ink"] {
-  --ground: var(--ink);
-  --figure: var(--gesso);
-  --figure-dim: color-mix(in oklab, var(--gesso) 62%, var(--ink));
-  --rule: color-mix(in oklab, var(--gesso) 16%, transparent);
-  --accent: #c25a3d;
-  --accent-testo: #e08a6b;
+   Due accenti, non uno. `--accent` vale per linee, campiture e
+   display: la grafica e il testo grande passano con 3:1.
+   `--accent-testo` vale per le annotazioni, che sotto i 18px devono
+   arrivare a 4.5:1. Tenerli separati evita di scolorire il magenta
+   del marchio per colpa di un'etichetta da 10px. */
+
+[data-ground="pece"] {
+  --ground: var(--pece);
+  --figure: var(--latte);
+  --figure-dim: color-mix(in oklab, var(--latte) 62%, var(--pece));
+  --rule: color-mix(in oklab, var(--latte) 18%, transparent);
+  --accent: var(--marker);
+  /* Il magenta pieno sul verde-nero arriva a 5,5:1 — passa così com'è.
+     È l'unico fondo su cui il colore del brand non va corretto. */
+  --accent-testo: var(--marker);
 }
 
-[data-ground="gesso"] {
-  --ground: var(--gesso);
-  --figure: var(--ink);
-  --figure-dim: color-mix(in oklab, var(--ink) 66%, var(--gesso));
-  --rule: color-mix(in oklab, var(--ink) 18%, transparent);
-  --accent: var(--sanguigna);
-  --accent-testo: #8a3620;
+[data-ground="latte"] {
+  --ground: var(--latte);
+  --figure: var(--pece);
+  --figure-dim: color-mix(in oklab, var(--pece) 66%, var(--latte));
+  --rule: color-mix(in oklab, var(--pece) 18%, transparent);
+  --accent: var(--marker);
+  --accent-testo: var(--marker-cupo);
 }
 
-[data-ground="sanguigna"] {
-  --ground: var(--sanguigna);
-  --figure: var(--gesso);
-  --figure-dim: color-mix(in oklab, var(--gesso) 82%, var(--sanguigna));
-  --rule: color-mix(in oklab, var(--gesso) 30%, transparent);
-  --accent: var(--gesso);
-  --accent-testo: var(--gesso);
+/* La scena in lime pieno. Qui il lime è chiaro, quindi la figura si
+   inverte: testo e segni diventano scuri. Il magenta resta solo per
+   la grafica — su lime non arriva a 4,5:1 e sul testo piccolo
+   sarebbe illeggibile. */
+[data-ground="lime"] {
+  --ground: var(--lime);
+  --figure: var(--pece);
+  --figure-dim: color-mix(in oklab, var(--pece) 74%, var(--lime));
+  --rule: color-mix(in oklab, var(--pece) 26%, transparent);
+  --accent: var(--pece);
+  --accent-testo: var(--pece);
+}
+
+/* ============================================================
+   Duotone
+
+   La fotografia è monocroma fredda, con le ombre virate al blu.
+   Appoggiata su un lime caldo e saturo litigherebbe: due
+   temperature che non si sono mai incontrate.
+
+   Il filtro rimappa la luminanza fra i due estremi del brand —
+   --pece nelle ombre, --latte nelle luci. Non è una velatura
+   colorata sopra l'immagine: è la fotografia ricostruita dentro
+   la scala del marchio, e infatti continua a leggersi come una
+   fotografia e non come un filtro.
+   ============================================================ */
+
+.duotone {
+  filter: url("#duotone-brand");
+}
+
+/* Chi non supporta i filtri SVG su elementi HTML vede comunque una
+   fotografia coerente, solo senza la virata. */
+@supports not (filter: url("#duotone-brand")) {
+  .duotone {
+    filter: grayscale(1) contrast(1.04);
+  }
 }

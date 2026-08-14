@@ -8,7 +8,9 @@
       name="description"
       content="Medicina estetica costruita sull'anatomia individuale. Non trasformiamo i volti: ne comprendiamo l'architettura."
     />
-    <meta name="theme-color" content="#0a0c0f" />
+    <meta name="theme-color" content="#0e1207" />
+    <!-- LA LINEA anche qui: il profilo tracciato dal marker. -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,8 +30,30 @@
     <link rel="preload" as="image" href="/media/img/macro-1600.avif" type="image/avif" />
   </head>
 
-  <body data-ground="ink">
+  <body data-ground="pece">
     <a class="skip-link" href="#contenuto">Vai al contenuto</a>
+
+    <!-- Il duotone del brand. Rimappa la luminanza della fotografia
+         fra i due estremi della palette — pece nelle ombre, latte
+         nelle luci — così le immagini monocrome fredde smettono di
+         litigare col lime caldo. Un solo filtro per tutto il sito. -->
+    <svg width="0" height="0" aria-hidden="true" focusable="false"
+         style="position: absolute">
+      <filter id="duotone-brand" color-interpolation-filters="sRGB">
+        <feColorMatrix
+          type="matrix"
+          values="0.2126 0.7152 0.0722 0 0
+                  0.2126 0.7152 0.0722 0 0
+                  0.2126 0.7152 0.0722 0 0
+                  0      0      0      1 0"
+        />
+        <feComponentTransfer>
+          <feFuncR type="table" tableValues="0.055 0.973" />
+          <feFuncG type="table" tableValues="0.071 1.000" />
+          <feFuncB type="table" tableValues="0.027 0.949" />
+        </feComponentTransfer>
+      </filter>
+    </svg>
 
     <!-- ══════════════════════════════════════════════════════════
          00 · SOGLIA — la linea disegna un profilo, poi si apre
@@ -39,7 +63,7 @@
         <path
           class="soglia__profilo"
           d="M196 22c-34-6-70 8-88 38-14 24-16 54-13 82 2 20 6 40 3 60-2 13-9 24-16 35-4 6-9 13-7 20 2 8 12 10 20 11 6 1 13 1 18 5 4 4 4 11 3 17-2 12-6 24-4 36 3 17 18 29 34 34 24 8 51 4 74-6"
-          stroke="var(--sanguigna)"
+          stroke="var(--marker)"
           stroke-width="1"
           vector-effect="non-scaling-stroke"
         />
@@ -50,7 +74,7 @@
     <!-- ══════════════════════════════════════════════════════════
          Interfaccia persistente
          ══════════════════════════════════════════════════════════ -->
-    <header class="testata" data-testata data-ground="ink">
+    <header class="testata" data-testata data-ground="pece">
       <a class="testata__marchio" href="#soglia">
         <span class="testata__nome">CANONE</span>
         <span class="tech tech--annot testata__coda">Studio di Medicina Estetica</span>
@@ -70,7 +94,7 @@
            la camera arretra fino al profilo. La parola CANONE
            vive nello spazio e passa dietro il volto.
            ════════════════════════════════════════════════════════ -->
-      <section class="scene luce" id="luce" data-ground="ink" data-scene="luce">
+      <section class="scene luce" id="luce" data-ground="pece" data-scene="luce">
         <div class="luce__pin">
           <canvas class="luce__camera" data-luce-canvas></canvas>
 
@@ -107,7 +131,7 @@
            volto se ne discosta. Il canone è un riferimento, non
            un bersaglio: è tutta la filosofia dello studio.
            ════════════════════════════════════════════════════════ -->
-      <section class="scene canone" id="canone" data-ground="gesso" data-scene="canone">
+      <section class="scene canone" id="canone" data-ground="latte" data-scene="canone">
         <p class="rail canone__rail tech tech--annot">02 — Canone</p>
 
         <div class="canone__testo">
@@ -159,7 +183,7 @@
               preserveAspectRatio="xMidYMid meet"
               aria-hidden="true"
             >
-              <g stroke="var(--sanguigna)" fill="none" stroke-width="1"
+              <g stroke="var(--marker)" fill="none" stroke-width="1"
                  vector-effect="non-scaling-stroke">
                 <line data-c-line x1="40" y1="255" x2="960" y2="255" />
                 <line data-c-line x1="40" y1="505" x2="960" y2="505" />
@@ -177,7 +201,7 @@
                 <!-- ramo mandibolare -->
                 <path data-c-line d="M255 895 L596 1140" />
               </g>
-              <g fill="var(--sanguigna)">
+              <g fill="var(--marker)">
                 <circle data-c-dot cx="505" cy="255" r="4" />
                 <circle data-c-dot cx="532" cy="505" r="4" />
                 <circle data-c-dot cx="640" cy="810" r="4" />
@@ -211,7 +235,7 @@
            sanguigna. Il piano è guidato dallo scroll, e la
            nomenclatura viaggia agganciata a lui.
            ════════════════════════════════════════════════════════ -->
-      <section class="scene strati" id="strati" data-ground="ink" data-scene="strati">
+      <section class="scene strati" id="strati" data-ground="pece" data-scene="strati">
         <div class="strati__pin" data-strati-pin>
           <div class="strati__telaio" data-strati-telaio>
             <img
@@ -234,7 +258,7 @@
             <div class="strati__sotto" data-strati-sotto>
               <svg viewBox="0 0 1000 1490" preserveAspectRatio="xMidYMid meet"
                    aria-hidden="true">
-                <g stroke="var(--sanguigna)" fill="none" stroke-width="1"
+                <g stroke="var(--marker)" fill="none" stroke-width="1"
                    vector-effect="non-scaling-stroke" opacity="0.95">
                   <!-- frontalis: fibre verticali sulla fronte -->
                   <path d="M300 500 L300 330 M348 498 L348 322 M396 496 L396 318 M444 498 L444 326 M492 502 L492 338" />
@@ -292,7 +316,7 @@
       <section
         class="scene topografia"
         id="topografia"
-        data-ground="sanguigna"
+        data-ground="lime"
         data-scene="topografia"
       >
         <p class="rail topografia__rail tech tech--annot">04 — Topografia</p>
@@ -321,6 +345,9 @@
               loading="lazy" decoding="async"
             />
           </div>
+
+          <!-- L'anello si chiude sulla regione avvicinata -->
+          <div class="topografia__anello" data-topo-anello aria-hidden="true"></div>
 
           <!-- I punti sono bottoni veri: la scena si attraversa anche
                da tastiera, non solo col mouse. -->
@@ -362,7 +389,7 @@
       <!-- ════════════════════════════════════════════════════════
            05 · METODO — respiro editoriale, quasi nessun movimento
            ════════════════════════════════════════════════════════ -->
-      <section class="scene metodo" id="metodo" data-ground="gesso" data-scene="metodo">
+      <section class="scene metodo" id="metodo" data-ground="latte" data-scene="metodo">
         <p class="rail metodo__rail tech tech--annot">05 — Metodo</p>
         <h2 class="display display--colossal metodo__titolo">Metodo</h2>
         <ol class="metodo__passi">
@@ -404,7 +431,7 @@
       <!-- ════════════════════════════════════════════════════════
            06 · MEDICO — le credenziali sono il livello tecnico
            ════════════════════════════════════════════════════════ -->
-      <section class="scene medico" id="medico" data-ground="ink" data-scene="medico">
+      <section class="scene medico" id="medico" data-ground="pece" data-scene="medico">
         <figure class="medico__ritratto">
           <img
             src="/media/img/medico-1080.avif"
@@ -438,7 +465,7 @@
            scroll attraversa il tempo, mentre il ragionamento si
            annota a lato.
            ════════════════════════════════════════════════════════ -->
-      <section class="scene esiti" id="esiti" data-ground="gesso" data-scene="esiti">
+      <section class="scene esiti" id="esiti" data-ground="latte" data-scene="esiti">
         <p class="rail esiti__rail tech tech--annot">07 — Esiti</p>
         <header class="esiti__intro">
           <h2 class="display esiti__titolo">
@@ -502,7 +529,7 @@
       <!-- ════════════════════════════════════════════════════════
            08 · CONSULTO — anamnesi, non "Book Now"
            ════════════════════════════════════════════════════════ -->
-      <section class="scene consulto" id="consulto" data-ground="ink" data-scene="consulto">
+      <section class="scene consulto" id="consulto" data-ground="pece" data-scene="consulto">
         <div class="consulto__testo">
           <p class="rail consulto__rail tech tech--annot">08 — Consulto</p>
           <h2 class="display consulto__titolo">
@@ -556,7 +583,7 @@
       </section>
     </main>
 
-    <footer class="pieno" data-ground="ink">
+    <footer class="pieno" data-ground="pece">
       <p class="tech tech--annot">
         CANONE — Studio di Medicina Estetica · Direttrice sanitaria Dott.ssa
         Elena Vasari · Torino

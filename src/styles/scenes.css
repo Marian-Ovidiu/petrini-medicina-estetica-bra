@@ -8,7 +8,7 @@
   z-index: 100;
   display: grid;
   place-items: center;
-  background: var(--ink);
+  background: var(--pece);
 }
 
 .soglia__disegno {
@@ -27,7 +27,7 @@
   bottom: clamp(24px, 6vh, 56px);
   left: 50%;
   transform: translateX(-50%);
-  color: var(--lume);
+  color: var(--fumo);
   font-variant-numeric: tabular-nums;
 }
 
@@ -60,11 +60,15 @@ body.is-soglia {
   content: "";
   position: absolute;
   inset: 0;
+  /* Caduta ripida. Con una coda lunga il velo si legge come una
+     velatura sopra la fotografia — e sulla campitura lime sembra
+     addirittura che il volto sia stato tinto di verde. Serve solo
+     dietro alle lettere: finito quello, deve sparire. */
   background: linear-gradient(
     to bottom,
-    color-mix(in oklab, var(--ground) 94%, transparent),
-    color-mix(in oklab, var(--ground) 62%, transparent) 45%,
-    transparent
+    color-mix(in oklab, var(--ground) 92%, transparent),
+    color-mix(in oklab, var(--ground) 55%, transparent) 62%,
+    transparent 92%
   );
   pointer-events: none;
   z-index: -1;
@@ -99,7 +103,7 @@ body.is-soglia {
 }
 
 .testata__coda {
-  color: var(--lume);
+  color: var(--fumo);
 }
 
 .testata__nav {
@@ -122,7 +126,7 @@ body.is-soglia {
   right: 0;
   bottom: 0;
   height: 1px;
-  background: var(--sanguigna);
+  background: var(--marker);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform var(--d-fast) var(--e-reveal);
@@ -186,7 +190,7 @@ body.is-soglia {
 .luce__rail {
   top: clamp(96px, 14vh, 150px);
   left: var(--gut);
-  color: var(--lume);
+  color: var(--fumo);
 }
 
 .luce__testo {
@@ -202,10 +206,10 @@ body.is-soglia {
    font dell'elemento, e sul contenitore varrebbe metà — la frase
    andrebbe a capo dove non deve. */
 .luce__claim {
-  color: var(--gesso);
+  color: var(--latte);
   max-width: 34ch;
   text-wrap: pretty;
-  text-shadow: 0 2px 30px rgb(10 12 15 / 0.55);
+  text-shadow: 0 2px 30px rgb(14 18 7 / 0.55);
 }
 
 .luce__coord {
@@ -213,7 +217,7 @@ body.is-soglia {
 }
 
 .luce__coord {
-  color: var(--lume);
+  color: var(--fumo);
 }
 
 .luce__coord em {
@@ -225,7 +229,7 @@ body.is-soglia {
   position: absolute;
   bottom: var(--gut);
   right: var(--gut);
-  color: var(--lume);
+  color: var(--fumo);
 }
 
 /* Fallback: niente WebGL, o movimento ridotto.
@@ -236,8 +240,8 @@ body.is-soglia {
 
 .luce--statica .luce__pin {
   background:
-    linear-gradient(to top, rgb(10 12 15 / 0.9), rgb(10 12 15 / 0.15) 55%),
-    url("/media/img/volto-1920.avif") center center / cover no-repeat var(--ink);
+    linear-gradient(to top, rgb(14 18 7 / 0.9), rgb(14 18 7 / 0.15) 55%),
+    url("/media/img/volto-1920.avif") center center / cover no-repeat var(--pece);
 }
 
 @media (max-width: 720px) {

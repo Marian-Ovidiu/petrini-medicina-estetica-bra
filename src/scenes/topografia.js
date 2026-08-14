@@ -102,7 +102,7 @@ export function initTopografia() {
 
   const campo = scene.querySelector("[data-topo-campo]");
   const bottoni = [...scene.querySelectorAll("[data-topo-regione]")];
-  const profilo = scene.querySelector("[data-topo-profilo]");
+  const anello = scene.querySelector("[data-topo-anello]");
   const macro = scene.querySelector("[data-d-macro]");
   const istruzione = scene.querySelector("[data-topo-istruzione]");
   const out = {
@@ -131,14 +131,11 @@ export function initTopografia() {
 
     if (istruzione) istruzione.style.opacity = chiave ? "0" : "";
 
-    // Senza regione la camera torna al profilo intero: l'assenza di
-    // selezione è uno stato, non un buco.
-    if (profilo) {
-      profilo.style.setProperty("--zoom", r ? "2.15" : "1");
-      if (r) {
-        profilo.style.setProperty("--ox", r.ox);
-        profilo.style.setProperty("--oy", r.oy);
-      }
+    // L'anello si sposta sul landmark. La fotografia non si muove:
+    // resta bloccata alla propria sagoma.
+    if (anello && r) {
+      anello.style.setProperty("--ox", r.ox);
+      anello.style.setProperty("--oy", r.oy);
     }
 
     if (!r) return;

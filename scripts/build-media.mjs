@@ -94,12 +94,6 @@ if (existsSync(CUT)) {
   const left = Math.round(width * 0.645);
   const box = { left, top: 0, width: width - left, height };
 
-  await sharp(src)
-    .extract(box)
-    .resize({ width: 1100 })
-    .avif({ quality: 64, effort: 6 })
-    .toFile(path.join(OUT, "profilo.avif"));
-
   const cutMeta = await sharp(CUT).metadata();
   const s = cutMeta.width / width; // il cutout torna a risoluzione diversa
   const cutBox = {
@@ -109,15 +103,25 @@ if (existsSync(CUT)) {
     height: cutMeta.height,
   };
 
-  // La maschera CSS va in modalità alfa, non luminanza: un PNG in
-  // scala di grigi ha alfa piena ovunque e non maschera niente.
-  // Qui l'alfa del ritaglio *è* la maschera.
-  await sharp(CUT)
-    .ensureAlpha()
-    .extract(cutBox)
+  /*
+   * Niente ritaglio a sagoma per TOPOGRAFIA.
+   *
+   * Sul fondo inchiostro il profilo scontornato funzionava: i capelli
+   * scuri su fondo scuro nascondevano l'imprecisione dello scontorno.
+   * Sulla campitura lime quella stessa frangia diventa un alone verde
+   * sulla testa, e nessuna soglia la risolve — i capelli e il fondo
+   * hanno la stessa luminanza, non c'è informazione da cui separarli.
+   *
+   * La scena usa una lastra rettangolare, come CANONE e STRATI. Il
+   * profilo si legge lo stesso, perché è illuminato contro il nero
+   * dentro l'inquadratura; e la regione la annuncia l'anello, che non
+   * dipende da nessuno scontorno.
+   */
+  await sharp(src)
+    .extract(box)
     .resize({ width: 1100 })
-    .png({ compressionLevel: 9, palette: false })
-    .toFile(path.join(OUT, "profilo-mask.png"));
+    .avif({ quality: 64, effort: 6 })
+    .toFile(path.join(OUT, "profilo.avif"));
 
   // Versione in scala di grigi, per gli shader che campionano un canale
   await sharp(CUT)

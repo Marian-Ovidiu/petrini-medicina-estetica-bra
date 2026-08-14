@@ -51,7 +51,7 @@
 }
 
 .canone__titolo em {
-  color: var(--sanguigna);
+  color: var(--marker);
 }
 
 .canone__prosa {
@@ -99,7 +99,7 @@
   object-fit: cover;
   /* La fotografia sta sul gesso come una lastra appoggiata, non
      incollata: un filo d'ombra e nessun angolo arrotondato. */
-  box-shadow: 0 30px 90px -40px rgb(10 12 15 / 0.55);
+  box-shadow: 0 30px 90px -40px rgb(14 18 7 / 0.55);
 }
 
 .canone__costruzione {

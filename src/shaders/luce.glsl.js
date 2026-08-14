@@ -47,6 +47,15 @@ export const frag = /* glsl */ `#version 300 es
     return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
   }
 
+  // Duotone del brand: la luminanza della fotografia rimappata fra i
+  // due estremi della palette. È la stessa operazione che il filtro
+  // SVG fa sulle altre immagini del sito — qui costa un prodotto
+  // scalare invece di un passaggio di filtro su tutto il canvas.
+  vec3 duotone(vec3 c) {
+    float lum = dot(c, vec3(0.2126, 0.7152, 0.0722));
+    return mix(uGround, uFigure, lum);
+  }
+
   void main() {
     float screenA = uRes.x / uRes.y;
 
@@ -108,7 +117,7 @@ export const frag = /* glsl */ `#version 300 es
     vec4 photo = texture(uPortrait, clamp(pUv, 0.0, 1.0));
     float m = subject(pUv);
 
-    col = mix(col, photo.rgb, m);
+    col = mix(col, duotone(photo.rgb), m);
 
     // ── l'ottica macro ────────────────────────────────────────
     // Copre l'apertura per intero e si ritira mentre la camera
@@ -119,7 +128,7 @@ export const frag = /* glsl */ `#version 300 es
       float mZoom = mix(1.75, 1.10, smoothstep(0.0, 0.30, p));
       vec2 mUv = cover(vUv, screenA, uMacroAspect);
       mUv = (mUv - vec2(0.5)) / mZoom + vec2(0.5) + uPointer * 0.006;
-      vec3 macro = texture(uMacro, clamp(mUv, 0.0, 1.0)).rgb;
+      vec3 macro = duotone(texture(uMacro, clamp(mUv, 0.0, 1.0)).rgb);
       col = mix(col, macro, macroMix);
     }
 

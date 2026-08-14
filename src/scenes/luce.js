@@ -3,9 +3,11 @@ import { pointer } from "../core/pointer.js";
 import { frag } from "../shaders/luce.glsl.js";
 import { createQuad, loadTexture, createTextureFromCanvas } from "../core/gl.js";
 
-const GROUND = [0.039, 0.047, 0.059]; // #0a0c0f
-const SANGUIGNA = [0.761, 0.353, 0.239]; // #c25a3d
-const FIGURE = [0.929, 0.906, 0.863]; // #ede7dc
+// Gli stessi due estremi del duotone in tokens.css: lo shader rifà
+// la rimappatura per conto suo, sui pixel che compone.
+const PECE = [0.055, 0.071, 0.027]; // #0e1207
+const MARKER = [0.937, 0.224, 0.518]; // #ef3984
+const LATTE = [0.973, 1.0, 0.949]; // #f8fff2
 
 /**
  * Dipinge la parola in Bodoni su una texture.
@@ -118,9 +120,9 @@ export async function initLuce() {
       uPointer: [pointer.sx, pointer.sy],
       uLinea: stato.linea,
       uTypeAlpha: stato.alfaParola,
-      uGround: GROUND,
-      uSanguigna: SANGUIGNA,
-      uFigure: FIGURE,
+      uGround: PECE,
+      uSanguigna: MARKER,
+      uFigure: LATTE,
     });
   }
 

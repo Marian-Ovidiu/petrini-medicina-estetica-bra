@@ -18,8 +18,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--ink);
-  color: var(--gesso);
+  background: var(--pece);
+  color: var(--latte);
   font-family: var(--body);
   font-size: var(--t-body);
   line-height: 1.45;
@@ -43,6 +43,32 @@ svg {
   max-width: 100%;
 }
 
+/* Ogni fotografia del sito passa dal duotone del brand. L'elenco sta
+   in un posto solo apposta: se una foto nuova non compare qui, si
+   nota subito perché stona: resta fredda in mezzo a un mondo verde.
+   L'hero non è nell'elenco — la stessa rimappatura la fa il suo
+   shader, dove costa un prodotto scalare invece di un filtro. */
+.canone__foto,
+.strati__foto,
+.topografia__profilo,
+.topografia__macro,
+.medico__ritratto img,
+.esiti__stato,
+.luce--statica .luce__pin {
+  filter: url("#duotone-brand");
+}
+
+@supports not (filter: url("#duotone-brand")) {
+  .canone__foto,
+  .strati__foto,
+  .topografia__profilo,
+  .topografia__macro,
+  .medico__ritratto img,
+  .esiti__stato {
+    filter: grayscale(1) contrast(1.04);
+  }
+}
+
 button {
   font: inherit;
   color: inherit;
@@ -58,8 +84,8 @@ a {
 }
 
 ::selection {
-  background: var(--sanguigna);
-  color: var(--gesso);
+  background: var(--marker);
+  color: var(--latte);
 }
 
 /* ============================================================
@@ -176,8 +202,11 @@ a {
   left: 0;
   z-index: 999;
   padding: 12px 20px;
-  background: var(--sanguigna);
-  color: var(--gesso);
+  /* Il magenta pieno con testo chiaro sopra si ferma a 3,7:1.
+     Il fondo scuro lo porta a 18:1 e il marker resta come filetto. */
+  background: var(--pece);
+  color: var(--latte);
+  border-bottom: 2px solid var(--marker);
   font-family: var(--tech);
   font-size: var(--t-tech);
   letter-spacing: 0.14em;

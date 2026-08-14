@@ -94,7 +94,7 @@
   right: -14%;
   bottom: -1px;
   height: 1px;
-  background: var(--sanguigna);
+  background: var(--marker);
 }
 
 .medico__testo {
@@ -181,7 +181,7 @@
 }
 
 .esiti__titolo em {
-  color: var(--sanguigna);
+  color: var(--marker);
 }
 
 .esiti__caso {
@@ -204,7 +204,7 @@
   position: relative;
   aspect-ratio: 1856 / 2320;
   overflow: hidden;
-  background: var(--velo);
+  background: var(--tenero);
 }
 
 @media (min-width: 900px) {
@@ -235,7 +235,7 @@
   right: 0;
   top: var(--rivela, 0%);
   height: 1px;
-  background: var(--sanguigna);
+  background: var(--marker);
   opacity: var(--rivela-op, 0);
 }
 
@@ -243,7 +243,7 @@
   position: absolute;
   left: 14px;
   bottom: 12px;
-  color: var(--gesso);
+  color: var(--latte);
   mix-blend-mode: difference;
   font-variant-numeric: tabular-nums;
 }
@@ -263,7 +263,9 @@
   gap: 12px;
   border-top: 1px solid var(--rule);
   padding-top: 18px;
-  opacity: 0.34;
+  /* Attenuate, non illeggibili: sotto questa soglia il testo non
+     passa più il contrasto nemmeno da spento. */
+  opacity: 0.55;
   transition: opacity var(--d-mid) var(--e-reveal);
 }
 
@@ -324,7 +326,7 @@
 }
 
 .consulto__titolo em {
-  color: var(--sanguigna);
+  color: var(--marker);
 }
 
 .consulto__costo {
@@ -379,7 +381,7 @@
 .campo input:focus,
 .campo textarea:focus {
   outline: none;
-  border-bottom-color: var(--sanguigna);
+  border-bottom-color: var(--marker);
 }
 
 .campo input:focus-visible,
@@ -389,7 +391,7 @@
 
 .campo[data-errore] input,
 .campo[data-errore] textarea {
-  border-bottom-color: var(--sanguigna);
+  border-bottom-color: var(--marker);
 }
 
 .campo[data-errore]::after {
@@ -398,7 +400,7 @@
   font-size: var(--t-annot);
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--sanguigna);
+  color: var(--marker);
   padding-top: 6px;
 }
 
@@ -421,7 +423,7 @@
   right: 0;
   bottom: 6px;
   height: 1px;
-  background: var(--sanguigna);
+  background: var(--marker);
   transform-origin: left;
   transition: transform var(--d-mid) var(--e-reveal);
 }
@@ -444,14 +446,14 @@
    ============================================================ */
 
 .pieno {
-  background: var(--ink);
-  color: var(--lume);
+  background: var(--pece);
+  color: var(--fumo);
   padding: clamp(30px, 5vh, 56px) var(--gut);
   display: flex;
   flex-wrap: wrap;
   gap: 16px clamp(30px, 6vw, 90px);
   justify-content: space-between;
-  border-top: 1px solid color-mix(in oklab, var(--gesso) 12%, transparent);
+  border-top: 1px solid color-mix(in oklab, var(--latte) 12%, transparent);
 }
 
 .pieno p {
