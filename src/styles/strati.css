@@ -302,8 +302,6 @@
   width: 26%;
   aspect-ratio: 1;
   translate: -50% -50%;
-  border: 1px solid var(--marker);
-  border-radius: 50%;
   opacity: 0;
   scale: 0.55;
   pointer-events: none;
@@ -312,6 +310,48 @@
     scale 0.9s var(--e-drive),
     left 0.9s var(--e-drive),
     top 0.9s var(--e-drive);
+}
+
+/* Il cerchio visibile sta su uno pseudo-elemento, non sull'anello.
+   L'anello porta posizione, ingresso e spostamento fra regioni — tutti
+   su `scale`; il respiro è anch'esso una scala, e sullo stesso
+   elemento l'animazione sovrascriverebbe la transizione, mangiandosi
+   l'ingresso da 0.55 e il passaggio da una regione all'altra.
+   Su due elementi le due scale si compongono e restano indipendenti. */
+.topografia__anello::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--marker);
+  border-radius: 50%;
+}
+
+/* Il respiro dura finché il visitatore non ha capito: al primo tocco
+   o passaggio vero si ferma. Un elemento che pulsa per sempre smette
+   di essere un invito e diventa un tic. */
+.topografia__campo[data-invito] .topografia__anello::before {
+  animation: anello-respira 2.6s var(--e-reveal) infinite;
+}
+
+@keyframes anello-respira {
+  0%,
+  100% {
+    scale: 1;
+    opacity: 1;
+  }
+  50% {
+    scale: 1.09;
+    opacity: 0.5;
+  }
+}
+
+/* Chi ha chiesto meno movimento non riceve un anello che pulsa: la
+   riga globale su prefers-reduced-motion azzera la durata, ma tanto
+   vale non avviarlo affatto. */
+@media (prefers-reduced-motion: reduce) {
+  .topografia__campo[data-invito] .topografia__anello::before {
+    animation: none;
+  }
 }
 
 .topografia__campo[data-regione] .topografia__anello {

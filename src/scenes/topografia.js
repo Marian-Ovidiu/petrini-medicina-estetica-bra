@@ -156,6 +156,10 @@ export function initTopografia() {
   // cui la scena sembra priva di istruzioni.
   let toccato = false;
 
+  // Finché nessuno ha interagito, la scena si presenta: l'anello
+  // respira. Al primo gesto vero smette.
+  campo.dataset.invito = "";
+
   function mostra(chiave) {
     if (chiave === corrente) return;
     corrente = chiave;
@@ -169,6 +173,7 @@ export function initTopografia() {
     else delete campo.dataset.regione;
 
     if (istruzione) istruzione.style.opacity = toccato ? "0" : "";
+    if (toccato) delete campo.dataset.invito;
 
     // L'anello si sposta sul landmark. La fotografia non si muove:
     // resta bloccata alla propria sagoma.
