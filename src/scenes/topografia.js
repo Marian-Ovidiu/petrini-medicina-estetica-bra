@@ -135,6 +135,10 @@ export function initTopografia() {
   const anello = scene.querySelector("[data-topo-anello]");
   const macro = scene.querySelector("[data-d-macro]");
   const istruzione = scene.querySelector("[data-topo-istruzione]");
+  // Su un telefono non ci si "avvicina" a niente.
+  if (istruzione && !pointer.fine) {
+    istruzione.textContent = "tocca una regione del profilo";
+  }
   const out = {
     lat: scene.querySelector("[data-d-lat]"),
     nome: scene.querySelector("[data-d-nome]"),
@@ -146,6 +150,11 @@ export function initTopografia() {
   };
 
   let corrente = null;
+  // L'apertura automatica all'ingresso non è un'interazione: se la
+  // conta come tale, l'istruzione si spegne mezzo secondo dopo
+  // l'arrivo e non la legge nessuno — che è esattamente il motivo per
+  // cui la scena sembra priva di istruzioni.
+  let toccato = false;
 
   function mostra(chiave) {
     if (chiave === corrente) return;
@@ -159,7 +168,7 @@ export function initTopografia() {
     if (chiave) campo.dataset.regione = chiave;
     else delete campo.dataset.regione;
 
-    if (istruzione) istruzione.style.opacity = chiave ? "0" : "";
+    if (istruzione) istruzione.style.opacity = toccato ? "0" : "";
 
     // L'anello si sposta sul landmark. La fotografia non si muove:
     // resta bloccata alla propria sagoma.
@@ -202,15 +211,15 @@ export function initTopografia() {
   campo.addEventListener("click", (e) => {
     if (e.target.closest("[data-topo-regione]")) return; // già gestito
     const v = piuVicina(e.clientX, e.clientY);
-    if (v) mostra(v.chiave);
+    if (v) { toccato = true; mostra(v.chiave); }
   });
 
   // Tastiera e touch: intento esplicito, nessuna distanza da calcolare.
   bottoni.forEach((b) => {
     const k = b.dataset.topoRegione;
-    b.addEventListener("focus", () => mostra(k));
-    b.addEventListener("click", () => mostra(k));
-    b.addEventListener("pointerenter", () => mostra(k));
+    b.addEventListener("focus", () => { toccato = true; mostra(k); });
+    b.addEventListener("click", () => { toccato = true; mostra(k); });
+    b.addEventListener("pointerenter", () => { toccato = true; mostra(k); });
   });
 
   // Puntatore fine: la regione più vicina vince, ma solo entro un
@@ -229,7 +238,9 @@ export function initTopografia() {
 
       const soglia = r.width * 0.42;
       const v = piuVicina(pointer.spx, pointer.spy);
-      mostra(v && v.distanza < soglia ? v.chiave : null);
+      const dentro = v && v.distanza < soglia;
+      if (dentro) toccato = true;
+      mostra(dentro ? v.chiave : null);
     });
   }
 

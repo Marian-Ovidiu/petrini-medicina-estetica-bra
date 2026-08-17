@@ -154,7 +154,7 @@
      contenuto, con margini generosi. */
   padding: clamp(130px, 19vh, 220px) var(--gut) clamp(100px, 15vh, 190px);
   display: grid;
-  gap: clamp(30px, 4vh, 54px);
+  gap: clamp(22px, 4vh, 54px);
 }
 
 @media (min-width: 1000px) {
@@ -217,10 +217,61 @@
   box-shadow: 0 30px 90px -50px rgb(14 18 7 / 0.7);
 }
 
+/* Su schermo stretto lastra e scheda stanno in colonna, e insieme
+   non ci stanno: servono ~890px, un telefono ne ha 780–900. Per
+   leggere le ultime righe il volto usciva dall'alto, e per cambiare
+   regione bisognava risalire.
+   Rimpicciolire finché non tornano i conti non funziona: il numero
+   dipende dal telefono, e su 360×780 non torna comunque — si
+   finirebbe per sacrificare la fotografia a un'aritmetica.
+   La lastra resta invece appiccicata in alto e la scheda le scorre
+   sotto. Il volto è sempre lì mentre si legge, e per cambiare
+   regione basta il pollice: niente scorrimenti automatici, nessun
+   pulsante, nessuna scorciatoia da imparare — e la faccia continua
+   a essere l'interfaccia anche in verticale. */
 @media (max-width: 999px) {
-  .topografia__finestra {
-    width: min(72vw, 380px);
+  .topografia__campo {
+    position: sticky;
+    top: clamp(64px, 9vh, 88px);
+    z-index: 1;
   }
+
+  /* La banda si estende verso l'alto quanto l'aggancio dello sticky:
+     senza questo spazio, all'arrivo copre l'istruzione che sta appena
+     sopra la lastra — e l'istruzione tornerebbe invisibile, che è
+     esattamente il problema da cui siamo partiti. */
+  .topografia {
+    row-gap: clamp(96px, 13vh, 120px);
+  }
+
+  /* La banda opaca è uno pseudo-elemento, non padding sul campo: i
+     punti sono posizionati in percentuale *dentro* il campo, e
+     imbottirlo ne allargava il sistema di coordinate — il punto della
+     fronte finiva fuori dalla fotografia, sul verde.
+     Così la scatola resta grande quanto la lastra e la banda si
+     allarga per conto suo, a tutta pagina. */
+  .topografia__campo::before {
+    content: "";
+    position: absolute;
+    inset: calc(clamp(64px, 9vh, 88px) * -1) calc(var(--gut) * -1) -14px;
+    background: var(--ground);
+    border-bottom: 1px solid var(--rule);
+    z-index: -1;
+  }
+
+  .topografia__finestra {
+    width: min(64vw, 340px);
+  }
+
+  .topografia__voci > div {
+    padding: 6px 0;
+    gap: 10px;
+  }
+
+  .topografia__nome {
+    margin: 4px 0 12px;
+  }
+
 }
 
 /* La fotografia resta bloccata alla propria sagoma, sempre.
@@ -306,6 +357,21 @@
      lastra: senza un alone il bianco ci sparisce dentro. */
   box-shadow: 0 0 0 1px rgb(14 18 7 / 0.35), 0 1px 4px rgb(14 18 7 / 0.5);
   transition: transform var(--d-fast) var(--e-snap), background var(--d-fast) linear;
+}
+
+/* Su lastra piccola i due punti più vicini scendono a ~21px: i
+   bersagli si accorciano sotto quella misura per non accavallarsi.
+   Deve stare *dopo* la regola desktop — stessa specificità, vince
+   l'ultima scritta, e dentro il blocco mobile più in alto non
+   applicava affatto.
+   Restare piccoli non li rende difficili da colpire: il tocco
+   impreciso lo raccoglie la lastra intera, che sceglie la regione
+   più vicina al dito. */
+@media (max-width: 999px) {
+  .topografia__punti button {
+    width: 36px;
+    height: 18px;
+  }
 }
 
 .topografia__punti button[data-attivo]::before,
