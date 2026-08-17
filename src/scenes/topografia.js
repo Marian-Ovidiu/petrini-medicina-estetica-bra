@@ -22,7 +22,7 @@ import { pointer, onPointer } from "../core/pointer.js";
 // tecnica sopra il titolo, che è il suo posto.
 const REGIONI = {
   fronte: {
-    ox: "39.3%", oy: "14.2%",
+    ox: "40%", oy: "9%",
     macro: "/media/img/oculus-560.avif",
     lat: "regio frontalis",
     nome: "Fronte",

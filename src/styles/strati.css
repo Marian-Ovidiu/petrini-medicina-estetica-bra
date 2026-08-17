@@ -302,6 +302,9 @@
   height: 7px;
   border-radius: 50%;
   background: var(--latte);
+  /* Restano bianchi, ma la fronte è la zona più illuminata della
+     lastra: senza un alone il bianco ci sparisce dentro. */
+  box-shadow: 0 0 0 1px rgb(14 18 7 / 0.35), 0 1px 4px rgb(14 18 7 / 0.5);
   transition: transform var(--d-fast) var(--e-snap), background var(--d-fast) linear;
 }
 
