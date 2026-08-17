@@ -27,7 +27,6 @@
       fetchpriority="high"
     />
     <link rel="preload" as="image" href="/media/img/volto-matte.avif" type="image/avif" />
-    <link rel="preload" as="image" href="/media/img/macro-1600.avif" type="image/avif" />
   </head>
 
   <body data-ground="pece">
@@ -90,12 +89,13 @@
     <main id="contenuto">
       <!-- ════════════════════════════════════════════════════════
            01 · LUCE
-           Lo scroll è una carrellata: si parte dentro la pelle,
-           la camera arretra fino al profilo. La parola CANONE
-           vive nello spazio e passa dietro il volto.
+           La sequenza si suona da sola all'atterraggio: la luce
+           arriva sul volto mentre la camera arretra, e la parola
+           CANONE vive nello spazio e passa dietro il profilo.
+           Nessuno scroll richiesto per vederla.
            ════════════════════════════════════════════════════════ -->
       <section class="scene luce" id="luce" data-ground="pece" data-scene="luce">
-        <div class="luce__pin">
+        <div class="luce__quadro">
           <canvas class="luce__camera" data-luce-canvas></canvas>
 
           <div class="luce__fronte">
@@ -112,7 +112,7 @@
             </div>
 
             <p class="tech tech--annot luce__invito" data-luce-invito>
-              scorri — la camera segue
+              scorri
             </p>
           </div>
         </div>
@@ -352,18 +352,18 @@
           <!-- I punti sono bottoni veri: la scena si attraversa anche
                da tastiera, non solo col mouse. -->
           <ul class="topografia__punti" data-topo-punti>
-            <li><button type="button" data-topo-regione="fronte"
-                style="--px: 40%; --py: 14%"><span>fronte</span></button></li>
-            <li><button type="button" data-topo-regione="perioculare"
-                style="--px: 31%; --py: 30%"><span>perioculare</span></button></li>
-            <li><button type="button" data-topo-regione="zigomo"
-                style="--px: 46%; --py: 42%"><span>zigomo</span></button></li>
-            <li><button type="button" data-topo-regione="labbra"
-                style="--px: 17%; --py: 63%"><span>labbra</span></button></li>
-            <li><button type="button" data-topo-regione="mento"
-                style="--px: 25%; --py: 78%"><span>mento</span></button></li>
-            <li><button type="button" data-topo-regione="mandibola"
-                style="--px: 51%; --py: 80%"><span>mandibola</span></button></li>
+            <li><button type="button" data-topo-regione="fronte" aria-label="Fronte"
+                style="--px: 40%; --py: 14%"><span aria-hidden="true">fronte</span></button></li>
+            <li><button type="button" data-topo-regione="perioculare" aria-label="Perioculare"
+                style="--px: 31%; --py: 30%"><span aria-hidden="true">perioculare</span></button></li>
+            <li><button type="button" data-topo-regione="zigomo" aria-label="Zigomo"
+                style="--px: 46%; --py: 42%"><span aria-hidden="true">zigomo</span></button></li>
+            <li><button type="button" data-topo-regione="labbra" aria-label="Labbra"
+                style="--px: 17%; --py: 63%"><span aria-hidden="true">labbra</span></button></li>
+            <li><button type="button" data-topo-regione="mento" aria-label="Mento"
+                style="--px: 25%; --py: 78%"><span aria-hidden="true">mento</span></button></li>
+            <li><button type="button" data-topo-regione="mandibola" aria-label="Mandibola"
+                style="--px: 51%; --py: 80%"><span aria-hidden="true">mandibola</span></button></li>
           </ul>
         </div>
 

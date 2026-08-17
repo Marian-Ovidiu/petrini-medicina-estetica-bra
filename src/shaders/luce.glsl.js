@@ -7,17 +7,16 @@ export const frag = /* glsl */ `#version 300 es
   uniform sampler2D uPortrait;
   uniform sampler2D uMatte;
   uniform sampler2D uType;
-  uniform sampler2D uMacro;
 
   uniform vec2  uRes;
   uniform float uImgAspect;
   uniform float uTypeAspect;
-  uniform float uMacroAspect;
 
   uniform float uProgress;   // 0 = dentro la pelle, 1 = profilo intero
   uniform float uTime;
   uniform vec2  uPointer;    // -1..1 smorzato
-  uniform float uLinea;      // intensità della sanguigna sul contorno
+  uniform float uLinea;      // intensità del marker sul contorno
+  uniform float uApertura;   // il diaframma: 0 = solo le luci alte
   uniform float uTypeAlpha;
 
   uniform vec3 uGround;
@@ -51,8 +50,15 @@ export const frag = /* glsl */ `#version 300 es
   // due estremi della palette. È la stessa operazione che il filtro
   // SVG fa sulle altre immagini del sito — qui costa un prodotto
   // scalare invece di un passaggio di filtro su tutto il canvas.
-  vec3 duotone(vec3 c) {
+  vec3 duotone(vec3 c, float apertura) {
     float lum = dot(c, vec3(0.2126, 0.7152, 0.0722));
+    // L'apertura è il diaframma della scena. A zero passa solo il
+    // bordo illuminato del profilo — fronte, naso, labbra — e tutto
+    // il resto sta nel nero; mentre sale, il volto emerge dall'ombra.
+    // È il modo in cui una luce arriva davvero su una faccia, e
+    // funziona a qualsiasi risoluzione: sostituisce il macro senza
+    // chiedere pixel che non abbiamo.
+    lum = smoothstep(mix(0.80, 0.0, apertura), 1.0, lum);
     return mix(uGround, uFigure, lum);
   }
 
@@ -60,11 +66,11 @@ export const frag = /* glsl */ `#version 300 es
     float screenA = uRes.x / uRes.y;
 
     // ── camera ────────────────────────────────────────────────
-    // Non è uno zoom su un'immagine: è una carrellata all'indietro,
-    // e attraversa due ottiche. Si parte dentro la pelle con un macro,
-    // si arretra fino al profilo con un tele. Il cambio di ottica
-    // avviene in movimento, quindi si legge come una messa a fuoco,
-    // non come uno stacco di montaggio.
+    // Una carrellata all'indietro, contenuta. Il macro d'apertura è
+    // stato tolto, e con lui la ragione per partire a forte
+    // ingrandimento: oltre ~1.7x la sorgente da 2560px si sgrana, e
+    // senza il macro a coprirla la sgranatura si vedrebbe. L'apertura
+    // la fa la luce, sotto, che non dipende dalla risoluzione.
     float p = uProgress;
     float ease = p * p * (3.0 - 2.0 * p);
 
@@ -75,9 +81,9 @@ export const frag = /* glsl */ `#version 300 es
     // profilo e resta più stretta. Stessa scena, altra fotografia.
     float verticale = 1.0 - smoothstep(0.86, 1.30, screenA);
 
-    float zoom  = mix(2.75, mix(1.02, 1.62, verticale), ease);
+    float zoom  = mix(1.62, mix(1.02, 1.58, verticale), ease);
     vec2  focus = mix(
-      vec2(0.735, 0.430),
+      vec2(0.660, 0.430),
       mix(vec2(0.500, 0.470), vec2(0.815, 0.400), verticale),
       ease
     );
@@ -117,20 +123,7 @@ export const frag = /* glsl */ `#version 300 es
     vec4 photo = texture(uPortrait, clamp(pUv, 0.0, 1.0));
     float m = subject(pUv);
 
-    col = mix(col, duotone(photo.rgb), m);
-
-    // ── l'ottica macro ────────────────────────────────────────
-    // Copre l'apertura per intero e si ritira mentre la camera
-    // arretra. Sotto, il ritratto sta già muovendosi: quando il
-    // macro se ne va, il movimento è già in corso.
-    float macroMix = 1.0 - smoothstep(0.10, 0.30, p);
-    if (macroMix > 0.001) {
-      float mZoom = mix(1.75, 1.10, smoothstep(0.0, 0.30, p));
-      vec2 mUv = cover(vUv, screenA, uMacroAspect);
-      mUv = (mUv - vec2(0.5)) / mZoom + vec2(0.5) + uPointer * 0.006;
-      vec3 macro = duotone(texture(uMacro, clamp(mUv, 0.0, 1.0)).rgb);
-      col = mix(col, macro, macroMix);
-    }
+    col = mix(col, duotone(photo.rgb, uApertura), m);
 
     // ── LA LINEA ──────────────────────────────────────────────
     // Il contorno reale del profilo, ripreso a sanguigna.

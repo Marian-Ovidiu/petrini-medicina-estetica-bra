@@ -75,19 +75,31 @@ async function shot(name, y) {
   console.log(`✓ ${file}`);
 }
 
-// I fotogrammi sono scelti sui momenti della coreografia, non a
-// intervalli regolari: apertura astratta, cambio d'ottica, parola
-// che si posa, linea al culmine, e l'ingresso nella scena successiva.
+// L'hero non è più guidato dallo scroll: si suona da solo. I suoi
+// fotogrammi si prendono cercando nel tempo della sequenza, sui
+// momenti della coreografia — la luce che arriva, la parola che si
+// posa, la linea al culmine, la composizione a riposo.
 const H = VIEWPORT.height;
-const frames = [
-  ["01-apertura", 0],
-  ["02-ottica", H * 0.75],
-  ["03-parola", H * 1.7],
-  ["04-linea", H * 2.3],
-  ["05-riposo", H * 3.15],
-];
 
-for (const [name, y] of frames) await shot(name, y);
+async function heroAt(name, t) {
+  await page.evaluate((tt) => window.__luce?.seek(tt), t);
+  await page.waitForTimeout(250);
+  await page.evaluate(() => window.__luce?.render());
+  await page.waitForTimeout(100);
+  const file = `${OUT}/${mobile ? "m-" : ""}${name}.png`;
+  await page.screenshot({ path: file });
+  console.log(`✓ ${file}`);
+}
+
+for (const [name, t] of [
+  ["01-apertura", 0],
+  ["02-luce", 0.22],
+  ["03-parola", 0.45],
+  ["04-linea", 0.62],
+  ["05-riposo", 1],
+]) {
+  await heroAt(name, t);
+}
 
 // Le scene sotto l'hero si misurano dalla loro posizione reale
 const scenes = await page.evaluate(() =>

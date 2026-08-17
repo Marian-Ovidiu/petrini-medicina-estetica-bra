@@ -87,7 +87,7 @@ Le transizioni sono parte della scena precedente, mai uno stacco.
 | # | Scena | Cosa succede | Registro |
 |---|---|---|---|
 | 00 | **SOGLIA** | La linea disegna un profilo mentre scorre nomenclatura latina. Poi si apre. | ink |
-| 01 | **LUCE** | Macro di pelle in luce radente, illeggibile. Lo scroll allarga il crop: zigomo → profilo → volto. La tipografia esiste in profondità, occlusa dal volto. | ink |
+| 01 | **LUCE** | La luce arriva sul volto — all'inizio passa solo il bordo illuminato del profilo, poi la faccia emerge dall'ombra mentre la camera arretra. La tipografia esiste in profondità, occlusa dal volto. La sequenza si suona da sola all'atterraggio. | ink |
 | 02 | **CANONE** | Dal mento la linea esce e costruisce la proporzione classica sopra il ritratto. Il puntatore muove la sorgente di luce. | gesso |
 | 03 | **STRATI** | Un piano attraversa il volto: superficie → topologia di luce → vettori muscolari → osso. Reso come disegno a sanguigna sopra la fotografia, non come HUD. | ink |
 | 04 | **TOPOGRAFIA** | Il volto **è** l'interfaccia. La prossimità del puntatore porta avanti una regione; compare il dossier clinico del trattamento. | sanguigna |
@@ -106,10 +106,18 @@ filosofia → la fotografia ritorna → il medico emerge da quel mondo.
 
 Meccaniche diverse, non varianti della stessa.
 
-**S1 — OCCLUSIONE (video + profondità + scroll-come-camera)** · scena LUCE
-Il ritratto è renderizzato in WebGL con una depth map. La parola `CANONE` vive nello
-spazio 3D *attorno* al volto: alcune lettere passano dietro lo zigomo e riemergono
-davanti al mento. Lo scroll muove la camera, non la pagina.
+**S1 — OCCLUSIONE (profondità + apertura di luce)** · scena LUCE
+Il ritratto è composto in WebGL con la propria matte. La parola `CANONE` vive nello
+spazio *attorno* al volto: le ultime lettere passano dietro il profilo. L'apertura è
+un diaframma — a zero passa solo il bordo illuminato, poi il volto emerge dall'ombra
+mentre la camera arretra.
+
+> Revisione dopo la prima presentazione al cliente: il macro di pelle in apertura è
+> stato rimosso, e la sequenza non è più guidata dallo scroll ma si suona da sola in
+> ~3,7 s all'atterraggio, accelerando se il visitatore si muove prima della fine.
+> Cadendo il macro cadeva anche la ragione per partire a forte ingrandimento — oltre
+> ~1,7× la sorgente si sgrana — quindi l'apertura è passata dall'ottica alla luce,
+> che non dipende dalla risoluzione.
 
 **S2 — LA COSTRUZIONE (scroll-controlled motion)** · scena CANONE
 La geometria della proporzione si disegna con lo scroll — path SVG con `stroke-dashoffset`

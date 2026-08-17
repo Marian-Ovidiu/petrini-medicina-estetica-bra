@@ -67,13 +67,12 @@ export async function initLuce() {
 
   const { gl } = quad;
 
-  const [portrait, matte, macro] = await Promise.all([
+  const [portrait, matte] = await Promise.all([
     loadTexture(gl, "/media/img/volto-2560.avif"),
     loadTexture(gl, "/media/img/volto-matte.avif"),
-    loadTexture(gl, "/media/img/macro-1600.avif"),
   ]);
 
-  if (!portrait || !matte || !macro) {
+  if (!portrait || !matte) {
     quad.destroy();
     return statica();
   }
@@ -89,6 +88,7 @@ export async function initLuce() {
     progresso: 0,
     linea: 0,
     alfaParola: 0,
+    apertura: 0,
   };
 
   let res = [1, 1];
@@ -110,15 +110,14 @@ export async function initLuce() {
       uPortrait: portrait,
       uMatte: matte,
       uType: parola,
-      uMacro: macro,
       uRes: res,
       uImgAspect: portrait.width / portrait.height,
       uTypeAspect: parola.width / parola.height,
-      uMacroAspect: macro.width / macro.height,
       uProgress: stato.progresso,
       uTime: (performance.now() - t0) / 1000,
       uPointer: [pointer.sx, pointer.sy],
       uLinea: stato.linea,
+      uApertura: stato.apertura,
       uTypeAlpha: stato.alfaParola,
       uGround: PECE,
       uSanguigna: MARKER,
@@ -127,36 +126,63 @@ export async function initLuce() {
   }
 
   // ── coreografia ────────────────────────────────────────────
-  // Lo scroll guida la camera. La tipografia e la linea non entrano
-  // insieme al movimento: aspettano che la camera abbia già arretrato,
-  // così il montaggio ha un tempo invece di un accordo unico.
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: section,
-      start: "top top",
-      end: "+=320%",
-      pin: ".luce__pin",
-      scrub: 0.9,
-      anticipatePin: 1,
-      // Questo pin allunga il documento di tre viewport. Deve
-      // ricalcolarsi per primo, altrimenti ogni trigger sotto misura
-      // una pagina che non esiste più e si accende alla posizione
-      // sbagliata.
-      refreshPriority: 10,
+  // La sequenza si suona da sola all'atterraggio, non la guida lo
+  // scroll. Chi arriva vede l'apertura per intero senza dover fare
+  // niente, e quando finisce la pagina è già pronta a scorrere sul
+  // resto: l'hero non chiede più tre schermate di scroll per
+  // raccontarsi.
+  //
+  // La tipografia e la linea non entrano insieme al movimento:
+  // aspettano che la camera abbia già arretrato, così il montaggio ha
+  // un tempo invece di un accordo unico.
+  const tl = gsap.timeline({ paused: true, onComplete: () => finita() });
+
+  // La luce e la camera sono due battute distinte, non la stessa curva:
+  // agganciate insieme, il diaframma ereditava l'avvio lento della
+  // carrellata e per un secondo e mezzo non succedeva niente.
+  tl.to(stato, { apertura: 1, duration: 1.8, ease: "power2.out" }, 0)
+    .to(stato, { progresso: 1, duration: 3.5, ease: "power2.inOut" }, 0)
+    .to(stato, { alfaParola: 1, duration: 1.0, ease: "power2.out" }, 1.1)
+    .to(stato, { linea: 1, duration: 0.8, ease: "power1.inOut" }, 2.0)
+    // Poi la linea si spegne: ha fatto il suo lavoro e lascia la
+    // scena al volto. Il silenzio fa parte della sequenza — ma è una
+    // sosta, non un'attesa: sotto i quattro secondi in totale, perché
+    // chi atterra non ha chiesto di guardare un filmato.
+    .to(stato, { linea: 0.32, duration: 0.7, ease: "power1.in" }, 3.0);
+
+  const invito = section.querySelector("[data-luce-invito]");
+  gsap.set(invito, { opacity: 0, y: 6 });
+
+  let conclusa = false;
+  function finita() {
+    if (conclusa) return;
+    conclusa = true;
+    // L'invito a scorrere compare quando c'è davvero qualcosa da
+    // scorrere: prima sarebbe un invito a interrompere.
+    gsap.to(invito, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" });
+  }
+
+  // Chi decide di muoversi prima della fine non va trattenuto: la
+  // sequenza accelera fino in fondo invece di essere saltata di netto,
+  // così non si perde lo stato d'arrivo della composizione.
+  function accelera() {
+    if (tl.progress() < 1) gsap.to(tl, { timeScale: 5, duration: 0.4 });
+  }
+  const opzioni = { passive: true, once: true };
+  window.addEventListener("wheel", accelera, opzioni);
+  window.addEventListener("touchstart", accelera, opzioni);
+  window.addEventListener("keydown", accelera, opzioni);
+
+  tl.play();
+
+  // Superato l'hero l'invito non serve più
+  ScrollTrigger.create({
+    trigger: section,
+    start: "bottom 85%",
+    onEnter: () => gsap.to(invito, { opacity: 0, duration: 0.3 }),
+    onLeaveBack: () => {
+      if (conclusa) gsap.to(invito, { opacity: 1, duration: 0.3 });
     },
-  });
-
-  tl.to(stato, { progresso: 1, ease: "none", duration: 1 }, 0)
-    .to(stato, { alfaParola: 1, ease: "power2.out", duration: 0.28 }, 0.3)
-    .to(stato, { linea: 1, ease: "power1.inOut", duration: 0.22 }, 0.52)
-    // Poi la linea si spegne: ha fatto il suo lavoro e lascia
-    // la scena al volto. Il silenzio fa parte della sequenza.
-    .to(stato, { linea: 0.32, ease: "power1.in", duration: 0.18 }, 0.8);
-
-  gsap.to("[data-luce-invito]", {
-    opacity: 0,
-    ease: "none",
-    scrollTrigger: { trigger: section, start: "top top", end: "+=60%", scrub: true },
   });
 
   let raf = 0;
@@ -177,7 +203,14 @@ export async function initLuce() {
   if (import.meta.env?.DEV) {
     // Quando il pannello di anteprima è sospeso il rAF si ferma e gli
     // screenshot di QA catturano un fotogramma vecchio.
-    window.__luce = { stato, render, get visibile() { return visibile; } };
+    window.__luce = {
+      stato,
+      render,
+      // La QA scorre la sequenza nel tempo, non nello scroll: senza
+      // questo non c'è modo di fotografare un fotogramma preciso.
+      seek: (t) => { tl.pause().progress(t); render(); },
+      get visibile() { return visibile; },
+    };
   }
 
   return () => {

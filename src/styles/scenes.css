@@ -163,7 +163,7 @@ body.is-soglia {
   position: relative;
 }
 
-.luce__pin {
+.luce__quadro {
   position: relative;
   height: 100svh;
   width: 100%;
@@ -241,7 +241,7 @@ body.is-soglia {
   display: none;
 }
 
-.luce--statica .luce__pin {
+.luce--statica .luce__quadro {
   background:
     linear-gradient(to top, rgb(14 18 7 / 0.9), rgb(14 18 7 / 0.15) 55%),
     url("/media/img/volto-1920.avif") center center / cover no-repeat var(--pece);

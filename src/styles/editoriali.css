@@ -265,17 +265,23 @@
   gap: 12px;
   border-top: 1px solid var(--rule);
   padding-top: 18px;
-  /* Attenuate, non illeggibili: sotto questa soglia il testo non
-     passa più il contrasto nemmeno da spento. */
-  opacity: 0.55;
-  transition: opacity var(--d-mid) var(--e-reveal);
+  transition: border-color var(--d-mid) var(--e-reveal);
+}
+
+/* Lo stato non si comunica smorzando il testo. Qualunque opacità
+   sotto ~0.8 porta questi colori sotto 4,5:1, e una tappa "spenta"
+   resta pur sempre da leggere: lo dicono la regola in alto, che si
+   accende in marker, e il colore dell'etichetta. */
+.esiti__tempo .tech {
+  color: var(--figure-dim);
+  transition: color var(--d-mid) var(--e-reveal);
 }
 
 .esiti__tempo li[data-attivo] {
-  opacity: 1;
+  border-top-color: var(--marker);
 }
 
-.esiti__tempo .tech {
+.esiti__tempo li[data-attivo] .tech {
   color: var(--accent-testo);
 }
 
