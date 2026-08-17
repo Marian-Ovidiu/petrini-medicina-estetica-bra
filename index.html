@@ -351,19 +351,26 @@
 
           <!-- I punti sono bottoni veri: la scena si attraversa anche
                da tastiera, non solo col mouse. -->
+          <!-- Posizioni rilevate dai punti segnati a mano dal medico
+               sulla lastra, non stimate a occhio: le percentuali sono
+               i baricentri dei suoi segni misurati sull'immagine. -->
           <ul class="topografia__punti" data-topo-punti>
             <li><button type="button" data-topo-regione="fronte" aria-label="Fronte"
-                style="--px: 40%; --py: 14%"><span aria-hidden="true">fronte</span></button></li>
-            <li><button type="button" data-topo-regione="perioculare" aria-label="Perioculare"
-                style="--px: 31%; --py: 30%"><span aria-hidden="true">perioculare</span></button></li>
+                style="--px: 39.3%; --py: 14.2%"><span aria-hidden="true">Fronte</span></button></li>
+            <li><button type="button" data-topo-regione="zampe" aria-label="Zampe di gallina"
+                style="--px: 51.6%; --py: 32.8%"><span aria-hidden="true">Zampe di gallina</span></button></li>
             <li><button type="button" data-topo-regione="zigomo" aria-label="Zigomo"
-                style="--px: 46%; --py: 42%"><span aria-hidden="true">zigomo</span></button></li>
+                style="--px: 50.7%; --py: 46.9%"><span aria-hidden="true">Zigomo</span></button></li>
+            <li><button type="button" data-topo-regione="codice" aria-label="Codice a barre"
+                style="--px: 16.2%; --py: 63%"><span aria-hidden="true">Codice a barre</span></button></li>
             <li><button type="button" data-topo-regione="labbra" aria-label="Labbra"
-                style="--px: 17%; --py: 63%"><span aria-hidden="true">labbra</span></button></li>
-            <li><button type="button" data-topo-regione="mento" aria-label="Mento"
-                style="--px: 25%; --py: 78%"><span aria-hidden="true">mento</span></button></li>
-            <li><button type="button" data-topo-regione="mandibola" aria-label="Mandibola"
-                style="--px: 51%; --py: 80%"><span aria-hidden="true">mandibola</span></button></li>
+                style="--px: 16%; --py: 69.6%"><span aria-hidden="true">Labbra</span></button></li>
+            <li><button type="button" data-topo-regione="marionetta" aria-label="Rughe marionetta"
+                style="--px: 37%; --py: 71.1%"><span aria-hidden="true">Rughe marionetta</span></button></li>
+            <li><button type="button" data-topo-regione="bruxismo" aria-label="Curare bruxismo"
+                style="--px: 78.5%; --py: 72.7%"><span aria-hidden="true">Curare bruxismo</span></button></li>
+            <li><button type="button" data-topo-regione="mento" aria-label="Profilo mento"
+                style="--px: 51.6%; --py: 86.6%"><span aria-hidden="true">Profilo mento</span></button></li>
           </ul>
         </div>
 
