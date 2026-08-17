@@ -89,8 +89,17 @@
     align-items: flex-start;
   }
   .canone__telaio {
-    height: min(74svh, 900px);
-    width: auto;
+    /* La larghezza è il minore fra la colonna e quella che deriva
+       dall'altezza voluta. Dimensionare solo sull'altezza faceva
+       sforare la lastra oltre la sua colonna — e con lei la banda
+       delle quote, che sta a destra del telaio: sotto i 1400px il
+       documento acquistava scroll orizzontale.
+       La larghezza resta definita e l'altezza la ricava
+       `aspect-ratio`, così la costruzione continua a stare sui
+       landmark: vincolare l'altezza e clampare la larghezza avrebbe
+       schiacciato il rapporto e scollato le linee dal volto. */
+    width: min(100%, calc(min(74svh, 900px) * 1696 / 2528));
+    height: auto;
   }
 }
 

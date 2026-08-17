@@ -91,10 +91,20 @@
   content: "";
   position: absolute;
   left: 0;
-  right: -14%;
+  right: 0;
   bottom: -1px;
   height: 1px;
   background: var(--marker);
+}
+
+/* Lo sbordo verso destra esiste solo dove c'è il vuoto della colonna
+   accanto in cui sconfinare. In colonna singola il ritratto è largo
+   quanto lo schermo, e quel 14% finiva fuori dal viewport portandosi
+   dietro lo scroll orizzontale di tutta la pagina. */
+@media (min-width: 900px) {
+  .medico__ritratto::after {
+    right: -10%;
+  }
 }
 
 .medico__testo {
