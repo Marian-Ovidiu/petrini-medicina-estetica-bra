@@ -238,9 +238,14 @@ virgolettata e cinque righe di credenziali — formazione, ateneo, anni,
 numero di procedure — scritte per la presentazione e non prese da nessun
 documento: accanto al nome di una persona reale non sono un lorem ipsum ma
 affermazioni verificabili, e la frase era peggio, perché metteva parole
-inventate in bocca a lui. Per lo stesso motivo sono cadute la qualifica
-«direttore sanitario» dal piede e dal modulo, e la città «Torino» dal piede
-e dal `<title>`: erano l'ambientazione dello studio inventato, non dati.
+inventate in bocca a lui. Per lo stesso motivo è caduta la qualifica
+«direttore sanitario» dal piede e dal modulo.
+
+La città ha avuto una storia sua. «Torino» era l'ambientazione dello studio
+inventato e non un indirizzo, quindi era uscita insieme al resto — ma quella
+vera esiste, il cliente l'ha confermata ed è **Bra**. Sta nel piede accanto
+al nome. Non è nel `<title>`, dove però entrerebbe volentieri: una ricerca
+locale è il modo in cui questo studio si trova.
 
 Il cliente aspetta il copy vero. Quando arriva: la frase torna in
 `.medico__frase`, le credenziali in una `<dl class="medico__credenziali">`
