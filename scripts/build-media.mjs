@@ -21,6 +21,10 @@ const WIDTHS = {
   hero: [1280, 1920, 2560, 3200],
   scene: [720, 1080, 1600],
   crop: [560, 900, 1400],
+  // Il ritratto del medico non è un render: è una fotografia vera, e
+  // la sua risoluzione è quella che è. Le larghezze finiscono dove
+  // finisce il file invece di dichiarare misure che non esistono.
+  ritratto: [720, 968],
 };
 
 const JOBS = [
@@ -32,6 +36,20 @@ const JOBS = [
   { src: "oculus.png", name: "oculus", set: "crop" },
   { src: "hero-c1.png", name: "volto-tre-quarti", set: "scene" },
   { src: "hero-c3.png", name: "volto-ii", set: "scene" },
+  // Il ritratto arriva come scatto da tessera in verticale 2:3: testa
+  // in alto e mezzo busto. Il taglio lo porta al 4:5 delle altre
+  // lastre e si ferma appena sopra il ricamo «Dr. Petrini W.» sulla
+  // casacca, che comparendo a metà si leggerebbe come una sbavatura —
+  // e che comunque il sito dice già meglio, con la firma.
+  // Il ciano della casacca e il fondo bianco non si correggono qui:
+  // ci pensa il duotone del brand in `base.css`, che li porta dentro
+  // la scala pece → latte come per ogni altra fotografia.
+  {
+    src: "medico-petrini.jpeg",
+    name: "medico",
+    set: "ritratto",
+    crop: { left: 56, top: 45, width: 968, height: 1210 },
+  },
 ];
 
 await mkdir(OUT, { recursive: true });
@@ -43,15 +61,21 @@ for (const job of JOBS) {
     continue;
   }
   const meta = await sharp(src).metadata();
+  // L'inquadratura sta qui e non in un file già ritagliato dentro
+  // `raw/`: il ritaglio è una decisione, e una decisione va scritta
+  // dove si rilegge, non incisa in un binario che nessuno riapre.
+  const sorgente = () => (job.crop ? sharp(src).extract(job.crop) : sharp(src));
+  const largh = job.crop ? job.crop.width : meta.width;
+
   for (const w of WIDTHS[job.set]) {
-    if (w > meta.width * 1.05) continue; // niente upscale
-    await sharp(src)
+    if (w > largh * 1.05) continue; // niente upscale
+    await sorgente()
       .resize({ width: w, withoutEnlargement: true })
       .avif({ quality: 62, effort: 6 })
       .toFile(path.join(OUT, `${job.name}-${w}.avif`));
   }
   // Fallback per Safari datati e per il preload dell'hero
-  await sharp(src)
+  await sorgente()
     .resize({ width: WIDTHS[job.set].at(-1), withoutEnlargement: true })
     .webp({ quality: 78 })
     .toFile(path.join(OUT, `${job.name}.webp`));
@@ -137,9 +161,10 @@ if (existsSync(CUT)) {
   console.log("✓ profilo + profilo-matte (ritaglio verticale)");
 }
 
-// Ritratti del medico e documentazione clinica
+// Documentazione clinica. Il ritratto del medico stava qui finché era
+// un render come gli altri; ora è una fotografia vera che vuole un
+// ritaglio, ed è passato ai JOBS in cima.
 for (const [src, name, w] of [
-  ["medico-a.png", "medico", [720, 1080, 1600]],
   ["caso-t0.png", "caso-i", [720, 1080]],
   ["caso-t90.png", "caso-i-t90", [720, 1080]],
 ]) {

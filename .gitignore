@@ -9,4 +9,10 @@ qa/
 # che invece sono versionati. Restando fuori dal repo non vengono
 # toccati dai cambi di ramo — che è quello che vogliamo, visto che
 # rigenerarli costa crediti.
-public/media/raw/
+public/media/raw/*
+# Eccezione: i materiali del cliente non sono render da rigenerare —
+# la firma e il ritratto arrivano da lui e non li riproduce nessuna
+# pipeline. Pesano poche centinaia di KB e devono sopravvivere ai
+# cambi di ramo.
+!public/media/raw/firma-petrini.jpeg
+!public/media/raw/medico-petrini.jpeg

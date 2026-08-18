@@ -180,6 +180,44 @@ a {
 }
 
 /* ============================================================
+   La firma — un segno, non una quarta voce
+
+   Il sistema dichiara tre caratteri e spiega perché sono tre. La
+   firma non ne aggiunge un quarto, perché non fa il lavoro di un
+   carattere: un carattere compone testo qualsiasi, la firma dice un
+   nome solo. Non compone mai una parola diversa dal nome, non prende
+   mai una misura scelta per essere letta come testo corrente, e non
+   sta in nessun posto dove un carattere farebbe la stessa cosa.
+
+   Da lì la regola, che è una regola di conteggio: due occorrenze in
+   tutto il sito, e sono queste. La testata, dove il nome identifica.
+   Il piede della scheda di anamnesi, dove il nome sottoscrive — che
+   è quello che una firma fa davvero, e l'unico secondo posto che se
+   la merita. Una terza occorrenza la farebbe scivolare in carattere
+   decorativo, che è precisamente ciò che non deve diventare.
+
+   È una maschera alfa e non un'immagine: il colore lo mette il
+   fondo. Così la firma segue la scena — latte sul pece, pece sul
+   latte e sul lime — invece di portarsi dietro il verde del JPEG
+   del cliente, che non è nessuno dei verdi della palette.
+   ============================================================ */
+
+.firma {
+  display: block;
+  background-color: var(--figure);
+  -webkit-mask: url("/media/img/firma-petrini.png") no-repeat center / contain;
+  mask: url("/media/img/firma-petrini.png") no-repeat center / contain;
+  /* Il rapporto della sorgente. Si dichiara solo la larghezza: le
+     due misure non vanno mai scritte a mano una accanto all'altra,
+     o prima o poi divergono e la firma si stira. */
+  aspect-ratio: 590 / 96;
+  /* La sorgente è raster e a 590px: oltre ~360px a schermo si
+     ammorbidisce. Nessuna delle due occorrenze la chiede più larga,
+     e questo tetto è lì perché resti vero anche dopo. */
+  max-width: 360px;
+}
+
+/* ============================================================
    Scene
    ============================================================ */
 

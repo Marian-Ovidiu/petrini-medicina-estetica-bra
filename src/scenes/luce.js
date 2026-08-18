@@ -9,15 +9,53 @@ const PECE = [0.055, 0.071, 0.027]; // #0e1207
 const MARKER = [0.937, 0.224, 0.518]; // #ef3984
 const LATTE = [0.973, 1.0, 0.949]; // #f8fff2
 
+// Il nome, nell'ordine in cui si legge. Il cognome sta sotto perché è
+// la riga che il profilo taglia meglio (§ disegnaNome) — e perché è la
+// riga che la testata ripete per esteso.
+const NOME = ["WILLIAM", "PETRINI"];
+
+// Quanta della larghezza della texture occupa il blocco. Governa la
+// misura di tutto: le righe sono giustificate a questo valore e
+// l'altezza viene di conseguenza.
+const LARGHEZZA = 0.94;
+
+// Interlinea, in frazione dell'altezza media delle maiuscole. Stretta:
+// due righe di Bodoni a questa scala devono leggersi come un blocco
+// unico, non come due parole che si trovano nella stessa inquadratura.
+const INTERLINEA = 0.14;
+
 /**
- * Dipinge la parola in Bodoni su una texture.
+ * Dipinge il nome in Bodoni su una texture, su due righe.
  *
  * Sta in un canvas invece che nel DOM perché deve poter essere
- * *occlusa dal volto*: solo dentro il compositore le lettere possono
+ * *occluso dal volto*: solo dentro il compositore le lettere possono
  * passare dietro il naso. Il testo leggibile resta nel DOM, nascosto
  * ai vedenti ma disponibile a screen reader e motori.
+ *
+ * Le righe sono portate alla stessa **larghezza**, non allo stesso
+ * corpo, e le due conseguenze sono entrambe volute.
+ *
+ * La prima è di gerarchia. In Bodoni WILLIAM è molto più larga di
+ * PETRINI a parità di corpo — due W contro due I — quindi giustificarle
+ * fa il cognome più grande del nome. È l'ordine giusto per un marchio:
+ * il nome presenta, il cognome è quello che resta.
+ *
+ * La seconda è di meccanica, ed è il motivo per cui la pila regge in
+ * questa scena invece di essere solo una riga in più. Il profilo taglia
+ * le due righe alla stessa ascissa, quindi l'occlusione resta un gesto
+ * unico — un bordo verticale di volto che passa davanti a un blocco —
+ * invece di sfrangiarsi su due parole di larghezza diversa, dove una
+ * finirebbe dietro la faccia e l'altra no.
+ *
+ * Resta vero quello che valeva per la riga sola: la scala è dettata
+ * dalle parole, non da un numero scelto a mano, e quindi qualunque
+ * nome occupa la stessa frazione di texture e viene tagliato nello
+ * stesso punto. Cambia solo *quale* lettera ci finisce sotto — e
+ * quella va guardata, non dedotta. Una lettera tonda mozzata a metà si
+ * legge come un errore, un montante che continua dietro il naso si
+ * legge come una lettera occlusa.
  */
-function disegnaParola(word = "CANONE") {
+function disegnaNome(righe = NOME) {
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   const w = Math.min(4096, Math.round(2400 * dpr));
   const h = Math.round(w * 0.42);
@@ -30,17 +68,55 @@ function disegnaParola(word = "CANONE") {
   ctx.clearRect(0, 0, w, h);
   ctx.fillStyle = "#ffffff";
   ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
+  ctx.textBaseline = "alphabetic";
 
-  // Si parte grandi e si stringe finché la parola non tocca i margini:
-  // la scala è dettata dalla parola, non da un numero scelto a mano.
-  let size = h * 1.05;
-  ctx.font = `400 ${size}px "Bodoni Moda", Didot, serif`;
-  size *= (w * 0.94) / ctx.measureText(word).width;
+  const font = (size) => `400 ${size}px "Bodoni Moda", Didot, serif`;
+  // La crenatura negativa va applicata *prima* di misurare: entra nella
+  // larghezza, e misurare senza per poi disegnare con significa
+  // consegnare righe più corte del bersaglio — e di quanto dipende da
+  // quante lettere ha la parola, cioè le righe non tornerebbero più
+  // giustificate fra loro.
+  const componi = (riga, size) => {
+    ctx.font = font(size);
+    ctx.letterSpacing = `${-size * 0.015}px`;
+  };
 
-  ctx.font = `400 ${size}px "Bodoni Moda", Didot, serif`;
-  ctx.letterSpacing = `${-size * 0.015}px`;
-  ctx.fillText(word, w / 2, h / 2);
+  // Ogni riga si misura a un corpo di riferimento e poi si riscala:
+  // la larghezza è lineare nel corpo, quindi un passaggio solo basta.
+  const misure = righe.map((riga) => {
+    const rif = h;
+    componi(riga, rif);
+    const size = (rif * (w * LARGHEZZA)) / ctx.measureText(riga).width;
+    componi(riga, size);
+    const m = ctx.measureText(riga);
+    return { riga, size, cap: m.actualBoundingBoxAscent };
+  });
+
+  const capMedia = misure.reduce((s, m) => s + m.cap, 0) / misure.length;
+  const interlinea = capMedia * INTERLINEA;
+  let blocco =
+    misure.reduce((s, m) => s + m.cap, 0) + interlinea * (misure.length - 1);
+
+  // Rete di sicurezza per il ripiego tipografico: senza Bodoni le
+  // metriche cambiano, e un blocco più alto della texture verrebbe
+  // tagliato di netto invece che rimpicciolito. Non dovrebbe scattare
+  // mai — i font sono attesi prima di dipingere.
+  const eccesso = blocco / (h * 0.98);
+  if (eccesso > 1) {
+    for (const m of misure) {
+      m.size /= eccesso;
+      m.cap /= eccesso;
+    }
+    blocco /= eccesso;
+  }
+
+  let y = (h - blocco) / 2;
+  for (const m of misure) {
+    y += m.cap;
+    componi(m.riga, m.size);
+    ctx.fillText(m.riga, w / 2, y);
+    y += interlinea;
+  }
 
   return c;
 }
@@ -81,8 +157,8 @@ export async function initLuce() {
   // disegnarla col fallback significa incidere il ripiego dentro una
   // texture che non si aggiorna più.
   await (document.fonts ? document.fonts.ready : Promise.resolve());
-  const canvasParola = disegnaParola("CANONE");
-  const parola = createTextureFromCanvas(gl, canvasParola);
+  const canvasNome = disegnaNome();
+  const parola = createTextureFromCanvas(gl, canvasNome);
 
   const stato = {
     progresso: 0,

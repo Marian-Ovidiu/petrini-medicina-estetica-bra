@@ -1,4 +1,4 @@
-# CANONE
+# Dr. William Petrini
 
 Esperienza digitale per uno studio di medicina estetica.
 Concept: **l'architettura del volto**.

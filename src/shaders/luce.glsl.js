@@ -96,15 +96,30 @@ export const frag = /* glsl */ `#version 300 es
 
     // ── piano tipografico ─────────────────────────────────────
     // Scala e deriva diverse dal ritratto: da qui nasce la profondità.
-    // La parola arriva da dietro il volto e si posa nella larghezza.
-    // Il centro deriva verso sinistra: l'ultima lettera resta dietro
-    // il profilo, e la parola si completa nella testata, non qui.
-    // In verticale la parola si ritira a sinistra e si rimpicciolisce:
-    // deve lasciare il profilo in campo, non scavalcarlo.
-    float tScale = mix(2.35, mix(0.84, 0.62, verticale), ease);
+    // Il nome arriva da dietro il volto e si posa nella larghezza.
+    // Il centro deriva verso sinistra: le ultime lettere restano
+    // dietro il profilo, e il nome si completa nella testata, non qui.
+    // In verticale si ritira a sinistra e si rimpicciolisce: deve
+    // lasciare il profilo in campo, non scavalcarlo.
+    //
+    // Il nome sta su due righe, quindi il blocco è alto il doppio di
+    // quanto fosse la riga sola e la posa non è più la stessa: sale
+    // sopra il centro ottico e stringe. Non è rifinitura — a parità di
+    // misura arrivava dentro il claim, e due testi in latte sovrapposti
+    // non sono una composizione in profondità, sono una collisione.
+    //
+    // La misura la detta il naso, non la fronte. Le due righe incontrano
+    // il profilo ad altezze diverse, e il naso sporge molto più a
+    // sinistra: se il blocco si posa sulla fronte, sotto il naso si
+    // mangia l'ultima lettera del cognome. Questi numeri sono tarati
+    // sul punto in cui *entrambe* le righe perdono un morso e nessuna
+    // perde una lettera — l'occlusione deve dire «dietro», non
+    // «troncato». Cambiando il nome vanno rifatti guardando, perché
+    // dipendono da quanto sono larghe le sue ultime lettere.
+    float tScale = mix(2.35, mix(0.6564, 0.697, verticale), ease);
     vec2  tCenter = mix(
       vec2(0.50, 0.52),
-      mix(vec2(0.470, 0.470), vec2(0.360, 0.620), verticale),
+      mix(vec2(0.161, 0.383), vec2(0.129, 0.500), verticale),
       ease
     );
     vec2  tDrift = uPointer * vec2(0.030, 0.020);

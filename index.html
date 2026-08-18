@@ -3,7 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>CANONE — Studio di Medicina Estetica</title>
+    <!-- Il lockup non porta descrittore, il titolo sì, e non è una
+         contraddizione: sono due oggetti diversi. Un marchio sta
+         dentro la pagina che lo spiega e può permettersi di tacere;
+         il titolo vive in una barra di schede e in una pagina di
+         risultati, dove intorno non c'è niente. «Dr. William
+         Petrini» da solo non dice il mestiere e non distingue questo
+         medico dagli omonimi: la disciplina è lì per quello, non per
+         decorare.
+         Resta la disciplina e cade la città: «Torino» veniva dallo
+         studio inventato della presentazione, non da un indirizzo.
+         E la disciplina non è una qualifica del medico — è di che
+         cosa parla il sito, che è l'unica cosa che un titolo deve
+         dire. -->
+    <title>Dr. William Petrini — Medicina Estetica</title>
     <meta
       name="description"
       content="Medicina estetica costruita sull'anatomia individuale. Non trasformiamo i volti: ne comprendiamo l'architettura."
@@ -74,9 +87,43 @@
          Interfaccia persistente
          ══════════════════════════════════════════════════════════ -->
     <header class="testata" data-testata data-ground="pece">
+      <!-- Il lockup: timbro e firma.
+           È la coppia con cui si autentica un documento clinico, ed è
+           anche l'unico modo in cui questo marchio regge a 32px — il
+           perché sta in scenes.css, sopra `.testata__marchio`.
+           Il tracciato è quello della soglia, identico: qui è solo
+           inquadrato, non ridisegnato.
+           Il nome resta in chiaro nel DOM perché una maschera alfa non
+           ha alt e il link deve chiamarsi come il medico. -->
       <a class="testata__marchio" href="#soglia">
-        <span class="testata__nome">CANONE</span>
-        <span class="tech tech--annot testata__coda">Studio di Medicina Estetica</span>
+        <svg class="testata__timbro" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+          <circle class="testata__anello" cx="50" cy="50" r="49" fill="none"
+                  vector-effect="non-scaling-stroke" />
+          <!-- viewBox annidato = il riquadro del disegno dentro il
+               timbro. Le proporzioni le tiene l'SVG, non un calcolo
+               nostro: il giorno che il tracciato cambia, il riquadro
+               resta l'unica cosa da rifare.
+               Il riquadro sta al 78% del diametro, non al 90: a
+               riempire il cerchio il profilo lo toccava, e un timbro
+               che tocca il proprio bordo si legge come un simbolo
+               ritagliato male.
+               In x è spostato di due unità e mezzo oltre il centro
+               geometrico. Il disegno è centrato sul suo bbox, ma il
+               bbox lo allargano due code sottili — la fronte in alto
+               e la nuca in basso — mentre la massa che si legge, il
+               profilo vero, sta tutta a sinistra. Si centra quella. -->
+          <svg viewBox="70 16 154 352" x="35.4" y="11" width="34.1" height="78" overflow="visible">
+            <path
+              class="testata__profilo"
+              d="M196 22c-34-6-70 8-88 38-14 24-16 54-13 82 2 20 6 40 3 60-2 13-9 24-16 35-4 6-9 13-7 20 2 8 12 10 20 11 6 1 13 1 18 5 4 4 4 11 3 17-2 12-6 24-4 36 3 17 18 29 34 34 24 8 51 4 74-6"
+              fill="none"
+              stroke-linecap="round"
+              vector-effect="non-scaling-stroke"
+            />
+          </svg>
+        </svg>
+        <span class="firma testata__firma" aria-hidden="true"></span>
+        <span class="visually-hidden">Dr. William Petrini</span>
       </a>
       <nav class="testata__nav" aria-label="Principale">
         <a href="#topografia" class="tech">Trattamenti</a>
@@ -90,9 +137,9 @@
       <!-- ════════════════════════════════════════════════════════
            01 · LUCE
            La sequenza si suona da sola all'atterraggio: la luce
-           arriva sul volto mentre la camera arretra, e la parola
-           CANONE vive nello spazio e passa dietro il profilo.
-           Nessuno scroll richiesto per vederla.
+           arriva sul volto mentre la camera arretra, e il nome —
+           WILLIAM sopra PETRINI — vive nello spazio e passa dietro
+           il profilo. Nessuno scroll richiesto per vederlo.
            ════════════════════════════════════════════════════════ -->
       <section class="scene luce" id="luce" data-ground="pece" data-scene="luce">
         <div class="luce__quadro">
@@ -117,9 +164,13 @@
           </div>
         </div>
 
-        <!-- Titolo accessibile: quello a schermo è dipinto nel canvas -->
+        <!-- Titolo accessibile: quello a schermo è dipinto nel canvas,
+             e questo deve dire la stessa cosa. Il canvas scrive il
+             nome intero su due righe, quindi qui le due versioni
+             coincidono — restano il titolo e la qualifica, che a
+             schermo stanno in testata e non nel canvas. -->
         <p class="visually-hidden">
-          CANONE, studio di medicina estetica. Non trasformiamo i volti, ne
+          Dr. William Petrini, medicina estetica. Non trasformiamo i volti, ne
           comprendiamo l'architettura.
         </p>
       </section>
@@ -436,33 +487,56 @@
       </section>
 
       <!-- ════════════════════════════════════════════════════════
-           06 · MEDICO — le credenziali sono il livello tecnico
+           06 · MEDICO — il ritratto e il nome, e per ora nient'altro
            ════════════════════════════════════════════════════════ -->
       <section class="scene medico" id="medico" data-ground="pece" data-scene="medico">
         <figure class="medico__ritratto">
+          <!-- La fotografia vera del dott. Petrini. Arriva come scatto
+               da tessera — fondo bianco, casacca ciano, sorriso — e
+               nessuna di quelle tre cose è stata corretta a mano: il
+               taglio e il duotone del brand bastano. Il fondo bianco
+               finisce esattamente sul latte della palette, il ciano
+               diventa un mezzo tono, e la lastra chiara si appoggia
+               sulla scena scura come le altre fotografie del sito.
+               Ritaglio e larghezze stanno in `build-media.mjs`.
+               968px è la risoluzione utile della sorgente: su schermi
+               a densità doppia il ritratto è servito appena sotto il
+               suo optimum. Si risolve solo con uno scatto più grande,
+               non in pipeline. -->
           <img
-            src="/media/img/medico-1080.avif"
-            srcset="/media/img/medico-720.avif 720w, /media/img/medico-1080.avif 1080w, /media/img/medico-1600.avif 1600w"
+            src="/media/img/medico-968.avif"
+            srcset="/media/img/medico-720.avif 720w, /media/img/medico-968.avif 968w"
             sizes="(max-width: 899px) 88vw, 40vw"
-            width="1856" height="2320"
-            alt="Ritratto della direttrice sanitaria dello studio"
+            width="968" height="1210"
+            alt="Ritratto di William Petrini"
             loading="lazy" decoding="async"
           />
         </figure>
         <div class="medico__testo">
           <p class="rail medico__rail tech tech--annot">06 — Medico</p>
-          <h2 class="display medico__nome">Dott.ssa<br />Elena Vasari</h2>
-          <p class="lead medico__frase">
-            «Il volto di una persona non è un problema da risolvere. È il primo
-            documento che leggo, e l'ultimo che voglio contraddire.»
-          </p>
-          <dl class="medico__credenziali tech">
-            <div><dt>formazione</dt><dd>Medicina e Chirurgia, Università di Torino — 2006</dd></div>
-            <div><dt>specializzazione</dt><dd>Chirurgia Plastica, Ricostruttiva ed Estetica — 2012</dd></div>
-            <div><dt>perfezionamento</dt><dd>Anatomia facciale applicata, cadaver lab — Parigi, Vienna</dd></div>
-            <div><dt>iscrizione</dt><dd>Ordine dei Medici Chirurghi e degli Odontoiatri</dd></div>
-            <div><dt>esercizio</dt><dd>oltre 4.000 procedure iniettive dal 2012</dd></div>
-          </dl>
+          <h2 class="display medico__nome">William<br />Petrini</h2>
+          <!-- ╔═══════════════════════════════════════════════════╗
+               ║  IN ATTESA DEL COPY VERO                          ║
+               ║                                                   ║
+               ║  Qui c'erano una frase virgolettata e cinque      ║
+               ║  righe di credenziali — formazione, ateneo, anni, ║
+               ║  numero di procedure — scritte per la             ║
+               ║  presentazione e non prese da nessun documento.   ║
+               ║  Accanto al nome di una persona reale non sono un ║
+               ║  lorem ipsum: sono affermazioni verificabili, e   ║
+               ║  la frase era peggio ancora, perché metteva       ║
+               ║  parole inventate in bocca a lui.                 ║
+               ║                                                   ║
+               ║  Restano fuori finché non arriva il testo vero.   ║
+               ║  Quando arriva: la frase torna in                 ║
+               ║  `.medico__frase`, le credenziali in una <dl      ║
+               ║  class="medico__credenziali tech"> — lo stile è   ║
+               ║  già in `editoriali.css` e aspetta lì.            ║
+               ║                                                   ║
+               ║  Sulle credenziali la forma conta quanto il       ║
+               ║  contenuto: la pubblicità sanitaria vuole         ║
+               ║  provincia dell'Ordine e numero di iscrizione.    ║
+               ╚═══════════════════════════════════════════════════╝ -->
         </div>
       </section>
 
@@ -586,15 +660,31 @@
             Risposta entro due giorni lavorativi. Nessun dato viene usato per
             finalità diverse dalla prenotazione.
           </p>
+
+          <!-- La seconda e ultima occorrenza della firma (la regola sta
+               in base.css). Non è il marchio che si ripete in fondo
+               alla pagina: è una firma che fa il mestiere di una
+               firma. Questo è un modulo di anamnesi, e una scheda
+               clinica la sottoscrive chi la leggerà — con la stessa
+               coppia timbro-e-firma con cui si chiude un referto.
+               Il segno è decorativo e la riga sotto porta il nome:
+               chi legge con la voce sente il nome una volta sola. -->
+          <p class="consulto__calce">
+            <span class="firma consulto__firma" aria-hidden="true"></span>
+            <span class="tech tech--annot">Dr. William Petrini</span>
+          </p>
         </form>
       </section>
     </main>
 
     <footer class="pieno" data-ground="pece">
-      <p class="tech tech--annot">
-        CANONE — Studio di Medicina Estetica · Direttrice sanitaria Dott.ssa
-        Elena Vasari · Torino
-      </p>
+      <!-- Solo il nome, in attesa del copy vero. Qualifica e città
+           erano ereditate dallo studio inventato di prima: la
+           qualifica non la vogliamo finché non è la sua, e «Torino»
+           non è mai stato un dato — era l'ambientazione della
+           presentazione. Un piede di pagina che dichiara la sede
+           sbagliata è peggio di un piede che tace. -->
+      <p class="tech tech--annot">Dr. William Petrini</p>
       <p class="tech tech--annot pieno__legale">
         Le immagini del sito sono simulazioni visive, non documentazione di
         pazienti. Nessun contenuto sostituisce una valutazione medica.

@@ -1,21 +1,56 @@
-# CANONE — Direzione Creativa
+# Dr. William Petrini — Direzione Creativa
 
-**Studio di Medicina Estetica**
+**Medicina estetica**
 Concept centrale: **L'ARCHITETTURA DEL VOLTO**
 
 ---
 
-## 1. Perché "CANONE"
+## 1. Il marchio è il medico, il concetto è il canone
+
+Questo progetto è nato col marchio **CANONE**. Il marchio ora è il nome del medico —
+**Dr. William Petrini**, nella sua firma — e il concetto è rimasto dov'era. Le due
+cose vanno tenute separate, perché è la separazione a far funzionare il resto.
+
+Un'insegna che dicesse CANONE metterebbe la propria tesi nel nome. E una tesi
+scritta sull'insegna non si può più dimostrare: si può solo ripetere. Con un nome
+proprio in testata la tesi torna a essere qualcosa che il sito deve guadagnarsi scena
+per scena — che è esattamente il lavoro che le otto scene fanno. Il cambio di nome, da
+questo punto di vista, non è una perdita: toglie al progetto la scorciatoia.
 
 Il *canone* è la regola di proporzione: quella di Policleto, quella vitruviana, quella
 che gli anatomisti e gli architetti condividono da duemila anni. È l'unica parola che
-tiene insieme le tre cose che questo brand deve dire contemporaneamente:
+tiene insieme le tre cose che questo studio deve dire contemporaneamente:
 
 - **medicina** (misura, anatomia, rigore)
 - **classicismo / lusso** (proporzione, canone estetico, Italia)
 - **architettura** (struttura, non decorazione)
 
-Non è una parola da spa. Non è una parola da e-commerce. È una parola da studio.
+Non è una parola da spa. Non è una parola da e-commerce. È una parola da studio — e
+adesso è una parola che il sito *usa* invece di portarla scritta in fronte.
+
+**Dove il canone sopravvive, e in che veste:**
+
+| dove | cosa resta |
+|---|---|
+| **Scena 02 — «02 — Canone»** | Invariata, ed è la scena che espone la tesi: il canone è un riferimento, non un bersaglio. Qui *canone* è il canone classico, non il marchio. |
+| **`lat. canon — la regola della proporzione`**, in calce alla hero | Resta, e migliora. Prima era la glossa del logotipo — un'insegna che spiega se stessa, il lavoro più debole che un'annotazione possa fare. Ora che sopra c'è un nome proprio la stessa riga smette di glossare e dichiara: è il seme della scena 02, non l'eco della testata. |
+| **Nomi interni** — `#canone`, `.canone__*`, `src/scenes/canone.js`, `package.json` | Invariati. La scena si chiama Canone. Rinominare il codice sarebbe churn senza nessun guadagno. |
+
+Nella hero il canvas dipinge il nome per esteso, **WILLIAM** sopra **PETRINI**, al
+posto di CANONE. La meccanica non cambia: le ultime lettere passano dietro il profilo
+e il nome si completa in testata.
+
+Su due righe perché con il solo cognome la hero diceva meno della testata, che il nome
+per esteso ce l'ha. Le righe sono giustificate alla stessa larghezza — non allo stesso
+corpo — e la scelta fa due lavori insieme. Di gerarchia: in Bodoni WILLIAM è molto più
+larga di PETRINI a parità di corpo, due `W` contro due `I`, quindi giustificarle fa il
+cognome più grande del nome, che è l'ordine giusto per un marchio. Di meccanica: il
+profilo taglia le due righe alla stessa ascissa, e l'occlusione resta un gesto unico —
+un bordo di volto che passa davanti a un blocco — invece di sfrangiarsi su due parole
+di larghezza diversa, dove una finirebbe dietro la faccia e l'altra no.
+
+La chiusura in testata resta quella di prima, e resta più stretta di quando il
+logotipo era tipografico: la firma *riscrive lo stesso nome*, con la stessa mano.
 
 Posizionamento in una frase:
 > Non trasformiamo i volti. Ne comprendiamo l'architettura.
@@ -59,6 +94,26 @@ Tre voci, tre funzioni. Il contrasto tra loro è il contenuto.
 Contrasto di scala volutamente violento: un titolo da 24vw accanto a un'annotazione
 da 10px. Nessuna misura intermedia comoda.
 
+**E la firma? Non è la quarta voce.** Le voci sono tre e restano tre. La firma del
+dott. Petrini non fa il lavoro di un carattere: un carattere compone testo qualsiasi,
+la firma dice un nome solo. Non compone mai una parola diversa dal nome, non prende
+mai una misura scelta per essere letta come testo corrente, non sta in nessun posto
+dove un carattere farebbe la stessa cosa. È un **segno**, e sta con LA LINEA (§4), non
+con Bodoni.
+
+La regola che tiene in piedi la distinzione è una regola di conteggio, e va rispettata
+alla lettera: **due occorrenze in tutto il sito.**
+
+1. **Testata** — il lockup, dove il nome identifica.
+2. **Piede della scheda di anamnesi** — dove il nome sottoscrive, che è quello che una
+   firma fa davvero.
+
+Non nel piede della pagina: lì il nome c'è già come testo, in registro amministrativo,
+e un marchio ripetuto a inizio e fine pagina è quello che fa un template. Alla terza
+occorrenza la firma diventerebbe un carattere decorativo — cioè precisamente la cosa
+che questo paragrafo esiste per impedire. La regola è scritta anche in `base.css`,
+sopra `.firma`, perché è lì che qualcuno andrà a cercarla.
+
 ---
 
 ## 4. Il dispositivo di firma: **LA LINEA**
@@ -67,6 +122,7 @@ Una sola hairline di sanguigna, spessa 1px, **continua per tutto il sito**.
 
 Non è un motivo decorativo ripetuto: è letteralmente la stessa linea che si trasforma.
 
+0. In testata **sta ferma dentro un anello**, per tutta la visita: è il timbro (§4b).
 1. Nel preloader **disegna un profilo** di volto.
 2. Nella hero **diventa il contorno della mandibola** del soggetto.
 3. In *Canone* **si apre in costruzione geometrica** — i terzi del volto, le sezioni.
@@ -77,6 +133,46 @@ Non è un motivo decorativo ripetuto: è letteralmente la stessa linea che si tr
 
 Una linea, un sito. È questo che fa sembrare il tutto *un sistema progettato*,
 non una sequenza di sezioni riuscite.
+
+### 4b. Il lockup: timbro e firma
+
+Il marchio in testata è **il profilo dentro un anello, accanto alla firma**. Non sono
+due elementi accostati, ed entrambe le scelte hanno una ragione precisa.
+
+**Perché l'anello.** Il profilo è stato provato nudo, alle misure fra 25 e 50px, ed è
+stato scartato guardandolo: il tracciato è un contorno aperto con rapporto 0,42 — alto
+e strettissimo — e il naso, che è l'unica cosa che rende leggibile un profilo, a 32px
+vale due pixel. Accanto a una firma a pennello il segno non veniva letto come volto:
+veniva letto come una **parentesi graffa** davanti al nome. Non è una lettura
+incompleta, è una lettura sbagliata, e le scorciatoie non funzionano — ritagliare il
+disegno lo peggiora, perché la sua larghezza sta tutta nella fronte e nella nuca
+mentre la fascia dei tratti è ancora più magra.
+
+La risposta è stata il **campo**, non il disegno: il tracciato non è toccato — è quello
+della soglia, byte per byte, solo inquadrato. Chiuso in un anello il profilo smette di
+essere punteggiatura e diventa un segno dentro un timbro, e nessuno legge l'interno di
+un timbro come un segno d'interpunzione.
+
+**Perché proprio un anello.** Non è un ornamento preso a prestito: è già uno stato de
+LA LINEA, quello che in TOPOGRAFIA si chiude sul landmark. E la coppia che ne esce dice
+il mestiere — un referto si autentica con **timbro e firma**, ed è esattamente ciò che
+sta in testata. Il lockup non arreda: nomina il documento che il sito vuole essere.
+
+**Gerarchia dentro il timbro.** L'anello è il campo, non la figura: è una hairline
+neutra che segue il fondo della scena. Tenuto sul magenta faceva due segni di pari voce
+nello stesso centimetro quadrato, e il cerchio vinceva sul profilo — che è il marchio.
+Il magenta resta al profilo, cioè a LA LINEA.
+
+**Misure.** Una sola variabile governa il gruppo (`--lockup`): il timbro detta il
+quadrato, la firma ne è un multiplo (5,1×), lo spazio fra i due una frazione (0,42×).
+Si cambia la variabile e il rapporto tiene — che è la differenza fra un marchio e due
+elementi accostati.
+
+**Nessuna coda.** Il lockup non porta descrittore. `<title>` sì, e non è una
+contraddizione: sono due oggetti diversi. Un marchio sta dentro la pagina che lo spiega
+e può permettersi di tacere; il titolo vive in una barra di schede e in una pagina di
+risultati, dove intorno non c'è niente, e «Dr. William Petrini» da solo non dice il
+mestiere né distingue questo medico dagli omonimi.
 
 ---
 
@@ -92,7 +188,7 @@ Le transizioni sono parte della scena precedente, mai uno stacco.
 | 03 | **STRATI** | Un piano attraversa il volto: superficie → topologia di luce → vettori muscolari → osso. Reso come disegno a sanguigna sopra la fotografia, non come HUD. | ink |
 | 04 | **TOPOGRAFIA** | Il volto **è** l'interfaccia. La prossimità del puntatore porta avanti una regione; compare il dossier clinico del trattamento. | sanguigna |
 | 05 | **METODO** | Respiro editoriale. Tipografia enorme, protocollo numerato, quasi nessun movimento. | gesso |
-| 06 | **MEDICO** | Ritratto editoriale. Le credenziali sono il livello di annotazione tecnica, non una bio. | ink |
+| 06 | **MEDICO** | La fotografia vera del dott. Petrini e il suo nome, per ora nient'altro: il copy è atteso dal cliente e le credenziali che c'erano erano inventate. Quando tornano, sono il livello di annotazione tecnica, non una bio. | ink |
 | 07 | **ESITI** | Casi clinici, non gallerie. Il ritratto resta fisso; lo scroll attraversa T0 → T+14gg → T+90gg mentre il ragionamento medico si annota a lato. | gesso |
 | 08 | **CONSULTO** | Anamnesi, non "Book Now". Il form come modulo clinico. | ink |
 
@@ -107,8 +203,9 @@ filosofia → la fotografia ritorna → il medico emerge da quel mondo.
 Meccaniche diverse, non varianti della stessa.
 
 **S1 — OCCLUSIONE (profondità + apertura di luce)** · scena LUCE
-Il ritratto è composto in WebGL con la propria matte. La parola `CANONE` vive nello
-spazio *attorno* al volto: le ultime lettere passano dietro il profilo. L'apertura è
+Il ritratto è composto in WebGL con la propria matte. Il nome `WILLIAM PETRINI`, su due
+righe, vive nello spazio *attorno* al volto: le ultime lettere di entrambe le righe
+passano dietro il profilo, tagliate alla stessa ascissa. L'apertura è
 un diaframma — a zero passa solo il bordo illuminato, poi il volto emerge dall'ombra
 mentre la camera arretra.
 
@@ -118,6 +215,42 @@ mentre la camera arretra.
 > Cadendo il macro cadeva anche la ragione per partire a forte ingrandimento — oltre
 > ~1,7× la sorgente si sgrana — quindi l'apertura è passata dall'ottica alla luce,
 > che non dipende dalla risoluzione.
+>
+> Passando da CANONE a PETRINI la geometria dell'occlusione non cambia: la scala è
+> dettata dalla larghezza (`size *= (w * 0.94) / measureText(word).width`), quindi la
+> parola occupa la stessa frazione di texture e viene tagliata nello stesso punto.
+> Cambia solo *quale* lettera ci finisce sotto, e in meglio: PETRINI è più stretta di
+> CANONE a parità di corpo — due `I` invece di due `O` — quindi il corpo cresce del
+> 4,9% e l'altezza delle maiuscole del 2,8%, e il taglio cade su uno stelo verticale
+> invece che su una lettera tonda. Un montante che continua dietro il naso si legge
+> come una lettera occlusa; una `O` mozzata si legge come un errore.
+>
+> Il passaggio successivo — il nome su due righe — è invece l'unico che ha richiesto di
+> rimettere le mani sulla posa, e non per gusto. Il blocco è alto il doppio della riga
+> sola e alla misura di prima arrivava dentro il claim: due testi in latte sovrapposti
+> non sono una composizione in profondità, sono una collisione.
+>
+> Ma la correzione vera è arrivata dal cliente, guardando: **il profilo non copriva un
+> pezzo dell'ultima lettera, se la mangiava.** WILLIAM finiva in «WILLIA» e PETRINI in
+> «PETRI», su tutte e due le misure. È il punto in cui l'occlusione smette di essere
+> profondità e diventa un errore di composizione — un nome troncato si legge come un
+> nome troncato, non come un nome dietro una faccia.
+>
+> La causa è geometrica e vale la pena scriverla, perché tornerà a ogni cambio di
+> nome: **il blocco su due righe è largo quanto la riga sola**, ma la sua ultima
+> lettera deve fermarsi dove si ferma quella di *entrambe* le righe, e le due righe
+> incontrano il profilo ad altezze diverse — WILLIAM sulla fronte, PETRINI sul naso,
+> che sporge molto più a sinistra. La misura la detta il naso, non la fronte. Con le
+> `W` in testa il blocco semplicemente non ci stava: è stato stretto e portato a
+> sinistra (orizzontale `tScale` 0,84 → 0,656 e `tCenter` 0,470/0,470 → 0,161/0,383;
+> verticale 0,62 → 0,697 e 0,360/0,620 → 0,129/0,500).
+>
+> Le due regole che restano, e che vanno tenute insieme perché tirano in direzioni
+> opposte: **il nome deve toccare il volto** — se non lo tocca non è più S1, è una
+> scritta sopra una fotografia, ed è esattamente l'errore opposto in cui si cade
+> stringendo troppo — e **deve toccarlo per un morso, non per una lettera.** Fra le
+> due, si sbaglia dalla parte della leggibilità: un nome intero che sfiora il profilo
+> è una composizione riuscita a metà, un nome tagliato è una composizione sbagliata.
 
 **S2 — LA COSTRUZIONE (scroll-controlled motion)** · scena CANONE
 La geometria della proporzione si disegna con lo scroll — path SVG con `stroke-dashoffset`

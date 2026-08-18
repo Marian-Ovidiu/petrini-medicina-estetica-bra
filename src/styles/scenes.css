@@ -49,7 +49,10 @@ body.is-soglia {
   right: 0;
   z-index: 50;
   display: flex;
-  align-items: flex-start;
+  /* Il marchio era due righe e il menù si allineava alla prima. Ora
+     il lockup è una riga sola: il menù va al suo centro ottico, o
+     resta appeso in alto contro un segno che gli sta accanto. */
+  align-items: center;
   justify-content: space-between;
   gap: var(--gut);
   padding: clamp(16px, 2.2vw, 28px) var(--gut);
@@ -81,8 +84,6 @@ body.is-soglia {
 /* Il velo copre la maggior parte dei casi; su una fotografia che
    arriva fino al bordo superiore serve anche un filo d'ombra sotto
    le lettere, altrimenti la testata si perde su uno zigomo in luce. */
-.testata__nome,
-.testata__coda,
 .testata__nav a {
   text-shadow: 0 1px 12px color-mix(in oklab, var(--ground) 80%, transparent);
 }
@@ -91,22 +92,110 @@ body.is-soglia {
   pointer-events: auto;
 }
 
+/* Il fondo della testata cambia con la scena che le passa sotto, e
+   figura e velo devono muoversi insieme: prima il velo sfumava e le
+   lettere scattavano di colpo. Con quattro parole di menù non si
+   notava, con un marchio di duecento pixel sì.
+
+   Breve, però, non lenta come il velo. La figura qui si *inverte* —
+   latte su pece diventa pece su latte — e a metà strada passa per un
+   grigio che non è né l'una né l'altra. Sul velo quella mezzatinta
+   dura e non dà fastidio perché è una velatura; sul marchio è il
+   marchio illeggibile. Un terzo di secondo la attraversa senza che
+   si veda, un secondo e mezzo la mette in mostra. */
+.testata__nav a,
+.testata__anello,
+.testata__firma {
+  transition:
+    color var(--d-fast) var(--e-drive),
+    background-color var(--d-fast) var(--e-drive),
+    stroke var(--d-fast) var(--e-drive);
+}
+
+/* ── il lockup: timbro e firma ───────────────────────────────
+   Il marchio a misura di testata è stato provato nudo, alle misure
+   fra 25 e 50px, e nudo non funziona: il tracciato è un contorno
+   aperto con rapporto 0,42 — alto e strettissimo — e il naso, che è
+   l'unica cosa che rende leggibile un profilo, a 32px vale due
+   pixel. Accanto a una firma a pennello il segno non veniva letto
+   come volto: veniva letto come una parentesi graffa davanti al
+   nome. Non è una lettura incompleta, è una lettura sbagliata.
+   Ritagliarlo peggiora — la larghezza del disegno sta tutta nella
+   fronte e nella nuca, la fascia dei tratti è ancora più magra.
+
+   La risposta è il campo, non il disegno. Chiuso in un anello il
+   profilo smette di essere punteggiatura e diventa un segno dentro
+   un timbro — e nessuno legge l'interno di un timbro come un segno
+   d'interpunzione. Il tracciato non è toccato: è quello della
+   soglia, byte per byte, solo inquadrato.
+
+   L'anello poi non è un ornamento preso a prestito: è già uno stato
+   de LA LINEA, quello che in TOPOGRAFIA si chiude sul landmark. E la
+   coppia che compone dice il mestiere — un referto si autentica con
+   timbro e firma, ed è esattamente quello che sta in testata.
+
+   Una sola misura governa il gruppo: il timbro detta il quadrato, la
+   firma ne è un multiplo, lo spazio fra i due una frazione. Si
+   cambia --lockup e il rapporto tiene, che è la differenza fra un
+   marchio e due elementi accostati. */
 .testata__marchio {
+  --lockup: clamp(26px, 2.15vw, 33px);
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  align-items: center;
+  gap: calc(var(--lockup) * 0.42);
+
+  /* Il bersaglio è il gruppo, che sul telefono è alto 25px: appena
+     sopra il minimo, e in un angolo dello schermo. Il padding allarga
+     l'area da toccare, il margine negativo la restituisce al layout —
+     il marchio resta dove sta e diventa raggiungibile col pollice. */
+  padding-block: 9px;
+  margin-block: -9px;
+
+  /* Una maschera alfa non ha text-shadow, e il filo d'ombra che
+     difendeva le lettere sopra le fotografie qui serve uguale. Lo fa
+     un drop-shadow, che segue l'alfa di quello che è stato disegnato
+     invece del rettangolo dell'elemento.
+
+     Sta sul gruppo e non sulla firma perché il filtro si applica
+     *prima* del mascheramento: messo sull'elemento mascherato
+     ombreggerebbe il suo box, e poi l'ombra verrebbe ritagliata via
+     insieme a tutto il resto. Sul genitore il filtro vede il gruppo
+     già disegnato — e con un'ombra sola difende anche il timbro, che
+     sopra uno zigomo in luce ne ha lo stesso bisogno. */
+  filter: drop-shadow(0 1px 10px color-mix(in oklab, var(--ground) 82%, transparent));
 }
 
-.testata__nome {
-  font-family: var(--display);
-  font-size: clamp(17px, 1.5vw, 22px);
-  letter-spacing: 0.16em;
-  line-height: 1;
-  color: var(--figure);
+.testata__timbro {
+  flex: none;
+  width: var(--lockup);
+  height: var(--lockup);
+  /* L'anello ha il tratto fuori scala: sborda di mezzo spessore */
+  overflow: visible;
 }
 
-.testata__coda {
-  color: var(--fumo);
+/* L'anello è il campo, non la figura. Tenuto sul magenta faceva due
+   segni di pari voce nello stesso centimetro quadrato e il cerchio
+   vinceva sul profilo, che è il marchio. Qui è una hairline che
+   segue il fondo della scena e si limita a delimitare. */
+.testata__anello {
+  stroke: color-mix(in oklab, var(--figure) 45%, transparent);
+  stroke-width: 0.8;
+}
+
+/* LA LINEA resta magenta a ogni fondo. Sul lime scende sotto il 3:1,
+   ed è voluto: è la stessa deroga che il brand si dà per l'anello di
+   TOPOGRAFIA — il magenta lì vale per la grafica, non per il testo. */
+.testata__profilo {
+  stroke: var(--marker);
+  /* Hairline come in tutto il sito, ma non 1px netto: a questa misura
+     il profilo sta accanto ai pieni di un pennello, e a 1px si
+     sfilaccia dentro l'anello. */
+  stroke-width: 1.3;
+}
+
+.testata__firma {
+  flex: none;
+  width: calc(var(--lockup) * 5.1);
 }
 
 .testata__nav {
@@ -144,14 +233,17 @@ body.is-soglia {
   .testata__nav a:not(.testata__consulto) {
     display: none;
   }
-  /* La coda del marchio è larga quanto lo schermo e spinge la voce
-     di menù fuori dal viewport. In verticale il marchio basta da solo. */
-  .testata__coda {
-    display: none;
+  /* Il descrittore che qui spariva non esiste più: il lockup è già
+     una riga sola a ogni misura. Resta da stringerlo, perché con
+     `Consulto` accanto la larghezza disponibile è quella che è —
+     e la firma è l'unico pezzo che si può accorciare senza che il
+     marchio smetta di leggersi. */
+  .testata__marchio {
+    --lockup: 25px;
+    gap: calc(var(--lockup) * 0.38);
   }
-  .testata__nome {
-    font-size: 16px;
-    letter-spacing: 0.2em;
+  .testata__firma {
+    width: calc(var(--lockup) * 4.7);
   }
 }
 

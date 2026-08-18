@@ -125,6 +125,11 @@
   margin: 0;
 }
 
+/* `.medico__frase` e `.medico__credenziali` non hanno markup in pagina:
+   la frase virgolettata e le credenziali sono uscite in attesa del copy
+   vero (il riquadro nella scena 06 dice perché). Lo stile resta qui
+   apposta — il testo torna, e toglierlo per rimetterlo identico fra
+   una settimana è churn che cancella anche le ragioni scritte sotto. */
 .medico__frase {
   max-width: 30ch;
   color: var(--figure-dim);
@@ -140,7 +145,10 @@
 
 .medico__credenziali > div {
   display: grid;
-  grid-template-columns: 15ch minmax(0, 1fr);
+  /* 15ch tagliava corto: `specializzazione` e `perfezionamento` sono
+     più lunghe della colonna e finivano addosso al valore. La misura
+     la detta il termine più lungo, non un numero tondo. */
+  grid-template-columns: 18ch minmax(0, 1fr);
   gap: 16px;
   padding: 11px 0;
   border-bottom: 1px solid var(--rule);
@@ -462,6 +470,39 @@
   letter-spacing: 0.06em;
   max-width: 46ch;
   margin-top: 18px;
+}
+
+/* LA LINEA chiude il documento come lo ha aperto: nella soglia
+   disegna un profilo, qui è la riga su cui si firma. Il filetto sta
+   *sotto* la firma e sopra il nome stampato, che è l'ordine in cui
+   le due cose stanno su un modulo vero — si firma sopra la riga, il
+   nome in chiaro va sotto perché la firma non è tenuta a essere
+   leggibile. Da qui anche la sovrapposizione: il pennello scende
+   sotto la propria baseline, e senza risalire galleggerebbe sopra
+   la riga invece di poggiarci. */
+.consulto__calce {
+  --fw: clamp(146px, 17vw, 186px);
+  margin: clamp(34px, 5vh, 58px) 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.consulto__firma {
+  width: var(--fw);
+  margin-bottom: calc(var(--fw) * -0.042);
+}
+
+.consulto__calce .tech {
+  border-top: 1px solid var(--rule);
+  padding-top: 9px;
+  /* La riga sporge oltre la firma da entrambi i lati: una riga
+     lunga quanto la firma sembra sottolinearla, non reggerla. */
+  min-width: calc(var(--fw) * 1.4);
+  color: var(--figure-dim);
+  font-family: var(--tech);
+  text-transform: none;
+  letter-spacing: 0.06em;
 }
 
 /* ============================================================
