@@ -357,11 +357,9 @@
   color: var(--marker);
 }
 
-.consulto__costo {
-  color: var(--figure-dim);
-  border-top: 1px solid var(--rule);
-  padding-top: 14px;
-}
+/* `.consulto__costo` è stata rimossa e non è in attesa di niente: la
+   tariffa del consulto non torna in pagina. Diverso dal copy della
+   scena 06, che aspetta il testo vero e per cui lo stile è rimasto. */
 
 .consulto__modulo {
   display: flex;
