@@ -11,10 +11,66 @@
   background: var(--pece);
 }
 
+.soglia__marchio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(22px, 3.4vh, 40px);
+}
+
 .soglia__disegno {
   width: min(22vw, 190px);
   height: auto;
   overflow: visible;
+}
+
+/* La firma che si scrive.
+   La sorgente è raster, quindi non c'è nessun tracciato da scoprire
+   con `stroke-dashoffset` come si fa col profilo qui sopra. Al suo
+   posto una seconda maschera — una lama di gradiente — che avanza
+   sopra la prima e la lascia passare solo fino a dove è arrivata.
+   Le due si intersecano: resta l'inchiostro già scritto.
+
+   Funziona perché una corsiva si scrive nell'ordine in cui si legge,
+   da sinistra a destra: la lama non simula la scrittura, segue la
+   stessa direzione della mano. L'inclinazione di 96° non è un vezzo —
+   è la pendenza delle aste della firma, e una lama verticale su una
+   scrittura inclinata si vede subito come una tendina che scorre.
+
+   Il bordo non è netto: 8% di sfumatura, che alla misura finale sono
+   una ventina di pixel. Un taglio secco è una maschera; un bordo
+   morbido è inchiostro che arriva. */
+.soglia__firma {
+  width: min(34vw, 260px);
+}
+
+/* La lama vive dentro `@supports` per una ragione precisa: senza
+   `mask-composite` due maschere si *sommano* invece di intersecarsi,
+   e la somma di una firma e di un rettangolo di gradiente è un
+   rettangolo. Il ripiego non è la firma senza animazione per caso —
+   è la firma senza animazione perché il blocco non si applica, e la
+   regola sopra resta quella di `.firma`. Il gesto si perde, il
+   marchio no. */
+@supports (mask-composite: intersect) or (-webkit-mask-composite: source-in) {
+  .soglia__firma {
+    --scrittura: 0%;
+
+    -webkit-mask-image: url("/media/img/firma-petrini.png"),
+      linear-gradient(96deg, #000 0 92%, transparent 100%);
+    mask-image: url("/media/img/firma-petrini.png"),
+      linear-gradient(96deg, #000 0 92%, transparent 100%);
+    -webkit-mask-repeat: no-repeat, no-repeat;
+    mask-repeat: no-repeat, no-repeat;
+    -webkit-mask-position: center, left center;
+    mask-position: center, left center;
+    -webkit-mask-size: contain, var(--scrittura) 100%;
+    mask-size: contain, var(--scrittura) 100%;
+    /* Il primo è il keyword storico di WebKit, il secondo lo
+       standard. Vanno dichiarati entrambi: le due sintassi non usano
+       gli stessi nomi e i browser non si sovrappongono del tutto. */
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
 }
 
 .soglia__profilo {

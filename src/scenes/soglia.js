@@ -16,9 +16,11 @@ const NOMEN = [
 /**
  * SOGLIA — nessun contatore di percentuale.
  *
- * Una hairline di sanguigna disegna un profilo. Quando ha finito,
- * si apre e lascia passare la luce. È il primo stato de LA LINEA:
- * la stessa linea che attraverserà tutto il documento.
+ * Una hairline di sanguigna disegna un profilo, poi la firma si
+ * scrive sotto. Quando il marchio è composto, si apre e lascia
+ * passare la luce. È il primo stato de LA LINEA — la stessa linea
+ * che attraverserà tutto il documento — e insieme il modo in cui il
+ * lockup di testata arriva: non compare, si è appena formato.
  */
 export function initSoglia() {
   const soglia = document.querySelector("#soglia");
@@ -26,6 +28,7 @@ export function initSoglia() {
 
   const path = soglia.querySelector(".soglia__profilo");
   const nomen = soglia.querySelector("[data-nomen]");
+  const firma = soglia.querySelector("[data-soglia-firma]");
 
   if (reducedMotion) {
     soglia.remove();
@@ -70,8 +73,31 @@ export function initSoglia() {
         },
         0
       )
-      // Pausa. Il disegno resta fermo un istante prima di aprirsi:
-      // è la sosta che rende il movimento successivo un evento.
+      // La firma parte prima che il profilo abbia finito. Non è un
+      // risparmio di tempo: due gesti in fila si guardano come una
+      // lista, due gesti che si accavallano si guardano come una
+      // mano sola che continua a scrivere. La sovrapposizione è
+      // corta — il mento del profilo si sta ancora chiudendo.
+      //
+      // 0,85s è il tempo di scrivere un nome, non di rivelare
+      // un'immagine: sotto sembra uno scatto, sopra un caricamento.
+      .to(
+        firma,
+        {
+          "--scrittura": "112%",
+          duration: 0.85,
+          // La mano parte, non accelera: `power1.out` toglie
+          // l'avvio molle che farebbe leggere il gesto come una
+          // dissolvenza. Oltre il 100% perché la sfumatura della
+          // lama deve uscire dal bordo destro, altrimenti l'ultima
+          // `i` resta più pallida del resto per sempre.
+          ease: "power1.out",
+        },
+        1.0
+      )
+      // Pausa. Il marchio composto resta fermo un istante prima di
+      // aprirsi: è la sosta che rende il movimento successivo un
+      // evento.
       .to({}, { duration: 0.35 })
       .to(nomen, { opacity: 0, duration: 0.3, ease: "power1.in" })
       .to(

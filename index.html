@@ -72,15 +72,23 @@
          00 · SOGLIA — la linea disegna un profilo, poi si apre
          ══════════════════════════════════════════════════════════ -->
     <div class="soglia" id="soglia" aria-hidden="true">
-      <svg class="soglia__disegno" viewBox="0 0 300 420" fill="none" aria-hidden="true">
-        <path
-          class="soglia__profilo"
-          d="M196 22c-34-6-70 8-88 38-14 24-16 54-13 82 2 20 6 40 3 60-2 13-9 24-16 35-4 6-9 13-7 20 2 8 12 10 20 11 6 1 13 1 18 5 4 4 4 11 3 17-2 12-6 24-4 36 3 17 18 29 34 34 24 8 51 4 74-6"
-          stroke="var(--marker)"
-          stroke-width="1"
-          vector-effect="non-scaling-stroke"
-        />
-      </svg>
+      <!-- La soglia non è un caricamento: è il marchio che si compone.
+           La linea disegna il profilo, poi la firma si scrive sotto —
+           le due metà del lockup, nell'ordine in cui si fa un referto.
+           Quando la soglia si apre, quel marchio è già in testata: non
+           compare, ci si era appena formato davanti. -->
+      <div class="soglia__marchio">
+        <svg class="soglia__disegno" viewBox="0 0 300 420" fill="none" aria-hidden="true">
+          <path
+            class="soglia__profilo"
+            d="M196 22c-34-6-70 8-88 38-14 24-16 54-13 82 2 20 6 40 3 60-2 13-9 24-16 35-4 6-9 13-7 20 2 8 12 10 20 11 6 1 13 1 18 5 4 4 4 11 3 17-2 12-6 24-4 36 3 17 18 29 34 34 24 8 51 4 74-6"
+            stroke="var(--marker)"
+            stroke-width="1"
+            vector-effect="non-scaling-stroke"
+          />
+        </svg>
+        <span class="firma soglia__firma" data-soglia-firma></span>
+      </div>
       <p class="soglia__nomen tech tech--annot"><span data-nomen>zygoma</span></p>
     </div>
 

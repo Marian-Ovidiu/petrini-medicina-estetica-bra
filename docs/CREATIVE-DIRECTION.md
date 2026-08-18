@@ -102,7 +102,7 @@ dove un carattere farebbe la stessa cosa. È un **segno**, e sta con LA LINEA (�
 con Bodoni.
 
 La regola che tiene in piedi la distinzione è una regola di conteggio, e va rispettata
-alla lettera: **due occorrenze in tutto il sito.**
+alla lettera: **due occorrenze in pagina.**
 
 1. **Testata** — il lockup, dove il nome identifica.
 2. **Piede della scheda di anamnesi** — dove il nome sottoscrive, che è quello che una
@@ -114,6 +114,10 @@ occorrenza la firma diventerebbe un carattere decorativo — cioè precisamente 
 che questo paragrafo esiste per impedire. La regola è scritta anche in `base.css`,
 sopra `.firma`, perché è lì che qualcuno andrà a cercarla.
 
+La firma che si scrive nella soglia (§4c) **non** è la terza: la soglia non è una
+pagina, e quell'elemento esce dal DOM prima che la testata sia visibile. Le due non
+convivono mai.
+
 ---
 
 ## 4. Il dispositivo di firma: **LA LINEA**
@@ -123,7 +127,8 @@ Una sola hairline di sanguigna, spessa 1px, **continua per tutto il sito**.
 Non è un motivo decorativo ripetuto: è letteralmente la stessa linea che si trasforma.
 
 0. In testata **sta ferma dentro un anello**, per tutta la visita: è il timbro (§4b).
-1. Nel preloader **disegna un profilo** di volto.
+1. Nella soglia **disegna un profilo** di volto, e sotto quel profilo si scrive
+   la firma: il marchio si compone prima che la pagina esista (§4c).
 2. Nella hero **diventa il contorno della mandibola** del soggetto.
 3. In *Canone* **si apre in costruzione geometrica** — i terzi del volto, le sezioni.
 4. In *Strati* **diventa vettore muscolare**.
@@ -174,6 +179,44 @@ e può permettersi di tacere; il titolo vive in una barra di schede e in una pag
 risultati, dove intorno non c'è niente, e «Dr. William Petrini» da solo non dice il
 mestiere né distingue questo medico dagli omonimi.
 
+### 4c. La soglia scrive la firma
+
+La soglia non è un caricamento: è **il marchio che si compone**. La linea disegna il
+profilo, poi sotto quel profilo la firma si scrive. Sono le due metà del lockup,
+nell'ordine in cui si chiude un referto — prima il timbro, poi la mano. Quando la
+soglia si apre, quel marchio è già in testata: non compare, si era appena formato
+davanti a chi guarda. È il lavoro che un preloader dovrebbe fare e quasi mai fa.
+
+**Come si scrive una firma raster.** Il profilo si scopre con `stroke-dashoffset`
+perché è un tracciato. La firma no: è una fotografia di un segno, e non ha nessun
+percorso da svelare. Al suo posto una **seconda maschera** — una lama di gradiente —
+che avanza sopra la prima e la lascia passare solo fino a dove è arrivata; le due si
+intersecano e resta l'inchiostro già scritto.
+
+Funziona perché una corsiva **si scrive nell'ordine in cui si legge**. La lama non
+simula la scrittura: segue la stessa direzione della mano, da sinistra a destra. Due
+dettagli fanno la differenza fra un gesto e una tendina — l'inclinazione della lama
+(96°, la pendenza delle aste della firma: verticale su una scrittura inclinata si
+smaschera subito) e il bordo sfumato all'8%, perché un taglio netto è una maschera
+mentre un bordo morbido è inchiostro che arriva.
+
+La strada alternativa era ricalcare la firma come tracciato SVG e animarla davvero.
+È stata scartata e vale la pena dire perché: il ricalco di un pennello restituisce il
+**contorno**, non l'asse, quindi `stroke-dashoffset` disegnerebbe il perimetro della
+firma invece della firma; e un ricalco ad asse singolo perde lo spessore modulato, che
+è tutto il carattere di questo segno. Meglio il segno vero rivelato bene che un segno
+finto animato meglio.
+
+**Perché non è la terza occorrenza.** La regola di §3 dice due, e regge: la soglia non
+è una pagina. Quell'elemento **esce dal DOM** quando la soglia si apre, e non convive
+mai con le altre due — quando la testata è visibile, quella firma non c'è più. È la
+stessa occorrenza della testata, vista mentre arriva.
+
+**Costo.** La soglia passa da ~3,0 a ~3,2 secondi. La firma parte prima che il profilo
+abbia finito, e la sovrapposizione non è un risparmio di tempo: due gesti in fila si
+guardano come una lista, due gesti che si accavallano si guardano come una mano sola
+che continua a scrivere.
+
 ---
 
 ## 5. Narrativa — otto scene, nessuna sezione
@@ -182,7 +225,7 @@ Le transizioni sono parte della scena precedente, mai uno stacco.
 
 | # | Scena | Cosa succede | Registro |
 |---|---|---|---|
-| 00 | **SOGLIA** | La linea disegna un profilo mentre scorre nomenclatura latina. Poi si apre. | ink |
+| 00 | **SOGLIA** | La linea disegna un profilo mentre scorre nomenclatura latina, poi la firma si scrive sotto. Quando il marchio è composto, si apre. | ink |
 | 01 | **LUCE** | La luce arriva sul volto — all'inizio passa solo il bordo illuminato del profilo, poi la faccia emerge dall'ombra mentre la camera arretra. La tipografia esiste in profondità, occlusa dal volto. La sequenza si suona da sola all'atterraggio. | ink |
 | 02 | **CANONE** | Dal mento la linea esce e costruisce la proporzione classica sopra il ritratto. Il puntatore muove la sorgente di luce. | gesso |
 | 03 | **STRATI** | Un piano attraversa il volto: superficie → topologia di luce → vettori muscolari → osso. Reso come disegno a sanguigna sopra la fotografia, non come HUD. | ink |
