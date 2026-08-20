@@ -49,7 +49,25 @@ si rimette un elemento nell'array. Cambiando forma vanno però riguardati `tScal
 `tCenter` nello shader, tarati sull'ingombro reale del blocco.
 
 Posizionamento in una frase:
-> Non trasformiamo i volti. Ne misuriamo l'armonia.
+> Non trasformiamo i volti. Ne ricerchiamo l'armonia.
+
+La seconda riga è stata **architettura**, poi **misura**, e il cliente l'ha chiusa su
+**ricerca**. Vale la pena tenere traccia del perché, perché è la riga su cui il sito
+si regge e tornerà in discussione.
+
+Il rischio, passando da architettura ad armonia, non era la parola: era il verbo.
+«Rispettare l'armonia» — la prima proposta — è un verbo di astensione, e *non
+trasformare* più *rispettare* dicono la stessa cosa due volte; la struttura originale
+funzionava perché la seconda riga diceva una cosa nuova invece di correggere la prima.
+«Misurare» risolveva il problema e in più agganciava la scena 02, che lo scarto lo
+misura per davvero. «Ricercare» sta in mezzo e ha una ragione sua: è un'azione, quindi
+la riga non si accartoccia, ma non dichiara un metodo — dice che l'armonia è un
+obiettivo che si insegue, non un dato che si constata. È più modesto e più difendibile
+di «misuriamo» accanto a un volto che non è quello del paziente.
+
+Il prezzo lo si paga in scena 02: dopo il copy nuovo del cliente quella scena non parla
+più di misura, quindi il legame fra dichiarazione e dimostrazione ora lo tiene solo la
+costruzione grafica, che i terzi continua a misurarli. Regge, ma è un appoggio in meno.
 
 **Lingua:** italiano per la voce editoriale, **latino anatomico** per il livello tecnico
 (*zygoma, mandibula, orbicularis oris, sulcus nasolabialis*). Questo doppio registro
