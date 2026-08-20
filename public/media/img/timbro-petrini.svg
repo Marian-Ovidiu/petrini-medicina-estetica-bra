@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 102 102" width="256" height="256"
+     role="img" aria-label="Dr. William Petrini">
+  <title>Dr. William Petrini — timbro</title>
+  <!--
+    Il timbro del sito, in un file autonomo.
+
+    In pagina questo segno è HTML inline e prende colore e spessore dal
+    CSS. Qui è tutto dichiarato: la trasformazione del disegno è stata
+    appiattita dentro le coordinate del tracciato, quindi niente
+    trasformazioni annidate e niente vector-effect. Il tratto è in
+    unità di viewBox e scala insieme al segno — 2,424 e 3,939 sono gli
+    spessori che in testata si vedono a 33px, cioè 0,8 e 1,3 pixel di
+    schermo.
+
+    L anello è in currentColor al 45 per cento, come nel sito, dove
+    segue il fondo della scena invece di essere un secondo colore:
+    basta impostare la proprietà color sul contenitore e il cerchio ci
+    si adegua. Il magenta resta al profilo, che è il marchio.
+
+    Il viewBox parte da -1 perché l anello sborda di mezzo tratto: a
+    0 0 100 100 il cerchio verrebbe rifilato dal proprio bordo.
+  -->
+  <circle cx="50" cy="50" r="49" fill="none"
+          stroke="currentColor" stroke-opacity="0.45" stroke-width="2.424" />
+  <path d="M63.3 12.357 c-7.529 -1.329 -15.5 1.771 -19.486 8.414 -3.1 5.314 -3.543 11.957 -2.879 18.157 0.443 4.429 1.329 8.857 0.664 13.286 -0.443 2.879 -1.993 5.314 -3.543 7.75 -0.886 1.329 -1.993 2.879 -1.55 4.429 0.443 1.771 2.657 2.214 4.429 2.436 1.329 0.221 2.879 0.221 3.986 1.107 0.886 0.886 0.886 2.436 0.664 3.764 -0.443 2.657 -1.329 5.314 -0.886 7.971 0.664 3.764 3.986 6.421 7.529 7.529 5.314 1.771 11.293 0.886 16.386 -1.329" fill="none" stroke="#EF3984" stroke-width="3.939"
+        stroke-linecap="round" />
+</svg>

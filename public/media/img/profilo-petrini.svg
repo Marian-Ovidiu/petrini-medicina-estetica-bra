@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="67 13 160 358" width="180" height="403"
+     role="img" aria-label="Dr. William Petrini">
+  <title>Dr. William Petrini — profilo</title>
+  <!--
+    Il profilo da solo, senza l anello del timbro.
+
+    Il tracciato è quello originale del sito, non ridisegnato: è lo
+    stesso che disegna la soglia in apertura e lo stesso che sta nel
+    timbro in testata. Qui cambia solo l inquadratura — il viewBox è
+    quello che il sito usa dentro il timbro, allargato di tre unità
+    per lato perché il tratto ha i capi arrotondati e a filo verrebbe
+    rifilato.
+
+    Il tratto è 5,87 unità di viewBox: sono gli stessi 1,3 pixel di
+    schermo che si vedono in testata, ma espressi nel disegno, così
+    scalano insieme al segno invece di restare sottili in stampa.
+
+    Senza anello il segno regge alle misure grandi. In piccolo no, ed
+    è il motivo per cui in testata l anello c è: sotto i 26 pixel il
+    naso vale due pixel e il profilo si legge come una parentesi
+    graffa, non come un volto.
+  -->
+  <path d="M196 22c-34-6-70 8-88 38-14 24-16 54-13 82 2 20 6 40 3 60-2 13-9 24-16 35-4 6-9 13-7 20 2 8 12 10 20 11 6 1 13 1 18 5 4 4 4 11 3 17-2 12-6 24-4 36 3 17 18 29 34 34 24 8 51 4 74-6" fill="none" stroke="#EF3984" stroke-width="5.87"
+        stroke-linecap="round" />
+</svg>
