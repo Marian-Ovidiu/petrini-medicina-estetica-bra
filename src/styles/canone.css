@@ -74,7 +74,11 @@
    restare agganciato ai landmark vive dentro questo riquadro. */
 .canone__telaio {
   position: relative;
-  aspect-ratio: 1696 / 2528;
+  /* Il rapporto è quello di `profilo.avif`, la lastra che questa
+     scena ha preso in cambio dalla 04. Deve coincidere col viewBox
+     della costruzione (1000 × 1572): è quella coincidenza a tenere
+     le linee sui landmark invece che vicino ai landmark. */
+  aspect-ratio: 1100 / 1729;
 }
 
 /* La lastra sta dentro un'altezza di schermo. Non è una scelta di
@@ -98,7 +102,7 @@
        `aspect-ratio`, così la costruzione continua a stare sui
        landmark: vincolare l'altezza e clampare la larghezza avrebbe
        schiacciato il rapporto e scollato le linee dal volto. */
-    width: min(100%, calc(min(74svh, 900px) * 1696 / 2528));
+    width: min(100%, calc(min(74svh, 900px) * 1100 / 1729));
     height: auto;
   }
 }

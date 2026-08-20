@@ -9,10 +9,17 @@ const PECE = [0.055, 0.071, 0.027]; // #0e1207
 const MARKER = [0.937, 0.224, 0.518]; // #ef3984
 const LATTE = [0.973, 1.0, 0.949]; // #f8fff2
 
-// Il nome, nell'ordine in cui si legge. Il cognome sta sotto perché è
-// la riga che il profilo taglia meglio (§ disegnaNome) — e perché è la
-// riga che la testata ripete per esteso.
-const NOME = ["WILLIAM", "PETRINI"];
+// Il nome in hero, una riga per elemento.
+//
+// È tornato al solo cognome per scelta del cliente, dopo aver provato
+// WILLIAM sopra PETRINI. La pila funzionava, ma costringeva il blocco
+// a stringersi per non farsi mangiare le ultime lettere dal profilo —
+// e un cognome solo, su una riga, può tornare grande. La macchina
+// regge entrambe le forme: si rimette un elemento nell'array e la
+// composizione si ricalcola da sé. Cambiando forma vanno però
+// riguardati `tScale` e `tCenter` nello shader, che sono tarati
+// sull'ingombro reale del blocco.
+const NOME = ["PETRINI"];
 
 // Quanta della larghezza della texture occupa il blocco. Governa la
 // misura di tutto: le righe sono giustificate a questo valore e

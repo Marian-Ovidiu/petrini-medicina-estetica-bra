@@ -161,20 +161,8 @@ if (existsSync(CUT)) {
   console.log("✓ profilo + profilo-matte (ritaglio verticale)");
 }
 
-// Documentazione clinica. Il ritratto del medico stava qui finché era
-// un render come gli altri; ora è una fotografia vera che vuole un
-// ritaglio, ed è passato ai JOBS in cima.
-for (const [src, name, w] of [
-  ["caso-t0.png", "caso-i", [720, 1080]],
-  ["caso-t90.png", "caso-i-t90", [720, 1080]],
-]) {
-  const f = path.join(RAW, src);
-  if (!existsSync(f)) continue;
-  for (const width of w) {
-    await sharp(f)
-      .resize({ width, withoutEnlargement: true })
-      .avif({ quality: 62, effort: 6 })
-      .toFile(path.join(OUT, `${name}-${width}.avif`));
-  }
-  console.log(`✓ ${name}`);
-}
+// La documentazione clinica (caso-t0 / caso-t90) serviva alla scena
+// ESITI, che il cliente ha tolto: i raw restano in `raw/`, e se la
+// scena torna torna anche il blocco che li converte. Il ritratto del
+// medico stava qui finché era un render come gli altri; ora è una
+// fotografia vera che vuole un ritaglio, ed è passato ai JOBS in cima.

@@ -36,24 +36,20 @@ adesso è una parola che il sito *usa* invece di portarla scritta in fronte.
 | **`lat. canon — la regola della proporzione`**, in calce alla hero | Resta, e migliora. Prima era la glossa del logotipo — un'insegna che spiega se stessa, il lavoro più debole che un'annotazione possa fare. Ora che sopra c'è un nome proprio la stessa riga smette di glossare e dichiara: è il seme della scena 02, non l'eco della testata. |
 | **Nomi interni** — `#canone`, `.canone__*`, `src/scenes/canone.js`, `package.json` | Invariati. La scena si chiama Canone. Rinominare il codice sarebbe churn senza nessun guadagno. |
 
-Nella hero il canvas dipinge il nome per esteso, **WILLIAM** sopra **PETRINI**, al
-posto di CANONE. La meccanica non cambia: le ultime lettere passano dietro il profilo
-e il nome si completa in testata.
+Nella hero il canvas dipinge **PETRINI** al posto di CANONE. La meccanica non cambia:
+le ultime lettere passano dietro il profilo e il nome si completa in testata, dove la
+firma lo *riscrive per esteso*.
 
-Su due righe perché con il solo cognome la hero diceva meno della testata, che il nome
-per esteso ce l'ha. Le righe sono giustificate alla stessa larghezza — non allo stesso
-corpo — e la scelta fa due lavori insieme. Di gerarchia: in Bodoni WILLIAM è molto più
-larga di PETRINI a parità di corpo, due `W` contro due `I`, quindi giustificarle fa il
-cognome più grande del nome, che è l'ordine giusto per un marchio. Di meccanica: il
-profilo taglia le due righe alla stessa ascissa, e l'occlusione resta un gesto unico —
-un bordo di volto che passa davanti a un blocco — invece di sfrangiarsi su due parole
-di larghezza diversa, dove una finirebbe dietro la faccia e l'altra no.
-
-La chiusura in testata resta quella di prima, e resta più stretta di quando il
-logotipo era tipografico: la firma *riscrive lo stesso nome*, con la stessa mano.
+È stata provata anche su due righe, WILLIAM sopra PETRINI, e il cliente l'ha riportata
+al solo cognome. La pila funzionava — righe giustificate alla stessa larghezza, cognome
+più grande del nome, profilo che taglia entrambe alla stessa ascissa — ma costava:
+un blocco alto il doppio deve stringersi per non farsi mangiare le ultime lettere, e
+il cognome da solo può tornare grande. `disegnaNome` regge ancora entrambe le forme:
+si rimette un elemento nell'array. Cambiando forma vanno però riguardati `tScale` e
+`tCenter` nello shader, tarati sull'ingombro reale del blocco.
 
 Posizionamento in una frase:
-> Non trasformiamo i volti. Ne comprendiamo l'architettura.
+> Non trasformiamo i volti. Ne misuriamo l'armonia.
 
 **Lingua:** italiano per la voce editoriale, **latino anatomico** per il livello tecnico
 (*zygoma, mandibula, orbicularis oris, sulcus nasolabialis*). Questo doppio registro
@@ -101,18 +97,19 @@ mai una misura scelta per essere letta come testo corrente, non sta in nessun po
 dove un carattere farebbe la stessa cosa. È un **segno**, e sta con LA LINEA (§4), non
 con Bodoni.
 
-La regola che tiene in piedi la distinzione è una regola di conteggio, e va rispettata
-alla lettera: **due occorrenze in pagina.**
+La regola che tiene in piedi la distinzione è una regola di conteggio: **una sola
+occorrenza in pagina**, la testata, dove il nome identifica.
 
-1. **Testata** — il lockup, dove il nome identifica.
-2. **Piede della scheda di anamnesi** — dove il nome sottoscrive, che è quello che una
-   firma fa davvero.
+Erano due. La seconda stava in calce alla scheda di anamnesi, dove il nome sottoscrive
+— che è quello che una firma fa davvero — ed è uscita su richiesta del cliente. In
+calce resta il nome come testo: una scheda clinica la sottoscrive chi la leggerà, e
+senza nessun nome il modulo si chiuderebbe nel vuoto. Il segno se n'è andato, il gesto
+no.
 
-Non nel piede della pagina: lì il nome c'è già come testo, in registro amministrativo,
-e un marchio ripetuto a inizio e fine pagina è quello che fa un template. Alla terza
-occorrenza la firma diventerebbe un carattere decorativo — cioè precisamente la cosa
-che questo paragrafo esiste per impedire. La regola è scritta anche in `base.css`,
-sopra `.firma`, perché è lì che qualcuno andrà a cercarla.
+Il tetto vale ancora, e ora è più stretto: mai nel piede della pagina, dove il nome c'è
+già come testo in registro amministrativo, e mai in un posto dove un carattere farebbe
+la stessa cosa. La regola è scritta anche in `base.css`, sopra `.firma`, perché è lì
+che qualcuno andrà a cercarla.
 
 La firma che si scrive nella soglia (§4c) **non** è la terza: la soglia non è una
 pagina, e quell'elemento esce dal DOM prima che la testata sia visibile. Le due non
@@ -219,7 +216,7 @@ che continua a scrivere.
 
 ---
 
-## 5. Narrativa — otto scene, nessuna sezione
+## 5. Narrativa — sette scene, nessuna sezione
 
 Le transizioni sono parte della scena precedente, mai uno stacco.
 
@@ -232,8 +229,7 @@ Le transizioni sono parte della scena precedente, mai uno stacco.
 | 04 | **TOPOGRAFIA** | Il volto **è** l'interfaccia. La prossimità del puntatore porta avanti una regione; compare il dossier clinico del trattamento. | sanguigna |
 | 05 | **METODO** | Respiro editoriale. Tipografia enorme, protocollo numerato, quasi nessun movimento. | gesso |
 | 06 | **MEDICO** | La fotografia vera del dott. Petrini e il suo nome, per ora nient'altro: il copy è atteso dal cliente e le credenziali che c'erano erano inventate. Quando tornano, sono il livello di annotazione tecnica, non una bio. | ink |
-| 07 | **ESITI** | Casi clinici, non gallerie. Il ritratto resta fisso; lo scroll attraversa T0 → T+14gg → T+90gg mentre il ragionamento medico si annota a lato. | gesso |
-| 08 | **CONSULTO** | Anamnesi, non "Book Now". Il form come modulo clinico. | ink |
+| 07 | **CONSULTO** | Anamnesi, non "Book Now". Il form come modulo clinico. | ink |
 
 Catena di transizioni: il crop della hero **entra** nello zigomo → lo zigomo genera la
 linea di misura → la misura diventa costruzione anatomica → l'anatomia introduce la

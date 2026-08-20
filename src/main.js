@@ -9,7 +9,7 @@ import { initPointer } from "./core/pointer.js";
 import { initSoglia } from "./scenes/soglia.js";
 import { initLuce } from "./scenes/luce.js";
 import { initCanone } from "./scenes/canone.js";
-import { initStrati, initEsiti } from "./scenes/strati.js";
+import { initStrati } from "./scenes/strati.js";
 import { initTopografia } from "./scenes/topografia.js";
 import { initConsulto } from "./scenes/consulto.js";
 
@@ -57,7 +57,6 @@ async function boot() {
   initCanone();
   initStrati();
   initTopografia();
-  initEsiti();
   initConsulto();
   watchGround();
   ScrollTrigger.refresh();

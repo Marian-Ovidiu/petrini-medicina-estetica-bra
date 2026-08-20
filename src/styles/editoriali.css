@@ -125,15 +125,16 @@
   margin: 0;
 }
 
-/* `.medico__frase` e `.medico__credenziali` non hanno markup in pagina:
-   la frase virgolettata e le credenziali sono uscite in attesa del copy
-   vero (il riquadro nella scena 06 dice perché). Lo stile resta qui
-   apposta — il testo torna, e toglierlo per rimetterlo identico fra
-   una settimana è churn che cancella anche le ragioni scritte sotto. */
+/* Il corsivo se n'è andato con le virgolette: segnalava una
+   citazione, e questa non lo è più — è una riga editoriale del sito
+   sul modo di lavorare del medico. Lasciarlo corsivo l'avrebbe fatta
+   leggere come parole sue, che è precisamente la cosa da evitare.
+   `.medico__credenziali` invece non ha markup in pagina: aspetta i
+   dati veri (il riquadro nella scena 06 dice perché) e lo stile resta
+   qui apposta. */
 .medico__frase {
-  max-width: 30ch;
+  max-width: 34ch;
   color: var(--figure-dim);
-  font-style: italic;
 }
 
 .medico__credenziali {
@@ -176,148 +177,7 @@
 }
 
 /* ============================================================
-   07 · ESITI
-   ============================================================ */
-
-.esiti {
-  padding: clamp(90px, 14vh, 190px) var(--gut) clamp(80px, 13vh, 170px);
-}
-
-.esiti__rail {
-  top: clamp(160px, 24vh, 300px);
-  right: var(--gut);
-}
-
-.esiti__intro {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  margin-bottom: clamp(46px, 8vh, 110px);
-}
-
-.esiti__titolo {
-  font-size: clamp(34px, 4.6vw, 78px);
-  line-height: 0.98;
-}
-
-.esiti__titolo em {
-  color: var(--marker);
-}
-
-.esiti__caso {
-  display: grid;
-  gap: clamp(34px, 5vh, 64px);
-}
-
-@media (min-width: 900px) {
-  .esiti__caso {
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
-    column-gap: clamp(40px, 6vw, 110px);
-    align-items: start;
-  }
-}
-
-/* Il ritratto resta fermo mentre il ragionamento scorre a fianco:
-   il confronto non è uno slider, è il tempo che passa accanto a
-   un'immagine che non si sposta. */
-.esiti__lastra {
-  position: relative;
-  aspect-ratio: 1856 / 2320;
-  overflow: hidden;
-  background: var(--tenero);
-}
-
-@media (min-width: 900px) {
-  .esiti__lastra {
-    position: sticky;
-    top: clamp(110px, 16vh, 180px);
-  }
-}
-
-.esiti__stato {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Lo stato successivo non entra in dissolvenza: si scopre da sotto
-   una linea che scende. È la stessa linea di tutto il sito. */
-.esiti__stato[data-stato="t90"] {
-  clip-path: inset(0 0 calc(100% - var(--rivela, 0%)) 0);
-}
-
-.esiti__lastra::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: var(--rivela, 0%);
-  height: 1px;
-  background: var(--marker);
-  opacity: var(--rivela-op, 0);
-}
-
-.esiti__marca {
-  position: absolute;
-  left: 14px;
-  bottom: 12px;
-  color: var(--latte);
-  mix-blend-mode: difference;
-  font-variant-numeric: tabular-nums;
-}
-
-.esiti__tempo {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(40px, 9vh, 130px);
-}
-
-.esiti__tempo li {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  border-top: 1px solid var(--rule);
-  padding-top: 18px;
-  transition: border-color var(--d-mid) var(--e-reveal);
-}
-
-/* Lo stato non si comunica smorzando il testo. Qualunque opacità
-   sotto ~0.8 porta questi colori sotto 4,5:1, e una tappa "spenta"
-   resta pur sempre da leggere: lo dicono la regola in alto, che si
-   accende in marker, e il colore dell'etichetta. */
-.esiti__tempo .tech {
-  color: var(--figure-dim);
-  transition: color var(--d-mid) var(--e-reveal);
-}
-
-.esiti__tempo li[data-attivo] {
-  border-top-color: var(--marker);
-}
-
-.esiti__tempo li[data-attivo] .tech {
-  color: var(--accent-testo);
-}
-
-.esiti__avvertenza {
-  grid-column: 1 / -1;
-  max-width: 66ch;
-  color: var(--figure-dim);
-  /* minuscolo: qui il monospazio resta, ed è voce clinica */
-  font-family: var(--tech);
-  text-transform: none;
-  letter-spacing: 0.06em;
-  border-top: 1px solid var(--rule);
-  padding-top: 16px;
-  margin-top: clamp(20px, 4vh, 50px);
-}
-
-/* ============================================================
-   08 · CONSULTO
+   07 · CONSULTO
    Un modulo clinico, non un CTA. Nessun riquadro, nessun bottone
    pieno: campi che sono righe da compilare.
    ============================================================ */

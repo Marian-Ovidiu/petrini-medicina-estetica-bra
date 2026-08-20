@@ -64,9 +64,13 @@
 }
 
 .strati__piano {
+  /* Lo sbordo è una misura sola perché lo usa anche l'etichetta, che
+     deve rientrarne per non farsi tagliare dalla lastra. Scritto due
+     volte, prima o poi diverge e il taglio torna. */
+  --sbordo: 6%;
   position: absolute;
-  left: -6%;
-  right: -6%;
+  left: calc(var(--sbordo) * -1);
+  right: calc(var(--sbordo) * -1);
   top: var(--piano, 0%);
   height: 1px;
   background: var(--marker);
@@ -77,9 +81,15 @@
 /* L'etichetta viaggia col piano e finisce sia sul fondo sia sulla
    fotografia: colore accessibile più pastiglia, come le targhette
    di TOPOGRAFIA. Stesso problema, stessa soluzione. */
+/* Il piano sborda dalla lastra di --sbordo per lato (è una linea che
+   attraversa, non il bordo di un rettangolo), ma la lastra ha
+   `overflow: hidden`. Un'etichetta ancorata a `right: 0` è quindi
+   ancorata *fuori* dalla lastra, e la lastra le taglia via l'ultima
+   parte: «osso» si leggeva «os». Si rientra dello sbordo, più un
+   margine perché la pastiglia non vada a sbattere sul bordo. */
 .strati__etichetta {
   position: absolute;
-  right: 0;
+  right: calc(var(--sbordo) + 10px);
   bottom: 7px;
   color: var(--accent-testo);
   background: var(--pece);
@@ -201,17 +211,20 @@
   justify-self: center;
 }
 
-/* La lastra. Il profilo si legge perché è illuminato contro il nero
-   *dentro* l'inquadratura, non perché sia stato scontornato: sui
-   capelli scuri su fondo scuro non c'è informazione da cui separare
-   soggetto e fondo, e sulla campitura lime ogni frangia di scontorno
-   diventa un alone verde sulla testa.
+/* La lastra. Il volto si legge perché è illuminato contro il fondo
+   scuro *dentro* l'inquadratura, non perché sia stato scontornato:
+   sui capelli scuri su fondo scuro non c'è informazione da cui
+   separare soggetto e fondo, e sulla campitura lime ogni frangia di
+   scontorno diventa un alone verde sulla testa.
    Il rettangolo netto è anche la stessa lingua di CANONE e STRATI —
    fotografie appoggiate sul foglio, mai incollate. */
 .topografia__finestra {
   position: relative;
   width: min(34vw, 340px);
-  aspect-ratio: 1100 / 1536;
+  /* Il rapporto è quello del tre quarti, la lastra presa in cambio
+     dalla scena 02. Le percentuali dei punti sono lette su questa
+     inquadratura: cambiando rapporto si scollano tutte insieme. */
+  aspect-ratio: 1696 / 2528;
   background: var(--pece);
   overflow: hidden;
   box-shadow: 0 30px 90px -50px rgb(14 18 7 / 0.7);

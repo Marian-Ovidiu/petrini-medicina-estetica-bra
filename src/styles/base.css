@@ -53,7 +53,6 @@ svg {
 .topografia__profilo,
 .topografia__macro,
 .medico__ritratto img,
-.esiti__stato,
 .luce--statica .luce__pin {
   filter: url("#duotone-brand");
 }
@@ -63,8 +62,7 @@ svg {
   .strati__foto,
   .topografia__profilo,
   .topografia__macro,
-  .medico__ritratto img,
-  .esiti__stato {
+  .medico__ritratto img {
     filter: grayscale(1) contrast(1.04);
   }
 }
@@ -189,21 +187,21 @@ a {
    mai una misura scelta per essere letta come testo corrente, e non
    sta in nessun posto dove un carattere farebbe la stessa cosa.
 
-   Da lì la regola, che è una regola di conteggio: due occorrenze in
-   pagina, e sono queste. La testata, dove il nome identifica. Il
-   piede della scheda di anamnesi, dove il nome sottoscrive — che è
-   quello che una firma fa davvero, e l'unico secondo posto che se la
-   merita. Una terza occorrenza in pagina la farebbe scivolare in
-   carattere decorativo, che è precisamente ciò che non deve
-   diventare.
+   Da lì la regola, che è una regola di conteggio: **una occorrenza in
+   pagina**, la testata, dove il nome identifica. Erano due — la
+   seconda in calce alla scheda di anamnesi, dove il nome sottoscrive
+   — ed è uscita su richiesta del cliente; lì resta il nome come
+   testo. Il tetto vale ancora e adesso è più stretto: una seconda
+   occorrenza la farebbe scivolare in carattere decorativo, che è
+   precisamente ciò che non deve diventare.
 
-   La firma nella soglia non è quella terza occorrenza, e la
+   La firma nella soglia non è una seconda occorrenza, e la
    distinzione va tenuta stretta perché è l'unica che regge. La
    soglia non è una pagina: è il marchio che si compone prima che la
    pagina esista, e quell'elemento viene rimosso dal DOM quando la
-   soglia si apre. Non convive mai con le altre due — quando la
+   soglia si apre. Non convive mai con quella di testata — quando la
    testata è visibile, quella firma non c'è più. È la stessa
-   occorrenza della testata, vista mentre arriva.
+   occorrenza, vista mentre arriva.
 
    È una maschera alfa e non un'immagine: il colore lo mette il
    fondo. Così la firma segue la scena — latte sul pece, pece sul

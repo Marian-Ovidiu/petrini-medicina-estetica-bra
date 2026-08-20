@@ -20,7 +20,7 @@
     <title>Dr. William Petrini — Medicina Estetica</title>
     <meta
       name="description"
-      content="Medicina estetica costruita sull'anatomia individuale. Non trasformiamo i volti: ne comprendiamo l'architettura."
+      content="Medicina estetica costruita sull'anatomia individuale. Non trasformiamo i volti: ne misuriamo l'armonia."
     />
     <meta name="theme-color" content="#0e1207" />
     <!-- LA LINEA anche qui: il profilo tracciato dal marker. -->
@@ -137,7 +137,6 @@
       <nav class="testata__nav" aria-label="Principale">
         <a href="#topografia" class="tech">Trattamenti</a>
         <a href="#metodo" class="tech">Metodo</a>
-        <a href="#esiti" class="tech">Esiti</a>
         <a href="#consulto" class="tech testata__consulto">Consulto</a>
       </nav>
     </header>
@@ -146,9 +145,9 @@
       <!-- ════════════════════════════════════════════════════════
            01 · LUCE
            La sequenza si suona da sola all'atterraggio: la luce
-           arriva sul volto mentre la camera arretra, e il nome —
-           WILLIAM sopra PETRINI — vive nello spazio e passa dietro
-           il profilo. Nessuno scroll richiesto per vederlo.
+           arriva sul volto mentre la camera arretra, e il cognome
+           vive nello spazio e passa dietro il profilo. Nessuno
+           scroll richiesto per vederlo.
            ════════════════════════════════════════════════════════ -->
       <section class="scene luce" id="luce" data-ground="pece" data-scene="luce">
         <div class="luce__quadro">
@@ -160,7 +159,7 @@
             <div class="luce__testo">
               <h1 class="lead luce__claim">
                 Non trasformiamo i volti.<br />
-                <span data-claim-2>Ne comprendiamo l'architettura.</span>
+                <span data-claim-2>Ne misuriamo l'armonia.</span>
               </h1>
               <p class="tech tech--annot luce__coord" data-luce-coord>
                 lat. <em>canon</em> — la regola della proporzione
@@ -180,7 +179,7 @@
              schermo stanno in testata e non nel canvas. -->
         <p class="visually-hidden">
           Dr. William Petrini, medicina estetica. Non trasformiamo i volti, ne
-          comprendiamo l'architettura.
+          misuriamo l'armonia.
         </p>
       </section>
 
@@ -196,19 +195,20 @@
 
         <div class="canone__testo">
           <h2 class="display canone__titolo">
-            La proporzione<br />non è un ideale.<br /><em>È una misura.</em>
+            L'armonia<br />non è una media.<br /><em>È la sua.</em>
           </h2>
           <div class="prose canone__prosa">
             <p>
               Il canone classico divide il volto in tre parti uguali: attaccatura
               dei capelli, glabella, base del naso, mento. <strong>Nessun volto
-              reale rispetta quella divisione</strong> — e non è un difetto da
-              correggere.
+              reale rispetta quella divisione</strong> — e la somiglianza di una
+              persona con sé stessa vive esattamente in quello scarto.
             </p>
             <p>
-              Misuriamo lo scarto perché è lì che vive la somiglianza di una
-              persona con sé stessa. Il canone ci dice dove siamo. Decidere
-              quanto muoversi è un'altra cosa, e riguarda chi abbiamo davanti.
+              Il canone dice dove siamo, non dove andare. Misuriamo lo scarto per
+              sapere quale proporzione regge l'insieme e quale lo tira: si muove
+              quella, e quanto basta. <strong>L'armonia di un volto è già scritta
+              nelle sue proporzioni</strong> — il lavoro è non contraddirle.
             </p>
           </div>
         </div>
@@ -220,16 +220,10 @@
           <div class="canone__telaio">
             <img
               class="canone__foto"
-              src="/media/img/volto-tre-quarti-1080.avif"
-              srcset="
-                /media/img/volto-tre-quarti-720.avif   720w,
-                /media/img/volto-tre-quarti-1080.avif 1080w,
-                /media/img/volto-tre-quarti-1600.avif 1600w
-              "
-              sizes="(max-width: 899px) 92vw, 42vw"
-              width="1696"
-              height="2528"
-              alt="Ritratto in tre quarti, luce radente che descrive lo zigomo e la linea mandibolare"
+              src="/media/img/profilo.avif"
+              width="1100"
+              height="1729"
+              alt="Profilo in luce radente, usato per la costruzione delle proporzioni"
               loading="lazy"
               decoding="async"
             />
@@ -239,51 +233,95 @@
                  gnathion 1140 su un'altezza di 1490. -->
             <svg
               class="canone__costruzione"
-              viewBox="0 0 1000 1490"
+              viewBox="0 0 1000 1572"
               preserveAspectRatio="xMidYMid meet"
               aria-hidden="true"
             >
+              <!-- Costruzione rifatta sul profilo, e non è la stessa di
+                   prima tradotta: su un profilo cambia cosa si può
+                   misurare.
+
+                   Sono tre linee e non quattro. Il canone divide il
+                   volto in tre parti fra attaccatura, glabella, base
+                   del naso e mento — ma in questa inquadratura la
+                   glabella sta al 22% dell'altezza e la base del naso
+                   al 55%: un terzo misura un terzo d'immagine, quindi
+                   l'attaccatura cadrebbe *sopra il bordo superiore*.
+                   Il ritaglio taglia via il terzo superiore.
+                   Disegnare lì una quarta linea significherebbe
+                   dichiarare una misura che la fotografia non contiene,
+                   ed è esattamente il contrario di quello che questa
+                   scena dice di fare. Si misura il misurabile: i due
+                   terzi inferiori, che sono anche quelli su cui si
+                   interviene.
+
+                   L'asse mediano invece non c'è più, e non per
+                   ritaglio: di profilo non esiste. Al suo posto il
+                   piano facciale — glabella a pogonion — che è la
+                   misura canonica del profilo e la sola linea che su
+                   questa fotografia dice più che sull'altra. -->
               <g stroke="var(--marker)" fill="none" stroke-width="1"
                  vector-effect="non-scaling-stroke">
-                <line data-c-line x1="40" y1="255" x2="960" y2="255" />
-                <line data-c-line x1="40" y1="505" x2="960" y2="505" />
-                <line data-c-line x1="40" y1="810" x2="960" y2="810" />
-                <line data-c-line x1="40" y1="1140" x2="960" y2="1140" />
+                <line data-c-line x1="40" y1="355" x2="960" y2="355" />
+                <line data-c-line x1="40" y1="900" x2="960" y2="900" />
+                <line data-c-line x1="40" y1="1390" x2="960" y2="1390" />
 
-                <!-- L'asse mediano è curvo perché la testa è ruotata.
-                     Una retta qui sarebbe una bugia disegnata bene. -->
-                <path
-                  data-c-line
-                  d="M505 255 C 515 380 525 430 532 505 C 545 620 610 730 640 810 C 655 900 620 1050 596 1140"
-                />
-                <!-- proiezione zigomatica -->
-                <path data-c-line d="M235 730 L40 730" />
-                <!-- ramo mandibolare -->
-                <path data-c-line d="M255 895 L596 1140" />
+                <!-- Il collegamento: una sola linea per tutti e sei
+                     i punti.
+
+                     Passa *dentro* il volto, non lungo la sagoma. La
+                     prima versione seguiva il contorno esterno, e a
+                     guardarla si capiva l'errore: ridisegnava il
+                     profilo invece di attraversarlo, cioè ripeteva
+                     quello che la fotografia già mostra. Da dentro,
+                     invece, mette in relazione punti che a occhio non
+                     si vedono insieme — glabella e gonion stanno su
+                     due piani diversi della faccia, ed è esattamente
+                     quello che una costruzione serve a dire.
+
+                     L'ordine è anatomico e non geometrico: scende
+                     dalla glabella per lo zigomo fino all'angolo
+                     della mandibola, torna avanti lungo il ramo fino
+                     al menton, e risale il mento e il labbro fino
+                     alla base del naso. È il perimetro dei due terzi
+                     che questa inquadratura contiene, percorso in una
+                     volta sola.
+
+                     Assorbe due linee che prima stavano da sole — il
+                     piano facciale e il ramo mandibolare — che erano
+                     lo stesso tratto spezzato in tre. Si scopre con
+                     lo scroll come le altre. -->
+                <path data-c-line d="M150 355 C 192 442 248 562 280 640 C 342 722 442 852 505 920 C 472 1082 302 1302 182 1390 C 170 1352 159 1312 154 1276 C 146 1152 130 1002 115 902" />
+                <!-- proiezione zigomatica, verso il campo libero -->
+                <path data-c-line d="M280 640 L960 640" />
               </g>
               <g fill="var(--marker)">
-                <circle data-c-dot cx="505" cy="255" r="4" />
-                <circle data-c-dot cx="532" cy="505" r="4" />
-                <circle data-c-dot cx="640" cy="810" r="4" />
-                <circle data-c-dot cx="596" cy="1140" r="4" />
-                <circle data-c-dot cx="235" cy="730" r="4" />
-                <circle data-c-dot cx="255" cy="895" r="4" />
+                <circle data-c-dot cx="150" cy="355" r="4" />
+                <circle data-c-dot cx="115" cy="902" r="4" />
+                <circle data-c-dot cx="154" cy="1276" r="4" />
+                <circle data-c-dot cx="182" cy="1390" r="4" />
+                <circle data-c-dot cx="280" cy="640" r="4" />
+                <circle data-c-dot cx="505" cy="920" r="4" />
               </g>
             </svg>
 
             <!-- Le quote vivono nello stesso telaio delle linee, quindi
                  non possono scollarsi da esse. -->
             <ul class="canone__quote tech tech--annot" aria-hidden="true">
-              <li data-c-quota style="--t: 0.171"><span>trichion</span></li>
-              <li data-c-quota style="--t: 0.339"><span>glabella</span> 28,2%</li>
-              <li data-c-quota style="--t: 0.544"><span>subnasale</span> 34,5%</li>
-              <li data-c-quota style="--t: 0.765"><span>gnathion</span> 37,3%</li>
+              <!-- Il trichion non c'è più: cadrebbe sopra il bordo
+                   superiore dell'inquadratura (il perché sta sopra la
+                   costruzione). Le tre quote sono i tre punti che la
+                   fotografia contiene, e le percentuali sono misurate
+                   su questa lastra, non convertite da quella prima. -->
+              <li data-c-quota style="--t: 0.226"><span>glabella</span></li>
+              <li data-c-quota style="--t: 0.574"><span>subnasale</span> 52,9%</li>
+              <li data-c-quota style="--t: 0.884"><span>gnathion</span> 47,1%</li>
             </ul>
           </div>
 
           <figcaption class="tech canone__scarto" data-canone-scarto>
-            terzi reali 28,2 / 34,5 / 37,3 — scarto dal canone
-            <span class="tech--accent">−5,1%</span> sul terzo superiore
+            terzi medio / inferiore 52,9 · 47,1 — scarto dal canone
+            <span class="tech--accent">+2,9%</span> sul medio
           </figcaption>
         </figure>
       </section>
@@ -386,7 +424,7 @@
             I trattamenti<br />non sono prodotti.<br /><em>Sono regioni.</em>
           </h2>
           <p class="tech topografia__istruzione" data-topo-istruzione>
-            avvicina una regione del profilo
+            avvicina una regione del volto
           </p>
         </header>
 
@@ -399,9 +437,15 @@
             <img
               class="topografia__profilo"
               data-topo-profilo
-              src="/media/img/profilo.avif"
-              alt="Profilo, usato come mappa delle regioni di trattamento"
-              width="1100" height="1536"
+              src="/media/img/volto-tre-quarti-1080.avif"
+              srcset="
+                /media/img/volto-tre-quarti-720.avif   720w,
+                /media/img/volto-tre-quarti-1080.avif 1080w,
+                /media/img/volto-tre-quarti-1600.avif 1600w
+              "
+              sizes="(max-width: 999px) 64vw, 34vw"
+              alt="Ritratto in tre quarti, usato come mappa delle regioni di trattamento"
+              width="1696" height="2528"
               loading="lazy" decoding="async"
             />
           </div>
@@ -411,26 +455,30 @@
 
           <!-- I punti sono bottoni veri: la scena si attraversa anche
                da tastiera, non solo col mouse. -->
-          <!-- Posizioni rilevate dai punti segnati a mano dal medico
-               sulla lastra, non stimate a occhio: le percentuali sono
-               i baricentri dei suoi segni misurati sull'immagine. -->
+          <!-- Posizioni rilevate sulla lastra nuova. Le precedenti
+               erano i baricentri dei segni fatti a mano dal medico sul
+               profilo: scambiata la fotografia non valevano più niente,
+               perché una percentuale non è un landmark — è un punto su
+               un'immagine. Queste sono state rilette sul tre quarti
+               sovrapponendo una griglia all'1% e guardando dove cade
+               ogni struttura, non convertendo le vecchie. -->
           <ul class="topografia__punti" data-topo-punti>
             <li><button type="button" data-topo-regione="fronte" aria-label="Fronte"
-                style="--px: 40%; --py: 9%"><span aria-hidden="true">Fronte</span></button></li>
+                style="--px: 46%; --py: 24%"><span aria-hidden="true">Fronte</span></button></li>
             <li><button type="button" data-topo-regione="zampe" aria-label="Zampe di gallina"
-                style="--px: 51.6%; --py: 32.8%"><span aria-hidden="true">Zampe di gallina</span></button></li>
+                style="--px: 35%; --py: 37%"><span aria-hidden="true">Zampe di gallina</span></button></li>
             <li><button type="button" data-topo-regione="zigomo" aria-label="Zigomo"
-                style="--px: 50.7%; --py: 46.9%"><span aria-hidden="true">Zigomo</span></button></li>
+                style="--px: 32%; --py: 45%"><span aria-hidden="true">Zigomo</span></button></li>
             <li><button type="button" data-topo-regione="codice" aria-label="Codice a barre"
-                style="--px: 16.2%; --py: 63%"><span aria-hidden="true">Codice a barre</span></button></li>
+                style="--px: 56%; --py: 61%"><span aria-hidden="true">Codice a barre</span></button></li>
             <li><button type="button" data-topo-regione="labbra" aria-label="Labbra"
-                style="--px: 16%; --py: 69.6%"><span aria-hidden="true">Labbra</span></button></li>
+                style="--px: 59%; --py: 65%"><span aria-hidden="true">Labbra</span></button></li>
             <li><button type="button" data-topo-regione="marionetta" aria-label="Rughe marionetta"
-                style="--px: 37%; --py: 71.1%"><span aria-hidden="true">Rughe marionetta</span></button></li>
+                style="--px: 50%; --py: 69%"><span aria-hidden="true">Rughe marionetta</span></button></li>
             <li><button type="button" data-topo-regione="bruxismo" aria-label="Curare bruxismo"
-                style="--px: 78.5%; --py: 72.7%"><span aria-hidden="true">Curare bruxismo</span></button></li>
+                style="--px: 23%; --py: 54%"><span aria-hidden="true">Curare bruxismo</span></button></li>
             <li><button type="button" data-topo-regione="mento" aria-label="Profilo mento"
-                style="--px: 51.6%; --py: 86.6%"><span aria-hidden="true">Profilo mento</span></button></li>
+                style="--px: 57%; --py: 73%"><span aria-hidden="true">Profilo mento</span></button></li>
           </ul>
         </div>
 
@@ -528,23 +576,31 @@
         <div class="medico__testo">
           <p class="rail medico__rail tech tech--annot">06 — Medico</p>
           <h2 class="display medico__nome">William<br />Petrini</h2>
+          <!-- Riga editoriale, non una citazione: non è fra virgolette
+               e non è in prima persona apposta. Quella di prima era una
+               frase inventata messa in bocca a lui, ed è il motivo per
+               cui era stata tolta. Questa dice come lavora, aggancia
+               l'armonia del claim in hero senza ripeterne le parole, e
+               resta comunque da far confermare a lui, perché lo
+               descrive. -->
+          <p class="lead medico__frase">
+            Non porta un'idea di volto. Cerca quella che il volto porta
+            già.
+          </p>
           <!-- ╔═══════════════════════════════════════════════════╗
-               ║  IN ATTESA DEL COPY VERO                          ║
+               ║  IN ATTESA DEL COPY VERO — le credenziali         ║
                ║                                                   ║
-               ║  Qui c'erano una frase virgolettata e cinque      ║
-               ║  righe di credenziali — formazione, ateneo, anni, ║
-               ║  numero di procedure — scritte per la             ║
-               ║  presentazione e non prese da nessun documento.   ║
-               ║  Accanto al nome di una persona reale non sono un ║
-               ║  lorem ipsum: sono affermazioni verificabili, e   ║
-               ║  la frase era peggio ancora, perché metteva       ║
-               ║  parole inventate in bocca a lui.                 ║
+               ║  Qui c'erano cinque righe di credenziali —        ║
+               ║  formazione, ateneo, anni, numero di procedure —  ║
+               ║  scritte per la presentazione e non prese da      ║
+               ║  nessun documento. Accanto al nome di una         ║
+               ║  persona reale non sono un lorem ipsum: sono      ║
+               ║  affermazioni verificabili.                       ║
                ║                                                   ║
-               ║  Restano fuori finché non arriva il testo vero.   ║
-               ║  Quando arriva: la frase torna in                 ║
-               ║  `.medico__frase`, le credenziali in una <dl      ║
-               ║  class="medico__credenziali tech"> — lo stile è   ║
-               ║  già in `editoriali.css` e aspetta lì.            ║
+               ║  Restano fuori finché non arrivano i dati veri.   ║
+               ║  Quando arrivano: una <dl class="medico__         ║
+               ║  credenziali tech"> — lo stile è già in           ║
+               ║  `editoriali.css` e aspetta lì.                   ║
                ║                                                   ║
                ║  Sulle credenziali la forma conta quanto il       ║
                ║  contenuto: la pubblicità sanitaria vuole         ║
@@ -554,78 +610,11 @@
       </section>
 
       <!-- ════════════════════════════════════════════════════════
-           07 · ESITI
-           Casi clinici, non gallerie. Il ritratto resta fermo e lo
-           scroll attraversa il tempo, mentre il ragionamento si
-           annota a lato.
-           ════════════════════════════════════════════════════════ -->
-      <section class="scene esiti" id="esiti" data-ground="latte" data-scene="esiti">
-        <p class="rail esiti__rail tech tech--annot">07 — Esiti</p>
-        <header class="esiti__intro">
-          <h2 class="display esiti__titolo">
-            Se si vede<br />il trattamento,<br /><em>è andata male.</em>
-          </h2>
-          <p class="prose">
-            Non pubblichiamo trasformazioni. Pubblichiamo casi: la condizione di
-            partenza, l'obiettivo, il ragionamento e cosa è cambiato davvero.
-          </p>
-        </header>
-
-        <article class="esiti__caso" data-esiti-caso>
-          <div class="esiti__lastra" data-esiti-lastra>
-            <img class="esiti__stato" data-stato="t0"
-                 src="/media/img/caso-i-1080.avif" width="1856" height="2320"
-                 alt="Documentazione clinica, profilo, condizione di partenza"
-                 loading="lazy" decoding="async" />
-            <img class="esiti__stato" data-stato="t90"
-                 src="/media/img/caso-i-t90-1080.avif" width="1856" height="2320"
-                 alt="Documentazione clinica, profilo, a novanta giorni"
-                 loading="lazy" decoding="async" />
-            <p class="tech tech--annot esiti__marca" data-esiti-marca>T0</p>
-          </div>
-
-          <ol class="esiti__tempo" data-esiti-tempo>
-            <li data-t="t0">
-              <p class="tech tech--annot">T0 — condizione di partenza</p>
-              <p class="prose">
-                Perdita di proiezione zigomatica, appoggio della guancia sul
-                solco naso-genieno, contorno mandibolare poco leggibile di
-                profilo. Nessuna richiesta di cambiamento: la richiesta era
-                «sembro stanca».
-              </p>
-            </li>
-            <li data-t="t14">
-              <p class="tech tech--annot">T+14 giorni — dopo la prima seduta</p>
-              <p class="prose">
-                Ripristino del sostegno profondo sull'arco zigomatico. Volume
-                minimo, piano sovraperiosteo. Nessun intervento sul solco: si
-                attende che il sostegno lo riduca da solo.
-              </p>
-            </li>
-            <li data-t="t90">
-              <p class="tech tech--annot">T+90 giorni — verifica</p>
-              <p class="prose">
-                Il solco si è ridotto senza essere trattato. Rifinitura del
-                bordo mandibolare. <strong>Il volto non è cambiato: ha
-                ripreso appoggio.</strong>
-              </p>
-            </li>
-          </ol>
-
-          <p class="tech tech--annot esiti__avvertenza">
-            Le immagini di questa pagina sono simulazioni visive prodotte per la
-            presentazione dello studio, non documentazione di pazienti reali.
-            Gli esiti individuali variano.
-          </p>
-        </article>
-      </section>
-
-      <!-- ════════════════════════════════════════════════════════
-           08 · CONSULTO — anamnesi, non "Book Now"
+           07 · CONSULTO — anamnesi, non "Book Now"
            ════════════════════════════════════════════════════════ -->
       <section class="scene consulto" id="consulto" data-ground="pece" data-scene="consulto">
         <div class="consulto__testo">
-          <p class="rail consulto__rail tech tech--annot">08 — Consulto</p>
+          <p class="rail consulto__rail tech tech--annot">07 — Consulto</p>
           <!-- «non prevede aghi» diceva la cosa giusta nominando quello
                che il paziente teme: la frase rassicurava e intanto
                piantava l'immagine. Il titolo dice adesso la stessa cosa
@@ -681,16 +670,14 @@
             finalità diverse dalla prenotazione.
           </p>
 
-          <!-- La seconda e ultima occorrenza della firma (la regola sta
-               in base.css). Non è il marchio che si ripete in fondo
-               alla pagina: è una firma che fa il mestiere di una
-               firma. Questo è un modulo di anamnesi, e una scheda
-               clinica la sottoscrive chi la leggerà — con la stessa
-               coppia timbro-e-firma con cui si chiude un referto.
-               Il segno è decorativo e la riga sotto porta il nome:
-               chi legge con la voce sente il nome una volta sola. -->
+          <!-- Qui c'era la firma manoscritta, tolta su richiesta del
+               cliente. Resta il nome in chiaro sopra la riga: la
+               calce di una scheda di anamnesi la sottoscrive chi la
+               leggerà, e senza nessun nome il modulo si chiuderebbe
+               nel vuoto. Il segno se n'è andato, il gesto no.
+               La firma resta quindi in un posto solo — la testata —
+               più la soglia, che è la stessa vista mentre arriva. -->
           <p class="consulto__calce">
-            <span class="firma consulto__firma" aria-hidden="true"></span>
             <span class="tech tech--annot">Dr. William Petrini</span>
           </p>
         </form>
@@ -698,14 +685,17 @@
     </main>
 
     <footer class="pieno" data-ground="pece">
-      <!-- Il nome e la sede, e per ora nient'altro. La qualifica non
-           la vogliamo finché non è la sua (vedi il riquadro nella
-           scena 06); la città invece è un dato vero e confermato dal
-           cliente — «Torino», che stava qui prima, era l'ambientazione
-           dello studio inventato della presentazione. Un piede che
-           dichiara la sede sbagliata è peggio di un piede che tace,
-           ma quella giusta è la prima cosa che un piede deve dire. -->
-      <p class="tech tech--annot">Dr. William Petrini · Bra</p>
+      <!-- Solo la sede. Il nome è uscito da qui su richiesta del
+           cliente, e la ripetizione la spiega: due schermate più su,
+           in calce alla scheda di anamnesi, «Dr. William Petrini» c'è
+           già come testo — e un nome che ricompare subito sotto, in
+           registro amministrativo, non aggiunge niente. La città
+           resta perché è un dato («Torino», che stava qui prima, era
+           l'ambientazione dello studio inventato) e perché la sede è
+           la cosa che un piede di pagina deve dire. La qualifica non
+           la vogliamo finché non è la sua: vedi il riquadro nella
+           scena 06. -->
+      <p class="tech tech--annot">Bra</p>
       <p class="tech tech--annot pieno__legale">
         Le immagini del sito sono simulazioni visive, non documentazione di
         pazienti. Nessun contenuto sostituisce una valutazione medica.
