@@ -18,121 +18,111 @@ import { pointer, onPointer } from "../core/pointer.js";
 //
 // I nomi visibili sono quelli con cui il medico parla ai pazienti —
 // "zampe di gallina", "codice a barre" — perché sono quelli con cui
-// i pazienti arrivano. Il latino non sparisce: resta nella riga
-// tecnica sopra il titolo, che è il suo posto.
+// i pazienti arrivano.
 const REGIONI = {
   fronte: {
-    ox: "46%", oy: "24%",
+    ox: "64%", oy: "22%",
     macro: "/media/img/oculus-560.avif",
-    lat: "regio frontalis",
     nome: "Fronte",
     obiettivo:
-      "Distendere le righe orizzontali della fronte senza togliere espressione allo sguardo.",
-    ragionamento:
-      "Le righe orizzontali sono la piega della pelle sopra l'unico muscolo che alza il sopracciglio. Toglierne tutta la forza fa scendere il sopracciglio e chiude lo sguardo: il volto sembra più stanco, non più riposato. Si riduce l'ampiezza della contrazione lasciando al muscolo un residuo di corsa.",
-    procedura:
-      "Tossina botulinica, dose frazionata su più punti, piano superficiale.",
-    durata: "15 minuti",
-    recupero: "Nessuno. Effetto pieno in 10–14 giorni.",
+      "Attenuare le rughe orizzontali della fronte, mantenendo uno sguardo naturale ed espressivo.",
+    comeFunziona:
+      "Le rughe della fronte compaiono soprattutto quando alziamo le sopracciglia. Il trattamento riduce questo movimento in modo controllato, rendendo la fronte più distesa senza togliere naturalezza allo sguardo.",
+    trattamento:
+      "Tossina botulinica, attraverso piccole iniezioni in punti scelti in base ai movimenti del viso.",
+    risultato:
+      "Si possono riprendere subito le normali attività. Può comparire un leggero rossore nei punti trattati. Il risultato si sviluppa gradualmente e si completa in circa 15–30 giorni.",
   },
   zampe: {
     ox: "35%", oy: "37%",
     macro: "/media/img/oculus-560.avif",
-    lat: "musculus orbicularis oculi, pars lateralis",
     nome: "Zampe di gallina",
     obiettivo:
-      "Ammorbidire le pieghe dell'angolo esterno dell'occhio lasciando intatto il sorriso.",
-    ragionamento:
-      "L'orbicolare è un anello: la porzione laterale increspa la pelle sottile dell'angolo esterno, quella interna chiude la palpebra e distribuisce il film lacrimale. Si tratta solo la prima. Ed è la stessa contrazione che rende vero un sorriso: spenta del tutto, il sorriso resta alla bocca e l'occhio non partecipa più.",
-    procedura:
-      "Tossina botulinica, tre punti per lato sulla porzione laterale, piano superficiale.",
-    durata: "10 minuti",
-    recupero: "Possibile ecchimosi puntiforme per 2–3 giorni.",
+      "Attenuare le rughe ai lati degli occhi, mantenendo un sorriso naturale ed espressivo.",
+    comeFunziona:
+      "Queste rughe compaiono soprattutto quando sorridiamo. Il trattamento riduce delicatamente la contrazione del muscolo, lasciando naturale il movimento degli occhi e del sorriso.",
+    trattamento:
+      "Tossina botulinica, attraverso piccole iniezioni ai lati degli occhi.",
+    risultato:
+      "Si possono riprendere subito le normali attività. In alcuni casi può comparire un piccolo livido nei punti trattati, che scompare in pochi giorni. Il risultato si sviluppa gradualmente e si completa in circa 15–30 giorni.",
   },
   zigomo: {
-    ox: "32%", oy: "45%",
+    ox: "36%", oy: "47%",
     macro: "/media/img/zygoma-560.avif",
-    lat: "os zygomaticum",
-    nome: "Zigomo",
+    nome: "Zigomi",
     obiettivo:
-      "Restituire appoggio al terzo medio, non volume alla guancia.",
-    ragionamento:
-      "La guancia non scende perché si è svuotata: scende perché ha perso l'appoggio sotto. Il grasso del volto sta in compartimenti che poggiano sull'osso, e quando l'osso arretra scivolano verso il basso accumulandosi sopra il solco. Riempire l'avvallamento aggiunge peso a un tessuto già disceso: si ricostruisce il piano d'appoggio in profondità, e quello che sta sopra ritrova sostegno.",
-    procedura:
-      "Filler ad alta coesività, piano sovraperiosteo, deposito a bolo sull'arco zigomatico.",
-    durata: "25 minuti",
-    recupero: "Gonfiore 48 ore. Assestamento a 3 settimane.",
+      "Ridare sostegno e definizione agli zigomi, senza appesantire o gonfiare la guancia.",
+    comeFunziona:
+      "Con il tempo la zona degli zigomi può perdere sostegno e i tessuti tendono a scendere. Il trattamento aiuta a ricreare questo supporto in profondità, migliorando i contorni del viso in modo naturale.",
+    trattamento:
+      "Filler a base di acido ialuronico, posizionato in profondità in punti selezionati degli zigomi.",
+    risultato:
+      "Può comparire un leggero gonfiore per 1–2 giorni. Il risultato si stabilizza progressivamente nelle settimane successive.",
   },
   codice: {
-    ox: "56%", oy: "61%",
+    ox: "69%", oy: "59%",
     macro: "/media/img/labium-560.avif",
-    lat: "rugae peribuccales",
     nome: "Codice a barre",
     obiettivo:
-      "Attenuare le righe verticali del labbro superiore senza appesantire la bocca.",
-    ragionamento:
-      "Le fibre dell'orbicolare della bocca si inseriscono nella pelle: ogni parola la piega nello stesso punto. La piega resta quando il derma si assottiglia e il bordo del labbro perde proiezione. Riempire riga per riga alza una cresta che in movimento si vede di più: si restituisce prima il sostegno del bordo, poi si riduce la forza che piega.",
-    procedura:
-      "Acido ialuronico a bassa densità, micro-infiltrazioni intradermiche; tossina botulinica a dose minima sull'orbicolare.",
-    durata: "25 minuti",
-    recupero: "Piccoli pomfi per 24 ore.",
+      "Attenuare le piccole rughe verticali sopra il labbro, mantenendo la bocca naturale e leggera.",
+    comeFunziona:
+      "Con il tempo la pelle sopra il labbro può diventare più sottile e segnarsi più facilmente. Il trattamento aiuta a distendere queste piccole rughe senza aumentare troppo il volume delle labbra.",
+    trattamento:
+      "Filler a base di acido ialuronico, con piccole iniezioni nella zona trattata.",
+    risultato:
+      "Si possono riprendere subito le normali attività. Può comparire un leggero gonfiore o piccoli segni nei punti trattati per circa un giorno.",
   },
   labbra: {
-    ox: "59%", oy: "65%",
+    ox: "68%", oy: "64%",
     macro: "/media/img/labium-560.avif",
-    lat: "labium superius et inferius",
     nome: "Labbra",
     obiettivo:
-      "Ridisegnare il bordo e restituire proiezione. Non aumentare.",
-    ragionamento:
-      "Un labbro non invecchia svuotandosi: si arrotola verso l'interno, il filtro si allunga, l'arco di Cupido si appiattisce. Il volume messo in un labbro che ha perso il margine non ha più niente che lo contenga e va in avanti: è la bocca che si riconosce da lontano. Si ricostruisce prima il margine, perché è il margine a dare proiezione senza volume.",
-    procedura:
-      "Filler a bassa densità, retrotraccia lineare sul vermiglio e sulle colonne del filtro.",
-    durata: "30 minuti",
-    recupero: "Gonfiore marcato 24–72 ore. Risultato reale a 2 settimane.",
+      "Definire meglio il contorno delle labbra e renderle più armoniose, senza creare un effetto eccessivo.",
+    comeFunziona:
+      "Con il tempo le labbra possono perdere definizione e apparire più sottili. Il trattamento aiuta a ridisegnarne la forma e, quando serve, a restituire un po’ di volume in modo naturale.",
+    trattamento:
+      "Filler a base di acido ialuronico, applicato in piccoli punti in base alla forma delle labbra.",
+    risultato:
+      "Può comparire gonfiore per 1–3 giorni. Il risultato si stabilizza gradualmente nelle settimane successive.",
   },
   marionetta: {
     ox: "50%", oy: "69%",
     macro: "/media/img/mandibula-560.avif",
-    lat: "sulcus labiomandibularis",
-    nome: "Rughe marionetta",
+    nome: "Rughe della marionetta",
     obiettivo:
-      "Rialzare l'angolo della bocca e attenuare il solco che scende verso il mento.",
-    ragionamento:
-      "Il solco è il punto in cui due cose si sommano: un muscolo che tira l'angolo della bocca verso il basso, e un sostegno venuto meno più in alto che scarica peso proprio lì. Riempirlo e basta lascia un cordone che si vede appena la persona parla. Si toglie prima la trazione, poi si ricostruisce l'appoggio davanti alla mandibola.",
-    procedura:
-      "Tossina botulinica sul depressor anguli oris; filler strutturale in profondità davanti al corpo mandibolare.",
-    durata: "20 minuti",
-    recupero: "48 ore di gonfiore contenuto.",
+      "Attenuare le rughe che scendono dagli angoli della bocca verso il mento e dare al viso un aspetto più disteso.",
+    comeFunziona:
+      "Con il tempo gli angoli della bocca possono tendere verso il basso e comparire queste pieghe. Il trattamento aiuta a rilassare i muscoli che tirano la bocca verso il basso e, quando serve, a ridare sostegno alla zona.",
+    trattamento:
+      "Filler a base di acido ialuronico, con piccole iniezioni nella zona trattata.",
+    risultato:
+      "Si possono riprendere subito le normali attività. Può comparire un leggero gonfiore per uno o due giorni.",
   },
   bruxismo: {
     ox: "23%", oy: "54%",
     macro: "/media/img/mandibula-560.avif",
-    lat: "musculus masseter",
-    nome: "Curare bruxismo",
+    nome: "Bruxismo",
     obiettivo:
-      "Ridurre la forza del serramento e il volume che allarga il terzo inferiore.",
-    ragionamento:
-      "Il massetere risponde al carico come ogni muscolo: serrare per ore ogni notte lo fa crescere, e un muscolo più grosso serra più forte. Il circolo si alimenta da solo, e ridurre la contrazione lo interrompe: cala prima la forza, poi il volume dell'angolo. La causa del bruxismo resta e si affronta altrove; qui si tratta l'effetto.",
-    procedura:
-      "Tossina botulinica intramuscolo profondo, tre punti per lato sul ventre del massetere.",
-    durata: "15 minuti",
-    recupero:
-      "Nessuno. Effetto sulla forza in 2 settimane, sul volume in 2–3 mesi.",
+      "Ridurre la forza con cui si stringono i denti e rilassare i muscoli della mandibola.",
+    comeFunziona:
+      "Quando stringiamo i denti troppo spesso, i muscoli della mandibola lavorano troppo e possono diventare più tesi e voluminosi. Il trattamento li aiuta a rilassarsi e a lavorare con meno forza.",
+    trattamento:
+      "Tossina botulinica, con piccole iniezioni nei muscoli della mandibola.",
+    risultato:
+      "Si possono riprendere subito le normali attività. Il risultato si sviluppa gradualmente e si completa in circa 15–30 giorni.",
   },
   mento: {
-    ox: "57%", oy: "73%",
+    ox: "33%", oy: "67%",
     macro: "/media/img/mandibula-560.avif",
-    lat: "musculus mentalis — pogonion",
-    nome: "Profilo mento",
+    nome: "Profilo del mento",
     obiettivo:
-      "Dare al mento la proiezione che regge il profilo, e distendere la buccia d'arancia.",
-    ragionamento:
-      "Il mento è l'appoggio anteriore di tutto il terzo inferiore: se arretra, il profilo si accorcia e la linea verso il collo perde definizione. Spesso il problema che si attribuisce alla mandibola nasce qui. La buccia d'arancia è un'altra cosa: è il mentale che spinge in alto e increspa una pelle sottile ancorata all'osso. Due meccanismi, due gesti distinti.",
-    procedura:
-      "Filler strutturale su piano sovraperiosteo al pogonion; tossina botulinica sul musculus mentalis.",
-    durata: "20 minuti",
-    recupero: "48 ore di gonfiore contenuto.",
+      "Rendere il mento più armonioso e migliorare il profilo del viso. Si può anche rendere più liscia la pelle del mento.",
+    comeFunziona:
+      "Se il mento è poco pronunciato, il profilo può sembrare meno definito. Il trattamento può dare più forma al mento e rilassare il muscolo che crea le piccole pieghe sulla pelle.",
+    trattamento:
+      "Filler a base di acido ialuronico, con piccole iniezioni nella zona trattata.",
+    risultato:
+      "Si possono riprendere subito le normali attività. Può comparire un leggero gonfiore per uno o due giorni.",
   },
 };
 
@@ -150,13 +140,11 @@ export function initTopografia() {
     istruzione.textContent = "tocca una regione del volto";
   }
   const out = {
-    lat: scene.querySelector("[data-d-lat]"),
     nome: scene.querySelector("[data-d-nome]"),
     obiettivo: scene.querySelector("[data-d-obiettivo]"),
-    ragionamento: scene.querySelector("[data-d-ragionamento]"),
-    procedura: scene.querySelector("[data-d-procedura]"),
-    durata: scene.querySelector("[data-d-durata]"),
-    recupero: scene.querySelector("[data-d-recupero]"),
+    comeFunziona: scene.querySelector("[data-d-come-funziona]"),
+    trattamento: scene.querySelector("[data-d-trattamento]"),
+    risultato: scene.querySelector("[data-d-risultato]"),
   };
 
   const dossier = scene.querySelector("[data-topo-dossier]");
@@ -245,13 +233,7 @@ export function initTopografia() {
     if (!r) return;
     if (macro && r.macro) macro.src = r.macro;
 
-    out.lat.textContent = r.lat;
-    out.nome.textContent = r.nome;
-    out.obiettivo.textContent = r.obiettivo;
-    out.ragionamento.textContent = r.ragionamento;
-    out.procedura.textContent = r.procedura;
-    out.durata.textContent = r.durata;
-    out.recupero.textContent = r.recupero;
+    scrivi(r);
   }
 
   /** La regione il cui punto è più vicino a una coordinata di schermo. */

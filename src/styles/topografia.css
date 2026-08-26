@@ -330,14 +330,6 @@
   padding-top: 20px;
 }
 
-.topografia__lat {
-  color: var(--figure-dim);
-  font-style: italic;
-  font-family: var(--tech);
-  text-transform: none;
-  letter-spacing: 0.08em;
-}
-
 .topografia__nome {
   font-size: clamp(28px, 3vw, 48px);
   line-height: 1;
