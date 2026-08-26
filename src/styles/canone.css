@@ -74,10 +74,11 @@
    restare agganciato ai landmark vive dentro questo riquadro. */
 .canone__telaio {
   position: relative;
-  /* Il rapporto è quello di `profilo.avif`, la lastra che questa
-     scena ha preso in cambio dalla 04. Deve coincidere col viewBox
-     della costruzione (1000 × 1572): è quella coincidenza a tenere
-     le linee sui landmark invece che vicino ai landmark. */
+  /* Il rapporto è quello di `canone-*.avif` — 1336 × 2100, cioè
+     1100 × 1729 — e deve coincidere col viewBox della costruzione
+     (1000 × 1572): è quella coincidenza a tenere le linee sui
+     landmark invece che vicino ai landmark. Il ritaglio si fa in
+     `scripts/build-media.mjs` proprio per questo. */
   aspect-ratio: 1100 / 1729;
 }
 
@@ -128,15 +129,22 @@
 }
 
 /* ── la luce che gira ──────────────────────────────────────────
-   Una seconda copia della fotografia, schiarita e contrastata, che
-   si vede solo dentro un alone morbido agganciato al puntatore.
-   Su un monocromo con modellato forte legge come una sorgente che
-   si sposta — ed è l'argomento della scena, non un effetto. */
+   Una seconda copia della *stessa* fotografia, schiarita e
+   contrastata, che si vede solo dentro un alone morbido agganciato
+   al puntatore. Su un monocromo con modellato forte legge come una
+   sorgente che si sposta — ed è l'argomento della scena, non un
+   effetto.
+
+   Deve essere la stessa lastra, non un'altra: qui sotto stava un
+   secondo ritratto (`volto-tre-quarti`), e in `screen` i due volti
+   non si sommavano in luce, si sovrapponevano — un orecchio e un
+   occhio di troppo che comparivano al passaggio del puntatore. La
+   luce si accende su ciò che c'è, altrimenti non è luce. */
 
 .canone__lastra--viva {
   --lx: 50%;
   --ly: 40%;
-  --luce-img: url("/media/img/volto-tre-quarti-1080.avif");
+  --luce-img: url("/media/img/canone-1100.avif");
 }
 
 .canone__lastra--viva .canone__telaio::after {

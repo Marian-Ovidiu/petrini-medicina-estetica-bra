@@ -1,7 +1,8 @@
 import "./styles/base.css";
 import "./styles/scenes.css";
 import "./styles/canone.css";
-import "./styles/strati.css";
+import "./styles/trattamenti.css";
+import "./styles/topografia.css";
 import "./styles/editoriali.css";
 
 import { initScroll, getLenis, gsap, ScrollTrigger, reducedMotion } from "./core/scroll.js";
@@ -9,7 +10,7 @@ import { initPointer } from "./core/pointer.js";
 import { initSoglia } from "./scenes/soglia.js";
 import { initLuce } from "./scenes/luce.js";
 import { initCanone } from "./scenes/canone.js";
-import { initStrati } from "./scenes/strati.js";
+import { initTrattamenti } from "./scenes/trattamenti.js";
 import { initTopografia } from "./scenes/topografia.js";
 import { initConsulto } from "./scenes/consulto.js";
 
@@ -55,7 +56,7 @@ async function boot() {
   // documento, e tutto ciò che si crea dopo misura la pagina vera.
   teardown.push(await initLuce());
   initCanone();
-  initStrati();
+  initTrattamenti();
   initTopografia();
   initConsulto();
   watchGround();

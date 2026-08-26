@@ -49,7 +49,7 @@ svg {
    L'hero non è nell'elenco — la stessa rimappatura la fa il suo
    shader, dove costa un prodotto scalare invece di un filtro. */
 .canone__foto,
-.strati__foto,
+.trattamenti__foto,
 .topografia__profilo,
 .topografia__macro,
 .medico__ritratto img,
@@ -59,7 +59,7 @@ svg {
 
 @supports not (filter: url("#duotone-brand")) {
   .canone__foto,
-  .strati__foto,
+  .trattamenti__foto,
   .topografia__profilo,
   .topografia__macro,
   .medico__ritratto img {

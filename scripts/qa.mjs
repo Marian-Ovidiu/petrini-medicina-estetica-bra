@@ -66,6 +66,14 @@ async function at(y) {
   await page.waitForTimeout(350);
   await page.evaluate(() => window.__luce?.render());
   await page.waitForTimeout(120);
+  // Le rivelazioni «una volta sola» — la costruzione di CANONE è la
+  // più lunga, oltre due secondi dal primo tratto all'ultima quota —
+  // non seguono lo scroll: partono quando la scena entra e finiscono
+  // per conto loro.
+  // Senza questa attesa il fotogramma coglie il tratto a metà, cioè
+  // uno stato che nessuno guarda, e su un sito che si giudica dai
+  // fotogrammi è lo strumento a mentire.
+  await page.waitForTimeout(1500);
 }
 
 async function shot(name, y) {

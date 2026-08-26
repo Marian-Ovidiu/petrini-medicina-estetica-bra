@@ -1,0 +1,241 @@
+/* ============================================================
+   03 · TRATTAMENTI — quattro voci, un volto, le zone che si accendono
+
+   L'elenco è l'interfaccia, non la fotografia. È la differenza con
+   TOPOGRAFIA, che sta due scene più giù e fa il contrario: lì il
+   volto è la mappa e si entra dalle regioni, qui si entra dai nomi —
+   perché i nomi sono quello che il paziente ha già sentito dire, e
+   quello che confonde. La lastra risponde.
+
+   Le zone non si dissolvono tutte insieme: escono sfalsate, con un
+   ritardo che sta nel `--i` di ciascuna. Quattro segni che compaiono
+   in fila si leggono come un elenco che si posa sul volto; gli
+   stessi quattro tutti in una volta si leggono come una schermata
+   che cambia.
+   ============================================================ */
+
+.trattamenti {
+  position: relative;
+  padding: clamp(90px, 14vh, 180px) var(--gut) clamp(80px, 13vh, 160px);
+}
+
+.trattamenti__rail {
+  top: clamp(150px, 22vh, 280px);
+  right: var(--gut);
+}
+
+.trattamenti__impianto {
+  display: grid;
+  gap: clamp(40px, 6vh, 80px);
+  align-items: center;
+}
+
+/* Il testo sta a sinistra e la lastra a destra, come in CANONE: due
+   scene che ragionano sullo stesso volto tengono lo stesso impianto,
+   altrimenti la pagina sembra cambiare autore a metà. */
+@media (min-width: 900px) {
+  .trattamenti__impianto {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+    column-gap: clamp(48px, 6vw, 120px);
+  }
+}
+
+.trattamenti__testo {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(26px, 3.6vh, 48px);
+}
+
+.trattamenti__titolo {
+  font-size: clamp(34px, 4.4vw, 72px);
+  line-height: 0.98;
+  margin: 0;
+}
+
+.trattamenti__titolo em {
+  color: var(--marker);
+}
+
+/* ── l'elenco ─────────────────────────────────────────────── */
+
+.trattamenti__elenco {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.trattamenti__elenco li {
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Il bottone occupa tutta la riga: il bersaglio è la voce intera,
+   non il testo del nome. Su touch è la differenza fra un elenco che
+   risponde e uno che sembra rotto. */
+.trattamenti__elenco button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  column-gap: clamp(14px, 1.6vw, 24px);
+  padding: clamp(13px, 1.6vh, 20px) 0;
+  text-align: left;
+  cursor: pointer;
+  color: var(--figure-dim);
+  transition: color var(--d-fast) var(--e-reveal);
+}
+
+.trattamenti__numero {
+  color: var(--figure-dim);
+  transition: color var(--d-fast) var(--e-reveal);
+}
+
+.trattamenti__nome {
+  grid-column: 2;
+  display: block;
+  font-family: var(--display, inherit);
+  font-size: clamp(19px, 1.9vw, 28px);
+  line-height: 1.1;
+  color: var(--figure);
+}
+
+.trattamenti__obiettivo {
+  grid-column: 2;
+  display: block;
+  margin-top: 4px;
+  font-size: var(--t-annot);
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+}
+
+/* La voce accesa. `aria-pressed` è già l'informazione, quindi lo
+   stile si aggancia lì invece di inventare una classe: se lo stato
+   visivo e quello dichiarato sono la stessa cosa, non possono
+   divergere. */
+.trattamenti__elenco button[aria-pressed="true"] {
+  color: var(--figure);
+}
+
+.trattamenti__elenco button[aria-pressed="true"] .trattamenti__numero {
+  color: var(--marker);
+}
+
+.trattamenti__elenco button:hover .trattamenti__nome,
+.trattamenti__elenco button:focus-visible .trattamenti__nome {
+  color: var(--marker);
+}
+
+/* ── la lastra ────────────────────────────────────────────── */
+
+.trattamenti__lastra {
+  margin: 0;
+  justify-self: center;
+}
+
+@media (min-width: 900px) {
+  .trattamenti__lastra {
+    justify-self: end;
+  }
+}
+
+.trattamenti__telaio {
+  position: relative;
+  /* Rapporto nativo della fotografia, ripetuto dal viewBox delle
+     zone: senza questa coincidenza `object-fit: cover` ritaglia e i
+     segni si scollano dalle strutture. */
+  aspect-ratio: 1696 / 2528;
+  width: min(100%, calc(min(76svh, 900px) * 1696 / 2528));
+  overflow: hidden;
+  box-shadow: 0 30px 90px -40px rgb(14 18 7 / 0.55);
+}
+
+@media (min-width: 900px) {
+  .trattamenti__telaio {
+    height: min(76svh, 900px);
+    width: auto;
+  }
+}
+
+.trattamenti__foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trattamenti__zone {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Nessun gruppo è visibile finché la scena non ne accende uno. Lo
+   stato di partenza lo scrive il CSS e non il JS: se lo script non
+   parte, la lastra resta una fotografia pulita invece di mostrare
+   tutte e quattro le mappe sovrapposte. */
+.trattamenti__zone g {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.trattamenti__zone [data-attivo] {
+  visibility: visible;
+  opacity: 1;
+}
+
+.trattamenti__zone ellipse,
+.trattamenti__zone path {
+  fill: color-mix(in srgb, var(--marker) 14%, transparent);
+  stroke: var(--marker);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  transform: scale(0.94);
+  transition:
+    opacity var(--d-mid) var(--e-reveal),
+    transform var(--d-mid) var(--e-reveal);
+  /* Il ritardo è la posizione della zona nel gruppo: i segni si
+     posano uno dopo l'altro, non tutti insieme. */
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+
+.trattamenti__zone [data-attivo] ellipse,
+.trattamenti__zone [data-attivo] path {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.trattamenti__didascalia {
+  margin-top: clamp(16px, 2.2vh, 26px);
+  max-width: 42ch;
+  color: var(--figure-dim);
+  border-top: 1px solid var(--rule);
+  padding-top: 14px;
+  font-family: var(--tech);
+  text-transform: none;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+}
+
+.trattamenti__didascalia b {
+  color: var(--accent-testo);
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Con `prefers-reduced-motion` le zone ci sono e basta: nessuna
+   comparsa sfalsata, nessuna scala. Lo stato resta leggibile — è il
+   movimento a sparire, non l'informazione. */
+@media (prefers-reduced-motion: reduce) {
+  .trattamenti__zone ellipse,
+  .trattamenti__zone path {
+    transition: none;
+    transition-delay: 0s;
+    transform: none;
+  }
+}

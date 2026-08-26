@@ -25,6 +25,11 @@ const WIDTHS = {
   // la sua risoluzione è quella che è. Le larghezze finiscono dove
   // finisce il file invece di dichiarare misure che non esistono.
   ritratto: [720, 968],
+  // La lastra di CANONE. Le larghezze finiscono a 1336 perché è la
+  // larghezza del ritaglio: la costruzione sta sui landmark solo se
+  // il rapporto della lastra è esattamente quello del telaio, e per
+  // ottenerlo la sorgente si taglia — non si allarga.
+  lastra: [720, 1100, 1336],
 };
 
 const JOBS = [
@@ -35,7 +40,41 @@ const JOBS = [
   { src: "labium.png", name: "labium", set: "crop" },
   { src: "oculus.png", name: "oculus", set: "crop" },
   { src: "hero-c1.png", name: "volto-tre-quarti", set: "scene" },
-  { src: "hero-c3.png", name: "volto-ii", set: "scene" },
+
+  /* ── CANONE · la lastra della costruzione ────────────────────
+   *
+   * Stessa sorgente della lastra di TOPOGRAFIA, inquadratura
+   * diversa. Prima qui c'era un ritaglio dell'hero (`profilo`), ed
+   * era il difetto: la scena 02 mostrava la stessa fotografia della
+   * scena 01, ingrandita. Due schermate di seguito con lo stesso
+   * scatto non sono un richiamo, sono una ripetizione.
+   *
+   * Il riquadro non è un'inquadratura a occhio. Il rapporto è quello
+   * del telaio (1336 : 2100 = 1100 : 1729): se la lastra e il telaio
+   * non hanno lo stesso rapporto, `object-fit: cover` ritaglia i
+   * lati e le linee della costruzione si scollano dai landmark.
+   * L'altezza è scelta perché il taglio contenga il trichion con un
+   * po' d'aria sopra e il gnathion con un po' di collo sotto: sono
+   * i due estremi del canone, e questa volta ci stanno tutti e due
+   * dentro — la costruzione può dire i tre terzi interi invece dei
+   * due che il vecchio ritaglio conteneva.
+   */
+  {
+    src: "hero-c1.png",
+    name: "canone",
+    set: "lastra",
+    crop: { left: 350, top: 110, width: 1336, height: 2100 },
+  },
+  /* La lastra di TRATTAMENTI. Frontale piena, luce simmetrica sui
+   * due lati: è la sola inquadratura su cui una zona di trattamento
+   * si può segnare dove sta davvero, perché le zone sono pari e su
+   * un tre quarti una delle due è sempre girata via. Il collo e le
+   * clavicole restano dentro perché la biorivitalizzazione arriva
+   * fin lì, e una zona che il ritaglio taglia non è una zona.
+   *
+   * Sostituisce `volto-ii`, che era il ritratto di un uomo: il
+   * volto del sito è uno solo, e sta nelle scene 01, 02 e 04. */
+  { src: "frontale.png", name: "frontale", set: "scene" },
   // Il ritratto arriva come scatto da tessera in verticale 2:3: testa
   // in alto e mezzo busto. Il taglio lo porta al 4:5 delle altre
   // lastre e si ferma appena sopra il ricamo «Dr. Petrini W.» sulla
@@ -50,6 +89,7 @@ const JOBS = [
     set: "ritratto",
     crop: { left: 56, top: 45, width: 968, height: 1210 },
   },
+
 ];
 
 await mkdir(OUT, { recursive: true });
@@ -106,63 +146,27 @@ if (existsSync(CUT)) {
   console.warn("· matte assente: serve hero-16x9-cutout.png");
 }
 
-/**
- * TOPOGRAFIA lavora su un profilo verticale, non sull'inquadratura
- * larga dell'hero. Il ritaglio si fa qui e non a mano, così la
- * fotografia e la sua matte restano allineate al pixel: da quella
- * coincidenza dipende tutta la scena.
+/*
+ * Il ritaglio verticale dell'hero — `profilo.avif` e la sua matte —
+ * non si fa più. Serviva a CANONE, che ora ha la sua lastra
+ * (`canone`, nei JOBS in cima) presa da un altro scatto: la scena
+ * 02 non deve mostrare la fotografia della scena 01 ingrandita.
+ * TOPOGRAFIA, che dà il nome a questo blocco, aveva già smesso di
+ * usarlo per il tre quarti.
  */
-if (existsSync(CUT)) {
-  const src = path.join(RAW, "hero-16x9.png");
-  const { width, height } = await sharp(src).metadata();
-  const left = Math.round(width * 0.645);
-  const box = { left, top: 0, width: width - left, height };
 
-  const cutMeta = await sharp(CUT).metadata();
-  const s = cutMeta.width / width; // il cutout torna a risoluzione diversa
-  const cutBox = {
-    left: Math.round(left * s),
-    top: 0,
-    width: cutMeta.width - Math.round(left * s),
-    height: cutMeta.height,
-  };
 
-  /*
-   * Niente ritaglio a sagoma per TOPOGRAFIA.
-   *
-   * Sul fondo inchiostro il profilo scontornato funzionava: i capelli
-   * scuri su fondo scuro nascondevano l'imprecisione dello scontorno.
-   * Sulla campitura lime quella stessa frangia diventa un alone verde
-   * sulla testa, e nessuna soglia la risolve — i capelli e il fondo
-   * hanno la stessa luminanza, non c'è informazione da cui separarli.
-   *
-   * La scena usa una lastra rettangolare, come CANONE e STRATI. Il
-   * profilo si legge lo stesso, perché è illuminato contro il nero
-   * dentro l'inquadratura; e la regione la annuncia l'anello, che non
-   * dipende da nessuno scontorno.
-   */
-  await sharp(src)
-    .extract(box)
-    .resize({ width: 1100 })
-    .avif({ quality: 64, effort: 6 })
-    .toFile(path.join(OUT, "profilo.avif"));
-
-  // Versione in scala di grigi, per gli shader che campionano un canale
-  await sharp(CUT)
-    .ensureAlpha()
-    .extractChannel("alpha")
-    .extract(cutBox)
-    .resize({ width: 1100 })
-    .blur(0.5)
-    .toColourspace("b-w")
-    .avif({ quality: 72, effort: 6 })
-    .toFile(path.join(OUT, "profilo-matte.avif"));
-
-  console.log("✓ profilo + profilo-matte (ritaglio verticale)");
-}
-
-// La documentazione clinica (caso-t0 / caso-t90) serviva alla scena
-// ESITI, che il cliente ha tolto: i raw restano in `raw/`, e se la
-// scena torna torna anche il blocco che li converte. Il ritratto del
-// medico stava qui finché era un render come gli altri; ora è una
-// fotografia vera che vuole un ritaglio, ed è passato ai JOBS in cima.
+// Nessun `caso-*` viene più convertito. La scena CONTROLLO — il
+// prima/dopo — è stata tolta dal cliente, e con lei le quattro
+// lastre delle due pazienti: in `img/` non esistono più, e i raw
+// (`caso-a-*`, `caso-b-*`, più i vecchi render `caso-t0`/`caso-t90`
+// della scena ESITI) restano in `raw/` senza consumatori. Sono
+// fotografie di persone vere: se non tornano in pagina, il posto
+// giusto per loro non è un repository.
+//
+// Nessun job chiama `withMetadata()`, ed è voluto: sharp scarta EXIF,
+// XMP e IPTC per impostazione predefinita, quindi modello del
+// dispositivo, data di scatto e identificativi della sessione non
+// arrivano in `img/`. È l'unico punto in cui quella garanzia si
+// ottiene, perché è l'unico punto in cui le fotografie vengono
+// riscritte.

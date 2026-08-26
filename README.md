@@ -113,9 +113,9 @@ Due decisioni portano il peso:
   del puntatore è un'aggiunta, non il solo modo di entrare.
 
 Con `prefers-reduced-motion` la soglia sparisce, l'hero diventa una
-composizione statica, le costruzioni sono già disegnate e il piano di
-STRATI si ferma a metà — le due condizioni restano leggibili, senza
-che nulla si muova.
+composizione statica, le costruzioni sono già disegnate e le zone di
+TRATTAMENTI compaiono senza comparsa sfalsata — le condizioni restano
+tutte leggibili, senza che nulla si muova.
 
 ---
 
@@ -125,9 +125,22 @@ che nulla si muova.
 esplicitamente che la scheda non è stata inviata. Prima di andare in
 produzione serve un endpoint e un trattamento dati conforme.
 
-**Le fotografie sono simulazioni visive.** Nessuna è documentazione di
-pazienti reali; la pagina e il piede lo dichiarano. Va mantenuto: in
-medicina estetica il confronto prima/dopo è materia regolata.
+**Le fotografie sono simulazioni visive, con una eccezione**, e il
+piede della pagina la nomina: il ritratto del medico.
+
+La scena CONTROLLO — il prima/dopo, due casi e quattro lastre di
+pazienti reali — è stata tolta dal cliente. Con lei escono di pagina
+le uniche fotografie di persone reali oltre al ritratto, e cadono i
+due nodi che pesavano su quella scena: le liberatorie delle pazienti
+e la disciplina della pubblicità sanitaria, che in medicina estetica
+regola proprio il confronto prima/dopo. I sorgenti restano in
+`public/media/raw/`, fuori dal repo (`.gitignore`), senza più nessun
+job che li converta: se non tornano in pagina, vanno tolti anche da
+lì.
+
+Gli AVIF e i WebP generati non portano EXIF, XMP né IPTC: nessun job
+della pipeline chiama `withMetadata()`, e sharp scarta i metadati per
+impostazione predefinita.
 
 I nomi, le credenziali e i numeri della dottoressa sono di
 presentazione. Vanno sostituiti con quelli reali prima di pubblicare.

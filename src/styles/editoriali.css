@@ -130,7 +130,7 @@
    sul modo di lavorare del medico. Lasciarlo corsivo l'avrebbe fatta
    leggere come parole sue, che è precisamente la cosa da evitare.
    `.medico__credenziali` invece non ha markup in pagina: aspetta i
-   dati veri (il riquadro nella scena 06 dice perché) e lo stile resta
+   dati veri (il riquadro nella scena 07 dice perché) e lo stile resta
    qui apposta. */
 .medico__frase {
   max-width: 34ch;
@@ -219,7 +219,7 @@
 
 /* `.consulto__costo` è stata rimossa e non è in attesa di niente: la
    tariffa del consulto non torna in pagina. Diverso dal copy della
-   scena 06, che aspetta il testo vero e per cui lo stile è rimasto. */
+   scena 07, che aspetta il testo vero e per cui lo stile è rimasto. */
 
 .consulto__modulo {
   display: flex;

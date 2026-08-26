@@ -135,7 +135,12 @@
         <span class="visually-hidden">Dr. William Petrini</span>
       </a>
       <nav class="testata__nav" aria-label="Principale">
-        <a href="#topografia" class="tech">Trattamenti</a>
+        <a href="#trattamenti" class="tech">Trattamenti</a>
+        <!-- Una voce in più, e non è un vezzo: il prima/dopo è la
+             prima cosa che cerca chi valuta uno studio, e una scena
+             raggiungibile solo scorrendo è una scena che quasi
+             nessuno trova. Sotto i 720px sparisce come le altre —
+             resta solo «Consulto». -->
         <a href="#metodo" class="tech">Metodo</a>
         <a href="#consulto" class="tech testata__consulto">Consulto</a>
       </nav>
@@ -231,188 +236,279 @@
           <div class="canone__telaio">
             <img
               class="canone__foto"
-              src="/media/img/profilo.avif"
-              width="1100"
-              height="1729"
-              alt="Profilo in luce radente, usato per la costruzione delle proporzioni"
+              src="/media/img/canone-1100.avif"
+              srcset="
+                /media/img/canone-720.avif   720w,
+                /media/img/canone-1100.avif 1100w,
+                /media/img/canone-1336.avif 1336w
+              "
+              sizes="(max-width: 899px) 78vw, 34vw"
+              width="1336"
+              height="2100"
+              alt="Ritratto in tre quarti in luce radente, usato per la costruzione delle proporzioni"
               loading="lazy"
               decoding="async"
             />
 
-            <!-- Coordinate rilevate sulla fotografia, non una griglia
-                 decorativa: trichion 255, glabella 505, subnasale 810,
-                 gnathion 1140 su un'altezza di 1490. -->
+            <!-- Coordinate rilevate su questa lastra, non una griglia
+                 decorativa: trichion 320, glabella 807, subnasale
+                 1288, gnathion 1846 sui 2100 px del ritaglio — cioè
+                 240 · 604 · 964 · 1382 nel telaio, che è lo stesso
+                 rapporto e quindi la stessa misura. -->
             <svg
               class="canone__costruzione"
               viewBox="0 0 1000 1572"
               preserveAspectRatio="xMidYMid meet"
               aria-hidden="true"
             >
-              <!-- Costruzione rifatta sul profilo, e non è la stessa di
-                   prima tradotta: su un profilo cambia cosa si può
-                   misurare.
+              <!-- Costruzione rifatta sulla lastra nuova, e non è la
+                   vecchia traslata: cambiando fotografia cambia cosa
+                   si può misurare.
 
-                   Sono tre linee e non quattro. Il canone divide il
-                   volto in tre parti fra attaccatura, glabella, base
-                   del naso e mento — ma in questa inquadratura la
-                   glabella sta al 22% dell'altezza e la base del naso
-                   al 55%: un terzo misura un terzo d'immagine, quindi
-                   l'attaccatura cadrebbe *sopra il bordo superiore*.
-                   Il ritaglio taglia via il terzo superiore.
-                   Disegnare lì una quarta linea significherebbe
-                   dichiarare una misura che la fotografia non contiene,
-                   ed è esattamente il contrario di quello che questa
-                   scena dice di fare. Si misura il misurabile: i due
-                   terzi inferiori, che sono anche quelli su cui si
-                   interviene.
+                   Le linee sono quattro e i terzi sono tre — interi.
+                   Il ritaglio precedente veniva dall'hero e tagliava
+                   via l'attaccatura dei capelli: il canone divide il
+                   volto in tre parti fra trichion, glabella, base del
+                   naso e mento, e di quelle tre ne conteneva due. La
+                   quarta linea si disegnava solo dichiarando una
+                   misura che la fotografia non aveva. Qui il trichion
+                   sta dentro l'inquadratura, quindi il terzo
+                   superiore si misura invece di essere dedotto, ed è
+                   la ragione per cui il taglio di questa lastra parte
+                   sopra l'attaccatura e non sulla fronte.
 
-                   L'asse mediano invece non c'è più, e non per
-                   ritaglio: di profilo non esiste. Al suo posto il
-                   piano facciale — glabella a pogonion — che è la
-                   misura canonica del profilo e la sola linea che su
-                   questa fotografia dice più che sull'altra. -->
+                   Le orizzontali restano orizzontali perché la testa
+                   non è inclinata: la bipupillare, misurata sui due
+                   occhi, corre a 1050 e 1055 px sulla sorgente — cinque
+                   pixel su millecinquecento. Se ci fosse stata
+                   inclinazione andrebbero ruotate, non lasciate a
+                   piombo.
+
+                   L'asse mediano invece qui esiste, e sul profilo di
+                   prima no. È il guadagno dei tre quarti: una sola
+                   linea che scende dal trichion alla glabella, prende
+                   il dorso e la punta del naso, rientra al subnasale,
+                   passa per il filtro e le labbra, scava il solco
+                   mentolabiale e chiude sul pogonion e sul gnathion.
+                   Non è dritta perché nessun asse mediano lo è —
+                   quella curva è la faccia girata, ed è esattamente
+                   ciò che una costruzione serve a mostrare. -->
               <g stroke="var(--marker)" fill="none" stroke-width="1"
                  vector-effect="non-scaling-stroke">
-                <line data-c-line x1="40" y1="355" x2="960" y2="355" />
-                <line data-c-line x1="40" y1="900" x2="960" y2="900" />
-                <line data-c-line x1="40" y1="1390" x2="960" y2="1390" />
+                <line data-c-line x1="40" y1="240" x2="960" y2="240" />
+                <line data-c-line x1="40" y1="604" x2="960" y2="604" />
+                <line data-c-line x1="40" y1="964" x2="960" y2="964" />
+                <line data-c-line x1="40" y1="1382" x2="960" y2="1382" />
 
-                <!-- Il collegamento: una sola linea per tutti e sei
-                     i punti.
-
-                     Passa *dentro* il volto, non lungo la sagoma. La
-                     prima versione seguiva il contorno esterno, e a
-                     guardarla si capiva l'errore: ridisegnava il
-                     profilo invece di attraversarlo, cioè ripeteva
-                     quello che la fotografia già mostra. Da dentro,
-                     invece, mette in relazione punti che a occhio non
-                     si vedono insieme — glabella e gonion stanno su
-                     due piani diversi della faccia, ed è esattamente
-                     quello che una costruzione serve a dire.
-
-                     L'ordine è anatomico e non geometrico: scende
-                     dalla glabella per lo zigomo fino all'angolo
-                     della mandibola, torna avanti lungo il ramo fino
-                     al menton, e risale il mento e il labbro fino
-                     alla base del naso. È il perimetro dei due terzi
-                     che questa inquadratura contiene, percorso in una
-                     volta sola.
-
-                     Assorbe due linee che prima stavano da sole — il
-                     piano facciale e il ramo mandibolare — che erano
-                     lo stesso tratto spezzato in tre. Si scopre con
-                     lo scroll come le altre. -->
-                <path data-c-line d="M150 355 C 192 442 248 562 280 640 C 342 722 442 852 505 920 C 472 1082 302 1302 182 1390 C 170 1352 159 1312 154 1276 C 146 1152 130 1002 115 902" />
-                <!-- proiezione zigomatica, verso il campo libero -->
-                <path data-c-line d="M280 640 L960 640" />
+                <!-- L'asse mediano: una sola linea per tutti e sei i
+                     punti, disegnata per ultima come le altre. -->
+                <path data-c-line d="M591 240 C 586 380 580 500 580 604 C 585 662 600 782 636 909 C 630 938 616 956 605 964 C 600 1010 595 1050 595 1086 C 598 1105 600 1116 600 1127 C 590 1170 570 1200 564 1232 C 572 1265 580 1290 582 1309 C 575 1340 560 1366 545 1382" />
               </g>
               <g fill="var(--marker)">
-                <circle data-c-dot cx="150" cy="355" r="4" />
-                <circle data-c-dot cx="115" cy="902" r="4" />
-                <circle data-c-dot cx="154" cy="1276" r="4" />
-                <circle data-c-dot cx="182" cy="1390" r="4" />
-                <circle data-c-dot cx="280" cy="640" r="4" />
-                <circle data-c-dot cx="505" cy="920" r="4" />
+                <circle data-c-dot cx="591" cy="240" r="4" />
+                <circle data-c-dot cx="580" cy="604" r="4" />
+                <circle data-c-dot cx="636" cy="909" r="4" />
+                <circle data-c-dot cx="605" cy="964" r="4" />
+                <circle data-c-dot cx="582" cy="1309" r="4" />
+                <circle data-c-dot cx="545" cy="1382" r="4" />
               </g>
             </svg>
 
             <!-- Le quote vivono nello stesso telaio delle linee, quindi
                  non possono scollarsi da esse. -->
             <ul class="canone__quote tech tech--annot" aria-hidden="true">
-              <!-- Il trichion non c'è più: cadrebbe sopra il bordo
-                   superiore dell'inquadratura (il perché sta sopra la
-                   costruzione). Le tre quote sono i tre punti che la
-                   fotografia contiene, e le percentuali sono misurate
-                   su questa lastra, non convertite da quella prima. -->
-              <li data-c-quota style="--t: 0.226"><span>glabella</span></li>
-              <li data-c-quota style="--t: 0.574"><span>subnasale</span> 52,9%</li>
-              <li data-c-quota style="--t: 0.884"><span>gnathion</span> 47,1%</li>
+              <!-- Quattro quote per quattro linee. Il numero accanto a
+                   una quota è il terzo che quella linea *chiude*,
+                   quindi il trichion non ne ha: apre e basta. Le
+                   percentuali sono misurate su questa lastra, e la
+                   somma fa 100 perché sono i tre terzi di una stessa
+                   altezza, non tre misure indipendenti. -->
+              <li data-c-quota style="--t: 0.153"><span>trichion</span></li>
+              <li data-c-quota style="--t: 0.384"><span>glabella</span> 31,9%</li>
+              <li data-c-quota style="--t: 0.613"><span>subnasale</span> 31,5%</li>
+              <li data-c-quota style="--t: 0.879"><span>gnathion</span> 36,6%</li>
             </ul>
           </div>
 
           <figcaption class="tech canone__scarto" data-canone-scarto>
-            terzi medio / inferiore 52,9 · 47,1 — scarto dal canone
-            <span class="tech--accent">+2,9%</span> sul medio
+            terzi 31,9 · 31,5 · 36,6 — scarto dal canone
+            <span class="tech--accent">+3,3%</span> sull'inferiore
           </figcaption>
         </figure>
       </section>
 
       <!-- ════════════════════════════════════════════════════════
-           03 · STRATI
-           Un piano attraversa il volto. Sopra: la fotografia.
-           Sotto: la stessa fotografia con i vettori muscolari a
-           sanguigna. Il piano è guidato dallo scroll, e la
-           nomenclatura viaggia agganciata a lui.
-           ════════════════════════════════════════════════════════ -->
-      <section class="scene strati" id="strati" data-ground="pece" data-scene="strati">
-        <div class="strati__pin" data-strati-pin>
-          <div class="strati__telaio" data-strati-telaio>
-            <img
-              class="strati__foto"
-              src="/media/img/volto-ii-1080.avif"
-              srcset="
-                /media/img/volto-ii-720.avif   720w,
-                /media/img/volto-ii-1080.avif 1080w,
-                /media/img/volto-ii-1600.avif 1600w
-              "
-              sizes="(max-width: 899px) 88vw, 42vw"
-              width="1696"
-              height="2528"
-              alt="Ritratto frontale in luce radente, usato per la lettura anatomica"
-              loading="lazy"
-              decoding="async"
-            />
+           03 · TRATTAMENTI
+           Quattro voci e un volto. Toccando una voce, sulla lastra
+           si accendono le zone che quel trattamento tratta — ed è
+           tutto l'argomento: quattro nomi che il paziente sente
+           usare come sinonimi non fanno la stessa cosa e non vanno
+           nello stesso posto.
 
-            <!-- Lo strato anatomico: visibile solo sotto il piano -->
-            <div class="strati__sotto" data-strati-sotto>
-              <svg viewBox="0 0 1000 1490" preserveAspectRatio="xMidYMid meet"
-                   aria-hidden="true">
-                <g stroke="var(--marker)" fill="none" stroke-width="1"
-                   vector-effect="non-scaling-stroke" opacity="0.95">
-                  <!-- frontalis: fibre verticali sulla fronte -->
-                  <path d="M300 500 L300 330 M348 498 L348 322 M396 496 L396 318 M444 498 L444 326 M492 502 L492 338" />
-                  <!-- orbicularis oculi -->
-                  <ellipse cx="245" cy="545" rx="95" ry="55" />
-                  <ellipse cx="465" cy="545" rx="90" ry="52" />
-                  <!-- zygomaticus major -->
-                  <path d="M205 655 L250 872" />
-                  <path d="M555 650 L410 872" />
-                  <!-- massetere -->
-                  <path d="M198 690 L230 940 L292 948 L252 686 Z" />
-                  <path d="M572 682 L558 930 L498 940 L520 678 Z" />
-                  <!-- orbicularis oris -->
-                  <ellipse cx="330" cy="880" rx="105" ry="45" />
-                  <!-- depressor anguli oris + mentalis -->
-                  <path d="M250 880 L272 1000 M410 880 L394 1000 M315 962 L325 1038" />
+           Prende il posto di STRATI, la scena dei quattro strati
+           sotto la pelle. Non è una perdita di contenuto ma un
+           cambio di livello: quella parlava di piani anatomici, che
+           è il ragionamento del medico; questa parla di trattamenti
+           con i loro nomi, che è la domanda del paziente.
+
+           Sta prima di TOPOGRAFIA e non dopo perché è la scena che
+           nomina; la 04 è quella che entra nel dettaglio clinico
+           regione per regione. Nome, poi dossier.
+           ════════════════════════════════════════════════════════ -->
+      <section
+        class="scene trattamenti"
+        id="trattamenti"
+        data-ground="pece"
+        data-scene="trattamenti"
+      >
+        <p class="rail trattamenti__rail tech tech--annot">03 — Trattamenti</p>
+
+        <div class="trattamenti__impianto">
+          <div class="trattamenti__testo">
+            <h2 class="display trattamenti__titolo">
+              Quattro trattamenti.<br />
+              <em>Un solo obiettivo: naturalezza.</em>
+            </h2>
+
+            <!-- Le quattro voci sono `<button>` e non `<li>` con un
+                 listener: la scena si attraversa da tastiera con la
+                 stessa informazione che riceve chi usa il mouse, come
+                 le regioni della 04. `aria-pressed` dice quale voce è
+                 quella accesa, e la didascalia sotto la lastra è
+                 `aria-live`: chi non vede le zone le sente nominare.
+
+                 «Botox» è il marchio registrato usato come nome
+                 comune, ed è la parola del cliente — la stessa che sta
+                 nel copy della scena 02. Le schede della 04 dicono
+                 «tossina botulinica». La scelta è sua e va fatta una
+                 volta per tutto il sito, non risolta qui. -->
+            <ol class="trattamenti__elenco" data-tratt-elenco>
+              <li>
+                <button type="button" data-tratt="botox" aria-pressed="true">
+                  <span class="trattamenti__numero tech tech--annot">01</span>
+                  <span class="trattamenti__nome">Botox</span>
+                  <span class="trattamenti__obiettivo">
+                    distende le rughe di espressione
+                  </span>
+                </button>
+              </li>
+              <li>
+                <button type="button" data-tratt="filler" aria-pressed="false">
+                  <span class="trattamenti__numero tech tech--annot">02</span>
+                  <span class="trattamenti__nome">Filler</span>
+                  <span class="trattamenti__obiettivo">
+                    sostiene, definisce, riequilibra
+                  </span>
+                </button>
+              </li>
+              <li>
+                <button type="button" data-tratt="prx" aria-pressed="false">
+                  <span class="trattamenti__numero tech tech--annot">03</span>
+                  <span class="trattamenti__nome">PRX</span>
+                  <span class="trattamenti__obiettivo">
+                    rinnova e illumina la pelle
+                  </span>
+                </button>
+              </li>
+              <li>
+                <button type="button" data-tratt="bio" aria-pressed="false">
+                  <span class="trattamenti__numero tech tech--annot">04</span>
+                  <span class="trattamenti__nome">Biorivitalizzazione</span>
+                  <span class="trattamenti__obiettivo">
+                    idrata e migliora la qualità della pelle
+                  </span>
+                </button>
+              </li>
+            </ol>
+
+            <p class="prose trattamenti__prosa">
+              Botox, filler, PRX e biorivitalizzazione non fanno la stessa cosa.
+              <strong>Ogni trattamento ha un obiettivo preciso.</strong> Capire
+              quale sia quello giusto è il primo passo per ottenere un risultato
+              naturale.
+            </p>
+          </div>
+
+          <figure class="trattamenti__lastra">
+            <!-- Il telaio ha il rapporto nativo della fotografia e il
+                 viewBox lo ripete (1000 × 1490): le zone stanno dove
+                 stanno le strutture, non vicino. Nessun ritaglio in
+                 mezzo, quindi nessuna deriva. -->
+            <div class="trattamenti__telaio">
+              <img
+                class="trattamenti__foto"
+                src="/media/img/frontale-1080.avif"
+                srcset="
+                  /media/img/frontale-720.avif   720w,
+                  /media/img/frontale-1080.avif 1080w,
+                  /media/img/frontale-1600.avif 1600w
+                "
+                sizes="(max-width: 899px) 82vw, 38vw"
+                width="1696"
+                height="2528"
+                alt="Ritratto frontale in luce simmetrica, usato come mappa delle zone di trattamento"
+                loading="lazy"
+                decoding="async"
+              />
+
+              <!-- Le zone. Rilevate su questa lastra con una griglia
+                   al 5% e lette struttura per struttura, non stimate.
+
+                   Botox e filler segnano punti: sono trattamenti che
+                   vanno in un posto preciso, e disegnarli come aree
+                   direbbe una cosa falsa. PRX e biorivitalizzazione
+                   segnano superfici, perché si fanno sul viso intero;
+                   e la biorivitalizzazione scende su collo e
+                   décolleté, che è la differenza vera fra le due e
+                   l'unico modo di farle leggere diverse. -->
+              <svg
+                class="trattamenti__zone"
+                viewBox="0 0 1000 1490"
+                preserveAspectRatio="xMidYMid meet"
+                aria-hidden="true"
+              >
+                <g data-zona="botox">
+                  <!-- fronte, glabella, zampe di gallina -->
+                  <ellipse style="--i: 0" cx="500" cy="328" rx="200" ry="88" />
+                  <ellipse style="--i: 1" cx="500" cy="484" rx="44" ry="44" />
+                  <ellipse style="--i: 2" cx="245" cy="575" rx="54" ry="46" />
+                  <ellipse style="--i: 3" cx="752" cy="575" rx="54" ry="46" />
+                </g>
+
+                <g data-zona="filler">
+                  <!-- zigomi, labbra, rughe marionetta, mento -->
+                  <ellipse style="--i: 0" cx="305" cy="655" rx="74" ry="54" />
+                  <ellipse style="--i: 1" cx="693" cy="655" rx="74" ry="54" />
+                  <ellipse style="--i: 2" cx="500" cy="860" rx="88" ry="40" />
+                  <ellipse style="--i: 3" cx="400" cy="930" rx="34" ry="44" />
+                  <ellipse style="--i: 4" cx="600" cy="930" rx="34" ry="44" />
+                  <ellipse style="--i: 5" cx="500" cy="985" rx="74" ry="45" />
+                </g>
+
+                <g data-zona="prx">
+                  <!-- il viso intero: un peeling non ha un bersaglio -->
+                  <ellipse style="--i: 0" cx="500" cy="580" rx="265" ry="445" />
+                </g>
+
+                <g data-zona="bio">
+                  <!-- viso, collo, décolleté -->
+                  <ellipse style="--i: 0" cx="500" cy="580" rx="265" ry="445" />
+                  <path style="--i: 1" d="M404 1030 C 396 1110 384 1195 374 1268 L626 1268 C 616 1195 604 1110 596 1030 Z" />
+                  <path style="--i: 2" d="M140 1410 C 244 1306 322 1274 374 1270 L626 1270 C 678 1274 756 1306 860 1410 Z" />
                 </g>
               </svg>
             </div>
 
-            <!-- Il piano. Una linea, non un bordo di rettangolo. -->
-            <div class="strati__piano" data-strati-piano>
-              <span class="tech tech--annot strati__etichetta" data-strati-etichetta>
-                superficie
-              </span>
-            </div>
-          </div>
-
-          <div class="strati__testo">
-            <h2 class="display strati__titolo">
-              Sotto la pelle<br />ci sono quattro strati.<br />
-              <em>Se ne vede uno.</em>
-            </h2>
-            <ol class="strati__elenco tech" data-strati-elenco>
-              <li><b>01</b> superficie — texture, luce, pori</li>
-              <li><b>02</b> volume — grasso profondo, sostegno</li>
-              <li><b>03</b> muscolo — movimento, espressione</li>
-              <li><b>04</b> osso — la struttura che non cambia</li>
-            </ol>
-            <p class="prose">
-              Un trattamento che ignora questa stratigrafia produce un volto
-              gonfio. <strong>Ogni prodotto ha il suo piano.</strong> Sapere
-              dove fermarsi conta più di sapere quanto mettere.
-            </p>
-          </div>
+            <!-- La didascalia nomina le zone accese. Non è un
+                 sottotitolo decorativo: è l'unica forma in cui
+                 l'informazione della lastra esiste anche per chi non
+                 la guarda, ed è per questo che è `aria-live`. -->
+            <figcaption
+              class="tech trattamenti__didascalia"
+              data-tratt-didascalia
+              aria-live="polite"
+            ></figcaption>
+          </figure>
         </div>
       </section>
 
@@ -707,9 +803,17 @@
            la vogliamo finché non è la sua: vedi il riquadro nella
            scena 06. -->
       <p class="tech tech--annot">Bra</p>
+      <!-- Questa riga diceva «non documentazione di pazienti», ed
+           era falsa perché il ritratto della scena 06 è una
+           fotografia vera del medico. L'eccezione resta una sola: il
+           prima/dopo è stato tolto, e con lui le uniche fotografie di
+           pazienti che il sito conteneva. La forma dichiara la regola
+           e la sua eccezione, che è l'unico modo perché una nota
+           legale valga qualcosa. -->
       <p class="tech tech--annot pieno__legale">
-        Le immagini del sito sono simulazioni visive, non documentazione di
-        pazienti. Nessun contenuto sostituisce una valutazione medica.
+        Le immagini del sito sono simulazioni visive, con una eccezione: il
+        ritratto del medico, che è una fotografia vera. Gli esiti individuali
+        variano e nessun contenuto sostituisce una valutazione medica.
       </p>
     </footer>
 

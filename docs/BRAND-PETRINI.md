@@ -76,6 +76,37 @@ infatti continua a leggersi come fotografia e non come filtro.
 L'hero fa la stessa operazione nel proprio shader, dove costa un
 prodotto scalare invece di un passaggio di filtro sul canvas.
 
+### Il duotone su una fotografia clinica
+
+Con le quattro lastre di CONTROLLO il duotone ha smesso di essere un
+automatismo e ha dovuto giustificarsi, perché lì il colore *è*
+informazione clinica: rossore, ecchimosi, vascolarizzazione. Portarlo
+via è una scelta, e la scelta è stata di portarlo via lo stesso.
+
+La ragione non è la coerenza di palette — quella da sola non basta a
+scartare un'informazione medica. È che **le quattro fotografie hanno
+bilanciamenti del bianco diversi fra prima e dopo**, e sono da
+telefono: in colore, il «dopo» del caso A ha il fondo caldo e la pelle
+più rosata del proprio «prima», e il «dopo» del caso B ha le labbra
+molto più sature. Nessuna di queste due differenze viene dal
+trattamento, e nessuno che guarda può distinguerle da quelle che ci
+vengono. Un prima/dopo in cui metà del miglioramento lo fa la
+temperatura colore è un prima/dopo che mente senza che nessuno abbia
+mentito.
+
+Il duotone toglie quella variabile e lascia in piedi le due che
+contano davvero in questi casi: **la forma e il valore** — il bordo
+del vermiglio, il rapporto fra i due labbri, la profondità dei solchi.
+Sono grandezze di luminanza, e la rimappatura le conserva.
+
+Il costo va scritto perché è reale: **rossore ed ecchimosi spariscono
+dalle immagini**. Non è un problema di sotto-dichiarazione, perché
+questi non sono scatti immediati di documentazione post-operatoria; e
+comunque l'errore che ne deriva va nella direzione giusta — il
+duotone toglie qualcosa di lusinghiero, non lo aggiunge. Se un giorno
+servisse una lastra che mostra un decorso, quella lastra deve stare
+fuori dall'elenco del duotone e dirlo nella didascalia.
+
 ---
 
 ## Cosa è cambiato nella scena TOPOGRAFIA
@@ -91,7 +122,7 @@ irrigidimento dell'alfa, soglia binaria, riempimento per righe dal
 bordo del profilo (che introduceva striature).
 
 La scena usa una **lastra rettangolare** — la stessa lingua di CANONE
-e STRATI, fotografie appoggiate sul foglio e mai incollate. Il profilo
+e TRATTAMENTI, fotografie appoggiate sul foglio e mai incollate. Il profilo
 si legge lo stesso, perché è illuminato contro il nero dentro
 l'inquadratura.
 
@@ -187,7 +218,7 @@ il nome sopravvive anche senza CSS, resta traducibile e resta indicizzabile.
 | forma | dove | perché |
 |---|---|---|
 | **Dr. William Petrini** | marchio e amministrazione: `<title>`, nome accessibile del lockup, piede di pagina, riga sotto la firma in calce al modulo | è la forma che il cliente ha firmato — «Dr.» sta dentro il logotipo |
-| **William Petrini** | scena 06, dove il nome è composto in Bodoni a 84px | a quella scala l'abbreviazione è un ingombro, e il titolo lo porta già il logotipo tre schermate più su. Il nome nudo, grande, accanto al ritratto |
+| **William Petrini** | scena 07, dove il nome è composto in Bodoni a 84px | a quella scala l'abbreviazione è un ingombro, e il titolo lo porta già il logotipo tre schermate più su. Il nome nudo, grande, accanto al ritratto |
 
 Quello che non compare più da nessuna parte è una **qualifica**: né
 «direttore sanitario», né la città. Vedi *Segnaposto*, punto 2.
@@ -213,12 +244,23 @@ Il lockup non ha aggiunto violazioni: il nome accessibile è testo vero, e
 timbro e firma sono `aria-hidden` — nessun doppione nell'albero. La firma
 in calce al modulo è decorativa e il nome accanto è testo.
 
+Nemmeno CONTROLLO ne ha aggiunte, e non per fortuna: **è una scena senza
+controlli**. La meccanica scelta non ha maniglie da trascinare, quindi non
+c'è niente da raggiungere con la tastiera e niente da nominare — è il
+guadagno meno appariscente della decisione presa in
+[CREATIVE-DIRECTION.md §5b](CREATIVE-DIRECTION.md). Le due misure prese
+sul fondo `--pece`: magenta pieno sulle etichette da 11px **5,04:1**,
+`--figure-dim` su testo e didascalie **6,64:1**. La riga di repere è
+grafica pura, `aria-hidden` per costruzione — è uno pseudo-elemento — e
+l'informazione che porta è scritta anche a parole nella voce «repere» di
+ogni scheda: chi non la vede non perde niente.
+
 ---
 
 ## Segnaposto — da chiudere prima di pubblicare
 
-**1. ~~Il ritratto della scena 06 è un volto femminile.~~ Chiuso.**
-Il cliente ha mandato la sua fotografia e la scena 06 ora ritrae lui. Arriva
+**1. ~~Il ritratto del medico è un volto femminile.~~ Chiuso.**
+Il cliente ha mandato la sua fotografia e la scena 07 ora ritrae lui. Arriva
 come scatto da tessera — fondo bianco, casacca ciano, sorriso — e vale la
 pena dire perché non è stata ritoccata: il duotone del brand porta il bianco
 esattamente sul latte della palette e il ciano su un mezzo tono, quindi la
@@ -232,7 +274,7 @@ Resta un limite vero: la sorgente utile è **968px**, e il ritratto occupa
 40vw. Su schermi a densità doppia è servito appena sotto il suo optimum.
 Non si risolve in pipeline, si risolve con uno scatto più grande.
 
-**2. Il copy della scena 06 non c'è, ed è voluto.**
+**2. Il copy della scena 07 non c'è, ed è voluto.**
 La scena porta il ritratto e il nome, e nient'altro. Erano fuori una frase
 virgolettata e cinque righe di credenziali — formazione, ateneo, anni,
 numero di procedure — scritte per la presentazione e non prese da nessun
@@ -254,7 +296,40 @@ stato rimosso apposta. Sulle credenziali la forma conta quanto il
 contenuto: la pubblicità sanitaria richiede provincia dell'Ordine e numero
 di iscrizione.
 
-**3. Il segno a misura piccola.**
+**3. Le liberatorie della scena CONTROLLO — e la deontologia.**
+Questo è il punto aperto più serio del progetto, e non è tecnico.
+
+*Consenso.* Le quattro fotografie ritraggono due pazienti reali. Il
+sito non dichiara nessun consenso alla pubblicazione, perché non
+sappiamo se le liberatorie esistono e **una dichiarazione di consenso
+falsa è peggio del silenzio**. Nel markup, sopra l'avvertenza della
+scena, c'è un commento con la riga già scritta: quando il cliente
+conferma che le liberatorie sono agli atti — firmate, con menzione
+esplicita della pubblicazione online e non solo dell'archivio clinico
+— la riga entra e la questione è chiusa. Finché non entra, la scena
+pubblica fotografie di pazienti senza dirne il titolo.
+
+*Pubblicità sanitaria.* Da verificare con l'Ordine dei Medici prima
+di andare in rete, e va verificato davvero, non dato per assodato: in
+Italia le fotografie prima/dopo in comunicazione sanitaria sono
+storicamente contestate dalla FNOMCeO come materiale a **carattere
+suggestionale**, cioè fuori dal perimetro dell'informazione
+«funzionale a garantire la sicurezza dei trattamenti». Se
+l'orientamento vale ancora, questa scena non si pubblica, e non c'è
+art direction che la salvi. È la stessa logica per cui in questo sito
+non ci sono prezzi.
+
+La scena è costruita perché si possa togliere in un colpo, come è già
+successo a ESITI: una `<section>`, un blocco in `editoriali.css`, un
+modulo in `src/scenes/`, quattro job nella pipeline e una voce di
+menù. Rimuovendola vanno rinumerate le scene da 06 a 08 e va rimessa
+la forma breve della riga legale nel piede.
+
+*Dati del caso A.* L'intervallo fra le due riprese non è documentato
+— le due sorgenti non hanno EXIF — e la scheda in pagina lo dichiara
+invece di inventarlo. Basta una riga del cliente per sostituirla.
+
+**4. Il segno a misura piccola.**
 Il timbro risolve la lettura, ma il profilo a 26–33px resta al limite della
 propria leggibilità: il naso vale due pixel. Se il cliente vuole spingere
 oltre, l'unico asset che servirebbe è una **variante del logo disegnata per

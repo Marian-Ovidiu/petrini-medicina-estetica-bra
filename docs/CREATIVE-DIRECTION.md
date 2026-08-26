@@ -148,8 +148,11 @@ Non è un motivo decorativo ripetuto: è letteralmente la stessa linea che si tr
 3. In *Canone* **si apre in costruzione geometrica** — i terzi del volto, le sezioni.
 4. In *Strati* **diventa vettore muscolare**.
 5. In *Topografia* **circonda la regione** che il puntatore avvicina.
-6. In *Metodo* **è il filetto sotto i titoli**.
-7. In *Consulto* **è la riga del campo del form**.
+6. In *Controllo* **si posa sul repere**: attraversa le due fotografie di un
+   caso all'altezza di un punto anatomico che il trattamento non ha toccato,
+   e passando dall'una all'altra dichiara che stanno alla stessa scala.
+7. In *Metodo* **è il filetto sotto i titoli**.
+8. In *Consulto* **è la riga del campo del form**.
 
 Una linea, un sito. È questo che fa sembrare il tutto *un sistema progettato*,
 non una sequenza di sezioni riuscite.
@@ -234,7 +237,7 @@ che continua a scrivere.
 
 ---
 
-## 5. Narrativa — sette scene, nessuna sezione
+## 5. Narrativa — otto scene, nessuna sezione
 
 Le transizioni sono parte della scena precedente, mai uno stacco.
 
@@ -243,15 +246,54 @@ Le transizioni sono parte della scena precedente, mai uno stacco.
 | 00 | **SOGLIA** | La linea disegna un profilo mentre scorre nomenclatura latina, poi la firma si scrive sotto. Quando il marchio è composto, si apre. | ink |
 | 01 | **LUCE** | La luce arriva sul volto — all'inizio passa solo il bordo illuminato del profilo, poi la faccia emerge dall'ombra mentre la camera arretra. La tipografia esiste in profondità, occlusa dal volto. La sequenza si suona da sola all'atterraggio. | ink |
 | 02 | **CANONE** | Dal mento la linea esce e costruisce la proporzione classica sopra il ritratto. Il puntatore muove la sorgente di luce. | gesso |
-| 03 | **STRATI** | Un piano attraversa il volto: superficie → topologia di luce → vettori muscolari → osso. Reso come disegno a sanguigna sopra la fotografia, non come HUD. | ink |
+| 03 | **TRATTAMENTI** | Quattro nomi — botox, filler, PRX, biorivitalizzazione — e un volto frontale. Toccando una voce, sulla lastra si accendono le zone che quel trattamento tratta: punti per i due iniettivi, superfici per i due di qualità della pelle. | ink |
 | 04 | **TOPOGRAFIA** | Il volto **è** l'interfaccia. La prossimità del puntatore porta avanti una regione; compare il dossier clinico del trattamento. | sanguigna |
 | 05 | **METODO** | Respiro editoriale. Tipografia enorme, protocollo numerato, quasi nessun movimento. | gesso |
 | 06 | **MEDICO** | La fotografia vera del dott. Petrini e il suo nome, per ora nient'altro: il copy è atteso dal cliente e le credenziali che c'erano erano inventate. Quando tornano, sono il livello di annotazione tecnica, non una bio. | ink |
 | 07 | **CONSULTO** | Anamnesi, non "Book Now". Il form come modulo clinico. | ink |
 
 Catena di transizioni: il crop della hero **entra** nello zigomo → lo zigomo genera la
-linea di misura → la misura diventa costruzione anatomica → l'anatomia introduce la
-filosofia → la fotografia ritorna → il medico emerge da quel mondo.
+linea di misura → la misura diventa costruzione anatomica → la mappa delle regioni
+trova due regioni vere → il metodo introduce la filosofia → il medico emerge da quel
+mondo.
+
+### 5b. Perché CONTROLLO non ha una tendina
+
+Il cliente aveva in mente due meccaniche: una tendina da trascinare, oppure qualcosa
+guidato dallo scroll. La scelta è stata fatta guardando, e sono state scartate
+entrambe.
+
+**La tendina.** Provata sulla coppia meglio registrata dei materiali — il caso A,
+laterale, le cui due lastre stanno alla stessa scala entro il 5% — e scartata al primo
+fotogramma: il cursore taglia in due la bocca, e la bocca è precisamente la cosa che
+fra le due fotografie deve essere diversa. Quello che si vede non è un cambiamento, è
+una giuntura sbagliata.
+
+E non è un difetto di allineamento che si possa correggere lavorandoci meglio. **In un
+prima/dopo di una regione piccola la cucitura cade sempre dentro la regione trattata,
+perché nell'inquadratura non c'è nient'altro.** La tendina funziona sui confronti in
+cui quasi tutto il fotogramma resta identico e il taglio corre su materiale invariato —
+una facciata, una stanza, un volume di mezzo viso. Qui il cambiamento *è* il
+fotogramma. La dissolvenza al passaggio cade per la stessa ragione, e peggio: due volti
+non registrati che si sciolgono l'uno nell'altro sdoppiano tutto invece che una linea
+sola.
+
+**Lo scroll.** Sarebbe stata la terza scena su sei a farsi guidare dallo scroll, e in
+una scena che si legge — quattro fotografie e due schede cliniche — lo scroll è il gesto
+della lettura. Rubarglielo per far scorrere una tendina significa che chi vuole tornare
+indietro a rileggere muove anche il confronto.
+
+**Quello che resta.** L'affiancamento, che da solo è la soluzione di tutti. A farne una
+scena di questo sito è LA LINEA: le lastre sono ritagliate perché uno stesso punto
+anatomico — non toccato dal trattamento — cada alla stessa altezza in tutte e due, e la
+riga di magenta ci passa sopra continua, dalla prima alla seconda. Il suo lavoro non è
+misurare il risultato: è dichiarare che le due fotografie stanno alla stessa scala e
+alla stessa altezza. Senza quella riga il confronto è un'affermazione; con quella riga
+è verificabile a occhio, che è l'unica forma di prova che una pagina possa offrire.
+
+È anche il ruolo per cui il marker esiste in questo brand: la matita dermografica con
+cui si segna un volto prima di intervenire. In CONTROLLO non segna un volto — segna il
+piano su cui lo si guarda.
 
 ---
 
@@ -321,10 +363,12 @@ anatomica la fa emergere — crop che spinge dentro, contorno di sanguigna che s
 dossier che si scrive in monospace. La distanza controlla l'intensità in modo continuo,
 non on/off.
 
-**S4 — IL PIANO (multi-medium: video + tipografia + mask + grafica + scroll)** · scena STRATI
-Un piano orizzontale attraversa il volto. Sopra il piano: fotografia. Sotto: la stessa
-immagine come disegno a sanguigna con i vettori muscolari. Il piano è una mask animata,
-il video continua a girare sotto, la tipografia latina si aggancia al piano e scorre con lui.
+**S4 — IL PIANO** · scena STRATI — *non realizzata.*
+Un piano orizzontale che attraversa il volto, fotografia sopra e vettori muscolari a
+sanguigna sotto. La scena è esistita ed è stata sostituita da TRATTAMENTI: parlava di
+piani anatomici, che è il ragionamento del medico, dove serviva il nome dei trattamenti,
+che è la domanda del paziente. L'idea resta qui perché il meccanismo — una mask guidata
+dallo scroll che scopre uno strato sotto l'altro — è ancora buono e può tornare altrove.
 
 **Interazioni originali inventate per questo progetto:**
 - **La Linea** (§4) — continuità narrativa attraverso l'intero documento.
