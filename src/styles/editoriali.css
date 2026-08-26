@@ -17,6 +17,8 @@
   margin: 0 0 clamp(40px, 8vh, 120px);
   /* Fuori misura, tagliato dal margine: la parola è una superficie,
      non un'etichetta di sezione. */
+  font-size: clamp(64px, 17vw, 300px);
+  line-height: 0.76;
   margin-left: -0.06em;
   letter-spacing: -0.045em;
 }
