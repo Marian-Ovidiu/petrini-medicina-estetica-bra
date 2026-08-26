@@ -43,37 +43,42 @@ const JOBS = [
 
   /* ── CANONE · la lastra della costruzione ────────────────────
    *
-   * Stessa sorgente della lastra di TOPOGRAFIA, inquadratura
-   * diversa. Prima qui c'era un ritaglio dell'hero (`profilo`), ed
-   * era il difetto: la scena 02 mostrava la stessa fotografia della
-   * scena 01, ingrandita. Due schermate di seguito con lo stesso
-   * scatto non sono un richiamo, sono una ripetizione.
+   * Un tre quarti che sul sito non c'è da nessun'altra parte: occhi
+   * aperti, fondo grigio, luce piena. È la quarta lastra che questa
+   * scena prova, e le prime tre sono cadute tutte per lo stesso
+   * motivo — erano già in pagina altrove. Un ritaglio dell'hero (la
+   * scena 02 mostrava la fotografia della 01 ingrandita); il tre
+   * quarti di TOPOGRAFIA; un profilo nuovo che però, accanto
+   * all'hero, si leggeva come lo stesso scatto. Due schermate con la
+   * stessa fotografia non sono un richiamo, sono una ripetizione, e
+   * in una pagina che parla di guardare bene è la cosa che si nota
+   * per prima.
+   *
+   * La lastra è specchiata. La sorgente ha il volto girato verso
+   * destra, cioè verso il bordo della pagina; specchiata guarda
+   * dentro il testo, che è l'impianto della scena da sempre. È una
+   * fotografia generata e non un paziente, quindi non c'è nessun
+   * documento da falsare — ma sta scritto qui perché un'inversione
+   * non dichiarata è il genere di cosa che, in un sito clinico, non
+   * si scopre più.
    *
    * Il riquadro non è un'inquadratura a occhio. Il rapporto è quello
-   * del telaio (1336 : 2100 = 1100 : 1729): se la lastra e il telaio
-   * non hanno lo stesso rapporto, `object-fit: cover` ritaglia i
-   * lati e le linee della costruzione si scollano dai landmark.
-   * L'altezza è scelta perché il taglio contenga il trichion con un
-   * po' d'aria sopra e il gnathion con un po' di collo sotto: sono
-   * i due estremi del canone, e questa volta ci stanno tutti e due
-   * dentro — la costruzione può dire i tre terzi interi invece dei
-   * due che il vecchio ritaglio conteneva.
+   * del telaio (1209 : 1900 = 1100 : 1729): se la lastra e il telaio
+   * non hanno lo stesso rapporto, `object-fit: cover` ritaglia i lati
+   * e le linee della costruzione si scollano dai landmark. L'altezza
+   * è scelta perché il taglio contenga il trichion con un po' d'aria
+   * sopra e il gnathion con il collo sotto: sono i due estremi del
+   * canone, e ci stanno tutti e due dentro — la costruzione dice i
+   * tre terzi interi invece dei due che il primo ritaglio conteneva.
    */
   {
-    src: "hero-c1.png",
+    src: "profilo-ii.png",
     name: "canone",
     set: "lastra",
-    crop: { left: 350, top: 110, width: 1336, height: 2100 },
+    mirror: true,
+    crop: { left: 240, top: 140, width: 1209, height: 1900 },
   },
-  /* La lastra di TRATTAMENTI. Frontale piena, luce simmetrica sui
-   * due lati: è la sola inquadratura su cui una zona di trattamento
-   * si può segnare dove sta davvero, perché le zone sono pari e su
-   * un tre quarti una delle due è sempre girata via. Il collo e le
-   * clavicole restano dentro perché la biorivitalizzazione arriva
-   * fin lì, e una zona che il ritaglio taglia non è una zona.
-   *
-   * Sostituisce `volto-ii`, che era il ritratto di un uomo: il
-   * volto del sito è uno solo, e sta nelle scene 01, 02 e 04. */
+
   { src: "frontale.png", name: "frontale", set: "scene" },
   // Il ritratto arriva come scatto da tessera in verticale 2:3: testa
   // in alto e mezzo busto. Il taglio lo porta al 4:5 delle altre
@@ -104,7 +109,17 @@ for (const job of JOBS) {
   // L'inquadratura sta qui e non in un file già ritagliato dentro
   // `raw/`: il ritaglio è una decisione, e una decisione va scritta
   // dove si rilegge, non incisa in un binario che nessuno riapre.
-  const sorgente = () => (job.crop ? sharp(src).extract(job.crop) : sharp(src));
+  const sorgente = () => {
+    // `mirror` specchia la lastra prima del ritaglio. Serve a una sola
+    // scena e non è un vezzo: CANONE ha il testo a sinistra e la lastra
+    // a destra, e un volto che guarda fuori pagina rompe l'impianto.
+    // Le coordinate di `crop` sono quindi quelle della sorgente non
+    // specchiata — è l'ordine in cui sharp esegue la pipeline, e i
+    // numeri qui sotto sono stati rilevati su un provino fatto con
+    // questa stessa catena.
+    const base = job.mirror ? sharp(src).flop() : sharp(src);
+    return job.crop ? base.extract(job.crop) : base;
+  };
   const largh = job.crop ? job.crop.width : meta.width;
 
   for (const w of WIDTHS[job.set]) {

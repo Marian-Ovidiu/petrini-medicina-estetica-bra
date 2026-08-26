@@ -139,7 +139,12 @@
    secondo ritratto (`volto-tre-quarti`), e in `screen` i due volti
    non si sommavano in luce, si sovrapponevano — un orecchio e un
    occhio di troppo che comparivano al passaggio del puntatore. La
-   luce si accende su ciò che c'è, altrimenti non è luce. */
+   luce si accende su ciò che c'è, altrimenti non è luce.
+
+   L'URL è quindi legato a quello dell'`img` della scena: se cambia
+   la lastra, cambia anche questa riga. Non c'è modo di dedurla dal
+   markup senza leggere l'immagine in JS, e non ne vale il costo —
+   ma vale il promemoria. */
 
 .canone__lastra--viva {
   --lx: 50%;
@@ -151,6 +156,7 @@
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 2;
   background-image: var(--luce-img);
   background-size: cover;
   background-position: center;
@@ -174,11 +180,40 @@
 }
 
 .canone__lastra--viva:hover .canone__telaio::after {
-  opacity: 0.62;
+  opacity: 0.72;
+}
+
+/* Il rovescio dell'alone: fuori dal cerchio la lastra si spegne.
+   Serve perché la copia in `screen` da sola non basta su una lastra
+   chiara — su un fondo quasi bianco lo schermo satura e la sorgente
+   che gira non si vede più. Una luce è un dislivello: se il resto
+   non cala, non c'è luce, c'è una macchia più chiara. Con le due
+   metà insieme l'effetto regge sia su una lastra scura sia su questa. */
+.canone__lastra--viva .canone__telaio::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(
+    circle at var(--lx) var(--ly),
+    transparent 0%,
+    transparent 24%,
+    rgb(14 18 7 / 0.34) 62%,
+    rgb(14 18 7 / 0.44) 100%
+  );
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transition: opacity var(--d-mid) var(--e-reveal);
+  pointer-events: none;
+}
+
+.canone__lastra--viva:hover .canone__telaio::before {
+  opacity: 1;
 }
 
 @media (hover: none), (prefers-reduced-motion: reduce) {
-  .canone__lastra--viva .canone__telaio::after {
+  .canone__lastra--viva .canone__telaio::after,
+  .canone__lastra--viva .canone__telaio::before {
     display: none;
   }
 }
