@@ -16,8 +16,9 @@ import { pointer } from "../core/pointer.js";
  * dove l'anteprima non esiste, il tocco sceglie e basta.
  */
 const ZONE = {
-  botox: "fronte, glabella e zampe di gallina — <b>dove il muscolo muove la pelle</b>",
-  filler: "zigomi, labbra, rughe marionetta e mento — <b>dove serve sostegno</b>",
+  botox: "fronte, zampe di gallina e masseteri — <b>dove il muscolo lavora troppo</b>",
+  filler:
+    "zigomi, filtro e labbra, rughe marionetta e linea della mandibola — <b>dove serve sostegno</b>",
   prx: "il viso intero — <b>un rinnovamento di superficie, senza un bersaglio</b>",
   bio: "viso, collo e décolleté — <b>dove la pelle perde qualità</b>",
 };

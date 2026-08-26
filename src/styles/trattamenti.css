@@ -195,7 +195,13 @@
   transform-box: fill-box;
   transform-origin: center;
   opacity: 0;
-  transform: scale(0.94);
+  /* `--rot` inclina un segno sul suo asse. Serve alle zone che
+     seguono un bordo osseo invece di una struttura tonda: la
+     mandibola scende in diagonale, e un ovale a piombo lì sopra
+     legge come una guancia. Sta in una variabile e non nell'attributo
+     `transform` dell'SVG perché la proprietà CSS lo sovrascriverebbe,
+     portandosi via la comparsa in scala. */
+  transform: rotate(var(--rot, 0deg)) scale(0.94);
   transition:
     opacity var(--d-mid) var(--e-reveal),
     transform var(--d-mid) var(--e-reveal);
@@ -207,7 +213,7 @@
 .trattamenti__zone [data-attivo] ellipse,
 .trattamenti__zone [data-attivo] path {
   opacity: 1;
-  transform: scale(1);
+  transform: rotate(var(--rot, 0deg)) scale(1);
 }
 
 .trattamenti__didascalia {
@@ -236,6 +242,6 @@
   .trattamenti__zone path {
     transition: none;
     transition-delay: 0s;
-    transform: none;
+    transform: rotate(var(--rot, 0deg));
   }
 }
