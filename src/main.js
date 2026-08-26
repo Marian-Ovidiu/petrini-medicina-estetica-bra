@@ -6,6 +6,7 @@ import "./styles/topografia.css";
 import "./styles/editoriali.css";
 
 import { initScroll, getLenis, gsap, ScrollTrigger, reducedMotion } from "./core/scroll.js";
+import { initSmartScroll } from "./core/smart-scroll.js";
 import { initPointer } from "./core/pointer.js";
 import { initSoglia } from "./scenes/soglia.js";
 import { initLuce } from "./scenes/luce.js";
@@ -59,6 +60,7 @@ async function boot() {
   initTrattamenti();
   initTopografia();
   initConsulto();
+  teardown.push(initSmartScroll());
   watchGround();
   ScrollTrigger.refresh();
 }

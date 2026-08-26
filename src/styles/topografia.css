@@ -82,47 +82,13 @@
   box-shadow: 0 30px 90px -50px rgb(14 18 7 / 0.7);
 }
 
-/* Su schermo stretto lastra e scheda stanno in colonna, e insieme
-   non ci stanno: servono ~890px, un telefono ne ha 780–900. Per
-   leggere le ultime righe il volto usciva dall'alto, e per cambiare
-   regione bisognava risalire.
-   Rimpicciolire finché non tornano i conti non funziona: il numero
-   dipende dal telefono, e su 360×780 non torna comunque — si
-   finirebbe per sacrificare la fotografia a un'aritmetica.
-   La lastra resta invece appiccicata in alto e la scheda le scorre
-   sotto. Il volto è sempre lì mentre si legge, e per cambiare
-   regione basta il pollice: niente scorrimenti automatici, nessun
-   pulsante, nessuna scorciatoia da imparare — e la faccia continua
-   a essere l'interfaccia anche in verticale. */
+/* Su schermo stretto lastra e scheda stanno in colonna. La lastra
+   resta nel flusso prima del dossier: tenerla sticky faceva scorrere
+   il titolo e le prime righe dietro alla fotografia, rendendole
+   illeggibili. Foto e testo ora si susseguono senza sovrapporsi. */
 @media (max-width: 999px) {
   .topografia__campo {
-    /* L'aggancio sta in una variabile perché la banda qui sotto si
-       estende verso l'alto esattamente di altrettanto: separati,
-       prima o poi divergono e la banda torna a coprire l'istruzione
-       che le sta sopra.
-       È volutamente corto: la banda arriva a 24px dal bordo, e da lì
-       in su ci pensa la testata. Un aggancio più generoso costringeva
-       a un distacco enorme fra titolo e lastra per tenere fuori
-       l'istruzione. */
-    --aggancio: 24px;
-    position: sticky;
-    top: var(--aggancio);
-    z-index: 1;
-  }
-
-  /* La banda opaca è uno pseudo-elemento, non padding sul campo: i
-     punti sono posizionati in percentuale *dentro* il campo, e
-     imbottirlo ne allargava il sistema di coordinate — il punto della
-     fronte finiva fuori dalla fotografia, sul verde.
-     Così la scatola resta grande quanto la lastra e la banda si
-     allarga per conto suo, a tutta pagina. */
-  .topografia__campo::before {
-    content: "";
-    position: absolute;
-    inset: calc(var(--aggancio) * -1) calc(var(--gut) * -1) -14px;
-    background: var(--ground);
-    border-bottom: 1px solid var(--rule);
-    z-index: -1;
+    position: relative;
   }
 
   .topografia__finestra {

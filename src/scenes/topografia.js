@@ -175,9 +175,9 @@ export function initTopografia() {
    * l'altezza del testo più lungo. Otto reflow all'avvio, mai più.
    *
    * Solo da 1000px in su, dove lastra e scheda stanno affiancate e
-   * l'altezza della scena la detta il dossier. Sotto, la lastra è
-   * appiccicata in alto e la scheda le scorre sotto: lì prenotare
-   * l'altezza massima lascerebbe solo un buco sotto le schede corte.
+   * l'altezza della scena la detta il dossier. Sotto stanno in
+   * sequenza verticale: lì prenotare l'altezza massima lascerebbe
+   * solo un buco sotto le schede corte.
    */
   const affiancato = window.matchMedia("(min-width: 1000px)");
 
