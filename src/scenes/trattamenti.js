@@ -1,4 +1,5 @@
 import { pointer } from "../core/pointer.js";
+import { ScrollTrigger } from "../core/scroll.js";
 
 /**
  * 03 · TRATTAMENTI — quattro nomi, un volto.
@@ -40,6 +41,42 @@ export function initTrattamenti() {
   const didascalia = scene.querySelector("[data-tratt-didascalia]");
   if (!bottoni.length) return;
 
+  /**
+   * Prenota l'altezza della didascalia più lunga.
+   *
+   * È lo stesso salto di layout corretto in TOPOGRAFIA: cambiando
+   * trattamento cambia il testo sotto la lastra; nel layout affiancato
+   * cambia quindi l'altezza della riga e l'elenco si sposta sotto un
+   * puntatore fermo. Il puntatore entra nella voce vicina, il testo
+   * cambia ancora e i due stati possono rincorrersi all'infinito.
+   *
+   * Sotto i 900px testo e lastra sono in sequenza: la didascalia sta
+   * dopo i comandi e non può spostarli, quindi prenotare spazio lì
+   * lascerebbe soltanto un vuoto inutile.
+   */
+  const affiancato = window.matchMedia("(min-width: 900px)");
+
+  function prenotaAltezza() {
+    if (!didascalia) return;
+    didascalia.style.minHeight = "";
+    if (!affiancato.matches) return;
+
+    const contenuto = didascalia.innerHTML;
+    const ariaLive = didascalia.getAttribute("aria-live");
+    // Le scritture usate solo per misurare non sono aggiornamenti da
+    // annunciare: la regione live torna attiva dopo il ripristino.
+    didascalia.setAttribute("aria-live", "off");
+    let max = 0;
+    for (const testo of Object.values(ZONE)) {
+      didascalia.innerHTML = testo;
+      max = Math.max(max, didascalia.offsetHeight);
+    }
+    didascalia.style.minHeight = `${Math.ceil(max)}px`;
+    didascalia.innerHTML = contenuto;
+    if (ariaLive === null) didascalia.removeAttribute("aria-live");
+    else didascalia.setAttribute("aria-live", ariaLive);
+  }
+
   // La scelta ferma. L'anteprima del puntatore non la tocca: se la
   // sovrascrivesse, uscire dall'elenco lascerebbe la lastra su una
   // voce che nessuno ha scelto.
@@ -78,4 +115,21 @@ export function initTrattamenti() {
   });
 
   scegli(scelto);
+
+  // I font decidono gli a capo e quindi l'altezza da prenotare. Dopo
+  // la misura vanno ricalcolati anche i trigger delle scene successive,
+  // perché la nuova quota cambia le loro coordinate nel documento.
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => {
+    prenotaAltezza();
+    ScrollTrigger.refresh();
+  });
+
+  let attesa;
+  window.addEventListener("resize", () => {
+    clearTimeout(attesa);
+    attesa = setTimeout(() => {
+      prenotaAltezza();
+      ScrollTrigger.refresh();
+    }, 180);
+  });
 }
