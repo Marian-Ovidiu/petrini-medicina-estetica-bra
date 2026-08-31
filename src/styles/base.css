@@ -46,14 +46,15 @@ svg {
 /* Ogni fotografia del sito passa dal duotone del brand. L'elenco sta
    in un posto solo apposta: se una foto nuova non compare qui, si
    nota subito perché stona: resta fredda in mezzo a un mondo verde.
-   L'hero non è nell'elenco — la stessa rimappatura la fa il suo
-   shader, dove costa un prodotto scalare invece di un filtro. */
+   L'hero in WebGL non è nell'elenco — la stessa rimappatura la fa il
+   suo shader, dove costa un prodotto scalare invece di un filtro. La
+   sua composizione statica sì: quella è una fotografia come le altre,
+   e il filtro glielo mette `scenes.css` sullo strato che la porta. */
 .canone__foto,
 .trattamenti__foto,
 .topografia__profilo,
 .topografia__macro,
-.medico__ritratto img,
-.luce--statica .luce__pin {
+.medico__ritratto img {
   filter: url("#duotone-brand");
 }
 
@@ -62,7 +63,8 @@ svg {
   .trattamenti__foto,
   .topografia__profilo,
   .topografia__macro,
-  .medico__ritratto img {
+  .medico__ritratto img,
+  .luce--statica .luce__quadro::before {
     filter: grayscale(1) contrast(1.04);
   }
 }

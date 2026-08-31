@@ -389,10 +389,82 @@ body.is-soglia {
   display: none;
 }
 
-.luce--statica .luce__quadro {
+/* La fotografia sta su uno strato suo, non sul fondo di `.luce__quadro`.
+   Il duotone del brand è un `filter`, e un filter si applica all'intero
+   sottoalbero: messo sul quadro avrebbe tinto anche il claim, la
+   costolina e le coordinate, che del quadro sono figli. Per anni non si
+   è visto perché la regola in `base.css` prendeva di mira
+   `.luce--statica .luce__pin`, un elemento che nel markup non esiste:
+   il filtro non arrivava a niente e la composizione statica restava
+   fredda in mezzo a un mondo verde — sul desktop come sul telefono.
+   Lo strato è `::before`, cioè il *primo* figlio del quadro: si dipinge
+   sotto il canvas e sotto il testo per ordine naturale, senza doversi
+   inventare uno z-index. Il velo scuro sta dentro lo strato insieme
+   alla fotografia, così il duotone rimappa la lastra intera come fa lo
+   shader, invece di tingere la foto e lasciare il velo per conto suo. */
+.luce--statica .luce__quadro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background:
     linear-gradient(to top, rgb(14 18 7 / 0.9), rgb(14 18 7 / 0.15) 55%),
     url("/media/img/volto-1920.avif") center center / cover no-repeat var(--pece);
+  filter: url("#duotone-brand");
+}
+
+/* Su verticale il `cover` centrato ritaglia il centro dell'immagine, e
+   il centro di questa immagine è fondo vuoto: il volto sta nel terzo
+   destro. Il risultato era un rettangolo nero — non una fotografia
+   inquadrata male, proprio nessuna fotografia.
+   È il difetto che pesa di più, perché questa non è una scorciatoia per
+   browser vecchi: con `prefers-reduced-motion` questa *è* la scena, e
+   non c'è nessun movimento a distrarre da un ritratto che non si vede.
+   La soglia è la stessa dello shader (0.86) apposta, così la versione
+   statica e quella in WebGL cambiano inquadratura insieme invece di
+   scollarsi a una certa larghezza; il 76% porta la finestra sullo
+   stesso asse naso-bocca su cui si posa la camera. */
+@media (max-aspect-ratio: 86 / 100) {
+  /* Il 70% non e' scelto a occhio: e' la posizione che da' al `cover`
+     lo stesso centro della camera in WebGL (0.6496 dell'immagine). La
+     formula e' `p = (centro - largh/2) / (1 - largh)`, dove `largh =
+     screenA / imgA` e' quanto dell'immagine il cover lascia vedere.
+     Spostando la camera va rifatto questo numero, o la composizione
+     statica inquadra un'altra cosa. */
+  .luce--statica .luce__quadro::before {
+    background-position: center, 70% center;
+  }
+
+  /* Il velo al piede — quello che la versione statica ha sempre avuto e
+     la versione in WebGL no. Su orizzontale non serviva: il claim sta a
+     sinistra e a sinistra c'è solo fondo. Portando il volto dentro il
+     fotogramma verticale la mandibola arriva sotto la seconda riga, e
+     lì il testo in latte cadeva a 1.2:1 su 14% delle lettere a 360px.
+     L'ombra del testo non basta a rispondere: un alone morbido è un
+     accorgimento ottico, non un rapporto di contrasto.
+     È un gradiente e non un rettangolo — la stessa regola che vale per
+     il velo della testata — e si spegne prima delle labbra, così toglie
+     luce al collo senza appiattire il volto. */
+  .luce__fronte::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      rgb(14 18 7 / 0.96) 0%,
+      rgb(14 18 7 / 0.9) 12%,
+      rgb(14 18 7 / 0.66) 20%,
+      rgb(14 18 7 / 0.24) 28%,
+      rgb(14 18 7 / 0) 36%
+    );
+  }
+
+  /* Il velo è posizionato, il blocco di testo no: senza questa riga i
+     discendenti posizionati si disegnano dopo il contenuto in flusso e
+     il velo finisce *sopra* il claim invece che sotto. */
+  .luce__testo {
+    position: relative;
+  }
 }
 
 @media (max-width: 720px) {
