@@ -16,3 +16,8 @@ public/media/raw/*
 # cambi di ramo.
 !public/media/raw/firma-petrini.jpeg
 !public/media/raw/medico-petrini.jpeg
+
+# Configurazione dell'IDE: è del computer di chi lavora, non del
+# progetto. Nessun file qui dentro serve a far girare o a costruire
+# il sito.
+.idea/
