@@ -15,10 +15,18 @@ import { pointer } from "../core/pointer.js";
  * togliere a nessuno la possibilità di fermare una scelta — su touch,
  * dove l'anteprima non esiste, il tocco sceglie e basta.
  */
+// La didascalia non è un sottotitolo: da quando le zone sono pozze
+// di luce e non più segni colorati, è l'unico posto in cui le
+// strutture hanno un nome. Chi non vede la lastra ha solo questa, e
+// chi la vede ci legge quello che la luce non sa dire — che quella
+// pozza sul ramo della mandibola è il bruxismo e non una guancia.
+// Va tenuta allineata alle forme dell'SVG: «profilo mento» stava qui
+// da quando il mento era una delle zone, ed è rimasta a nominare una
+// forma che il cliente aveva già fatto togliere.
 const ZONE = {
   botox: "fronte, zampe di gallina e bruxismo — <b>dove il muscolo lavora troppo</b>",
   filler:
-    "zigomi, rughe marionetta, profilo mento, codice a barre e labbra — <b>dove serve sostegno</b>",
+    "zigomi, codice a barre, labbra, rughe marionetta e linea della mandibola — <b>dove serve sostegno</b>",
   prx: "il viso intero — <b>un rinnovamento di superficie, senza un bersaglio</b>",
   bio: "viso, collo e décolleté — <b>dove la pelle perde qualità</b>",
 };

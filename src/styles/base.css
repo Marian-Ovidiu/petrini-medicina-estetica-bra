@@ -49,7 +49,16 @@ svg {
    L'hero in WebGL non è nell'elenco — la stessa rimappatura la fa il
    suo shader, dove costa un prodotto scalare invece di un filtro. La
    sua composizione statica sì: quella è una fotografia come le altre,
-   e il filtro glielo mette `scenes.css` sullo strato che la porta. */
+   e il filtro glielo mette `scenes.css` sullo strato che la porta.
+
+   Una sola eccezione, e resta in elenco apposta: la lastra di
+   TRATTAMENTI si riprende il filtro in `trattamenti.css` con
+   `#duotone-aperto`, che è questo stesso duotone con una gamma in
+   più. Là la scena si legge per differenza di luce e l'apertura deve
+   stare *dentro* la rimappatura, non dopo. Resta qui perché la riga
+   che conta è la ripiegatura di `@supports` qui sotto, e perché il
+   giorno che qualcuno cambia il duotone del sito deve vedere che c'è
+   una seconda copia da cambiare. */
 .canone__foto,
 .trattamenti__foto,
 .topografia__profilo,

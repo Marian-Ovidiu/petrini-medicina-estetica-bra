@@ -44,7 +44,17 @@
   /* — ruoli, riassegnati per scena via data-ground — */
   --ground: var(--pece);
   --figure: var(--latte);
-  --figure-dim: color-mix(in oklab, var(--latte) 62%, var(--pece));
+  /* Scritto in sRGB, non come `color-mix(in oklab, …)`. Il colore è
+     lo stesso — è quel mix, risolto — ma il valore *calcolato* di un
+     color-mix in oklab è una stringa `oklab(…)`, e un valore così è
+     verificabile solo da chi sa leggerlo. I motori di audit non lo
+     sanno: chi lo salta non controlla il testo, chi ci prova lo legge
+     storto. Il risultato era che ogni annotazione del sito — cioè
+     tutto il testo sotto i 18px — passava per «0 violazioni» senza
+     essere mai stata misurata. Il mix resta scritto qui accanto,
+     perché è da lì che il colore viene e da lì va rifatto se le
+     primitive cambiano. */
+  --figure-dim: rgb(149 155 142); /* = oklab, latte 62% + pece — 6,64:1 */
   --rule: color-mix(in oklab, var(--latte) 16%, transparent);
   --accent: var(--marker);
   --accent-testo: var(--marker);
@@ -88,7 +98,7 @@
 [data-ground="pece"] {
   --ground: var(--pece);
   --figure: var(--latte);
-  --figure-dim: color-mix(in oklab, var(--latte) 62%, var(--pece));
+  --figure-dim: rgb(149 155 142); /* latte 62% + pece — 6,64:1 */
   --rule: color-mix(in oklab, var(--latte) 18%, transparent);
   --accent: var(--marker);
   /* Il magenta pieno sul verde-nero arriva a 5,5:1 — passa così com'è.
@@ -99,7 +109,7 @@
 [data-ground="latte"] {
   --ground: var(--latte);
   --figure: var(--pece);
-  --figure-dim: color-mix(in oklab, var(--pece) 66%, var(--latte));
+  --figure-dim: rgb(83 88 75); /* pece 66% + latte — 7,18:1 */
   --rule: color-mix(in oklab, var(--pece) 18%, transparent);
   --accent: var(--marker);
   --accent-testo: var(--marker-cupo);
@@ -112,7 +122,7 @@
 [data-ground="lime"] {
   --ground: var(--lime);
   --figure: var(--pece);
-  --figure-dim: color-mix(in oklab, var(--pece) 74%, var(--lime));
+  --figure-dim: rgb(45 64 21); /* pece 74% + lime — 7,16:1 */
   --rule: color-mix(in oklab, var(--pece) 26%, transparent);
   --accent: var(--pece);
   --accent-testo: var(--pece);

@@ -7,11 +7,12 @@
    perché i nomi sono quello che il paziente ha già sentito dire, e
    quello che confonde. La lastra risponde.
 
-   Le zone non si dissolvono tutte insieme: escono sfalsate, con un
-   ritardo che sta nel `--i` di ciascuna. Quattro segni che compaiono
-   in fila si leggono come un elenco che si posa sul volto; gli
-   stessi quattro tutti in una volta si leggono come una schermata
-   che cambia.
+   Le zone non sono segni sopra la fotografia: sono pozze di luce.
+   La lastra sale di luce per intera e un velo la riporta in ombra
+   dove il trattamento non arriva — l'apertura della scena 01, ma
+   locale invece che globale. La meccanica sta più in basso, sotto
+   «la lastra»; il perché sta nel commento dell'SVG in index.html,
+   accanto alle coordinate.
    ============================================================ */
 
 .trattamenti {
@@ -156,12 +157,44 @@
   }
 }
 
+/* La lastra si accende per intera, e il velo la riporta in ombra
+   dove il trattamento non arriva. Sono i due tempi di una stessa
+   luce: senza il primo il velo scaverebbe soltanto, e un ritratto
+   femminile a occhi chiusi scavato nel nero non è illuminazione da
+   studio, è una foto forense. Alzando prima la lastra, la zona
+   trattata *guadagna* luce e il resto scende sotto di lei.
+
+   L'apertura sta dentro il duotone, non dopo: `#duotone-aperto` è
+   lo stesso filtro del resto del sito con una gamma in mezzo. Un
+   secondo `filter` in CSS non si somma al primo, lo sostituisce —
+   la prima versione di questa scena metteva `brightness()` qui e
+   si portava via il duotone senza dirlo, lasciando la lastra fredda
+   in mezzo a una pagina verde. Da lì la regola: se la si vuole più
+   chiara, la si schiarisce *dentro* la rimappatura del marchio, non
+   dopo.
+
+   L'apertura è agganciata a `[data-attivo]` insieme al velo, e non
+   messa sulla fotografia una volta per tutte, perché sono la stessa
+   cosa: senza velo una lastra schiarita è solo una lastra fuori
+   registro rispetto alle altre fotografie del sito. Se lo script non
+   parte, o `:has()` non c'è, qui resta il duotone di `base.css` e la
+   lastra è una fotografia come le altre. */
 .trattamenti__foto {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.trattamenti__telaio:has([data-attivo]) .trattamenti__foto {
+  filter: url("#duotone-aperto");
+}
+
+@supports not (filter: url("#duotone-aperto")) {
+  .trattamenti__telaio:has([data-attivo]) .trattamenti__foto {
+    filter: grayscale(1) contrast(1.04) brightness(1.12);
+  }
 }
 
 .trattamenti__zone {
@@ -172,48 +205,46 @@
   pointer-events: none;
 }
 
-/* Nessun gruppo è visibile finché la scena non ne accende uno. Lo
-   stato di partenza lo scrive il CSS e non il JS: se lo script non
-   parte, la lastra resta una fotografia pulita invece di mostrare
-   tutte e quattro le mappe sovrapposte. */
-.trattamenti__zone g {
+/* Il velo è l'ombra, non un colore steso sopra: è --pece, cioè il
+   fondo stesso della scena, quindi la parte non trattata della
+   lastra non si tinge — sprofonda nel nero da cui la scena è
+   fatta.
+
+   Sta a zero finché una zona non è accesa. Lo stato di partenza lo
+   scrive il CSS e non il JS: se lo script non parte — o se il
+   browser non conosce `:has()` — la lastra resta una fotografia
+   pulita, che è lo stesso comportamento che aveva prima. */
+.trattamenti__velo {
+  fill: var(--pece);
   opacity: 0;
-  visibility: hidden;
+  transition: opacity var(--d-mid) var(--e-reveal);
 }
 
-.trattamenti__zone [data-attivo] {
-  visibility: visible;
-  opacity: 1;
+.trattamenti__zone:has([data-attivo]) .trattamenti__velo {
+  opacity: 0.46;
 }
 
-.trattamenti__zone ellipse,
-.trattamenti__zone path {
-  fill: color-mix(in srgb, var(--marker) 14%, transparent);
-  stroke: var(--marker);
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-  transform-box: fill-box;
-  transform-origin: center;
+/* I quattro gruppi vivono dentro la maschera e si scambiano in
+   dissolvenza. Non c'è più la comparsa sfalsata, e non è una
+   semplificazione: settanta millisecondi fra un segno e l'altro
+   funzionavano finché i segni erano inchiostro che si posa — cinque
+   tratti in fila si leggono come un elenco che scende sul volto.
+   Cinque pozze di luce che si accendono una dopo l'altra si leggono
+   come un'insegna, e su una fotografia di una persona è un registro
+   peggiore di quello che stavamo togliendo. La luce arriva tutta
+   insieme, e ci mette il tempo di un'apertura di diaframma.
+
+   Il verso dall'alto in basso che i `--i` portavano — lo stesso
+   della costruzione di CANONE — non si perde: sta ancora
+   nell'ordine dell'elenco, che è l'interfaccia di questa scena. */
+.trattamenti__zone [data-zona] {
+  fill: #000;
   opacity: 0;
-  /* `--rot` inclina un segno sul suo asse. Serve alle zone che
-     seguono un bordo osseo invece di una struttura tonda: la
-     mandibola scende in diagonale, e un ovale a piombo lì sopra
-     legge come una guancia. Sta in una variabile e non nell'attributo
-     `transform` dell'SVG perché la proprietà CSS lo sovrascriverebbe,
-     portandosi via la comparsa in scala. */
-  transform: rotate(var(--rot, 0deg)) scale(0.94);
-  transition:
-    opacity var(--d-mid) var(--e-reveal),
-    transform var(--d-mid) var(--e-reveal);
-  /* Il ritardo è la posizione della zona nel gruppo: i segni si
-     posano uno dopo l'altro, non tutti insieme. */
-  transition-delay: calc(var(--i, 0) * 70ms);
+  transition: opacity var(--d-mid) var(--e-reveal);
 }
 
-.trattamenti__zone [data-attivo] ellipse,
-.trattamenti__zone [data-attivo] path {
+.trattamenti__zone [data-zona][data-attivo] {
   opacity: 1;
-  transform: rotate(var(--rot, 0deg)) scale(1);
 }
 
 .trattamenti__didascalia {
@@ -234,14 +265,13 @@
   font-style: italic;
 }
 
-/* Con `prefers-reduced-motion` le zone ci sono e basta: nessuna
-   comparsa sfalsata, nessuna scala. Lo stato resta leggibile — è il
-   movimento a sparire, non l'informazione. */
+/* Con `prefers-reduced-motion` la luce c'è e basta: nessuna
+   dissolvenza, né sul velo né fra un trattamento e l'altro. Lo
+   stato resta leggibile — è il movimento a sparire, non
+   l'informazione. */
 @media (prefers-reduced-motion: reduce) {
-  .trattamenti__zone ellipse,
-  .trattamenti__zone path {
+  .trattamenti__velo,
+  .trattamenti__zone [data-zona] {
     transition: none;
-    transition-delay: 0s;
-    transform: rotate(var(--rot, 0deg));
   }
 }

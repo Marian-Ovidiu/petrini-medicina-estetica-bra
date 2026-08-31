@@ -66,6 +66,47 @@
           <feFuncB type="table" tableValues="0.027 0.949" />
         </feComponentTransfer>
       </filter>
+
+      <!-- Lo stesso duotone, con l'apertura aperta di uno scatto. Lo
+           usa la lastra di TRATTAMENTI, dove la scena si legge per
+           differenza di luce: la fotografia sale, e un velo la
+           riporta in ombra dove il trattamento non arriva.
+
+           L'apertura è una gamma, non un `brightness()`. La
+           differenza conta: `brightness` moltiplica e taglia, e la
+           fronte di questa lastra — che è già la zona più chiara
+           della fotografia — diventa una macchia bianca; una gamma
+           con esponente sotto 1 solleva i mezzitoni e lascia fermo
+           l'estremo, quindi non c'è nessun valore che possa bruciare.
+           È anche la cosa giusta da fare per un'altra ragione: nella
+           scena 01 l'apertura è il diaframma della scena, e un
+           diaframma non moltiplica la luce, sposta la soglia sotto la
+           quale non passa più niente.
+
+           Sta prima della tabella e non dopo apposta. Dopo,
+           schiarirebbe il pece delle ombre e la fotografia si
+           staccherebbe dal fondo della scena; prima, agisce sulla
+           luminanza e lascia che siano i due estremi del marchio a
+           dire dove finisce il nero. -->
+      <filter id="duotone-aperto" color-interpolation-filters="sRGB">
+        <feColorMatrix
+          type="matrix"
+          values="0.2126 0.7152 0.0722 0 0
+                  0.2126 0.7152 0.0722 0 0
+                  0.2126 0.7152 0.0722 0 0
+                  0      0      0      1 0"
+        />
+        <feComponentTransfer>
+          <feFuncR type="gamma" exponent="0.74" />
+          <feFuncG type="gamma" exponent="0.74" />
+          <feFuncB type="gamma" exponent="0.74" />
+        </feComponentTransfer>
+        <feComponentTransfer>
+          <feFuncR type="table" tableValues="0.055 0.973" />
+          <feFuncG type="table" tableValues="0.071 1.000" />
+          <feFuncB type="table" tableValues="0.027 0.949" />
+        </feComponentTransfer>
+      </filter>
     </svg>
 
     <!-- ══════════════════════════════════════════════════════════
@@ -456,81 +497,248 @@
                 decoding="async"
               />
 
-              <!-- Le zone. Rilevate su questa lastra con una griglia
-                   al 5% e lette struttura per struttura, non stimate.
+              <!-- Le zone, rese come pozze di luce.
 
-                   Botox e filler segnano punti: sono trattamenti che
-                   vanno in un posto preciso, e disegnarli come aree
-                   direbbe una cosa falsa. PRX e biorivitalizzazione
-                   segnano superfici, perché si fanno sul viso intero;
-                   e la biorivitalizzazione scende su collo e
-                   décolleté, che è la differenza vera fra le due e
-                   l'unico modo di farle leggere diverse. -->
+                   Prima erano segni: ogni zona un'ellisse con
+                   riempimento e contorno di magenta, disegnata *sopra*
+                   la fotografia. Tre cose non funzionavano, e sono la
+                   ragione di questo blocco.
+
+                   La geometria mentiva. Un ovale sul viso, un trapezio
+                   sul collo, un ventaglio sul décolleté: primitive che
+                   non seguono nessuna anatomia, e che lette a schermo
+                   sembravano ritagli di carta appoggiati sopra.
+                   Riempimento più contorno insieme dicono due cose e
+                   fanno leggere il segno come un adesivo. E soprattutto
+                   contraddicevano il titolo che sta sopra — «un solo
+                   obiettivo: naturalezza» — perché una donna vera
+                   cerchiata di rosa è lo schema del «prima», cioè il
+                   registro «ecco cosa c'è da correggere in te».
+
+                   Qui la zona non si disegna: si illumina. La lastra
+                   intera sale di luce, e un velo la riporta in ombra
+                   ovunque tranne dove il trattamento agisce. È lo
+                   stesso dispositivo della scena 01, dove l'apertura è
+                   il diaframma della scena — «a zero passa solo il
+                   bordo illuminato del profilo, mentre sale il volto
+                   emerge dall'ombra». Qui l'apertura è locale invece
+                   che globale.
+
+                   Risolve anche il difetto che il codice di prima
+                   ammetteva da sé — «un peeling non ha un bersaglio».
+                   Se PRX e biorivitalizzazione agiscono ovunque, si
+                   accende tutto il viso, e quella è l'informazione
+                   vera, non un ripiego: le due restano distinguibili
+                   perché la biorivitalizzazione scende su collo e
+                   décolleté.
+
+                   Le coordinate sono le stesse di prima — rilevate su
+                   questa lastra con una griglia al 5%, struttura per
+                   struttura. Cambia come vengono rese, non dove stanno.
+                   Le due eccezioni sono annotate dove capitano. -->
               <svg
                 class="trattamenti__zone"
                 viewBox="0 0 1000 1490"
                 preserveAspectRatio="xMidYMid meet"
                 aria-hidden="true"
               >
-                <g data-zona="botox">
-                  <!-- fronte, zampe di gallina, masseteri.
-                       La glabella — le due rughe verticali fra le
-                       sopracciglia — c'era ed è stata tolta dal
-                       cliente. Al suo posto i masseteri, che sono il
-                       trattamento del bruxismo: stanno sotto
-                       l'orecchio, sopra l'angolo della mandibola, e
-                       sono gli unici due segni di questa scena che
-                       non riguardano una ruga. Sono inclinati di 19°
-                       perché il ramo della mandibola lo è: scende
-                       dall'orecchio in avanti, e un ovale a piombo
-                       finisce sulla guancia invece che sull'osso.
-                       Stanno dentro il contorno del volto e sono
-                       misurati sulla lastra, non specchiati a occhio:
-                       il volto non è simmetrico e l'asse cade a 498,
-                       non a 500. -->
-                  <ellipse style="--i: 0" cx="500" cy="328" rx="200" ry="88" />
-                  <ellipse style="--i: 1" cx="245" cy="575" rx="54" ry="46" />
-                  <ellipse style="--i: 2" cx="752" cy="575" rx="54" ry="46" />
-                  <ellipse style="--i: 3; --rot: -19deg" cx="261" cy="842" rx="27.5" ry="36" />
-                  <ellipse style="--i: 4; --rot: 19deg" cx="736" cy="842" rx="27.5" ry="36" />
-                </g>
+                <defs>
+                  <!-- Tre sfumature, non una. Il bordo di una pozza è
+                       largo quanto è larga la sorgente che la fa: una
+                       finestra proietta una penombra di un palmo, una
+                       lampadina di un millimetro. Qui vale lo stesso —
+                       il viso intero sfuma su quarantotto unità, un
+                       punto sul ramo della mandibola su diciassette.
 
-                <g data-zona="filler">
-                  <!-- zigomi, filtro, labbra, rughe marionetta,
-                       linea della mandibola.
+                       Non è un vezzo, è l'unico modo di far convivere
+                       le due metà di questa scena. Con una sfumatura
+                       sola: stretta abbastanza per i masseteri — 55
+                       unità di larghezza — e gli zigomi tornano due
+                       ellissi riconoscibili, cioè il segno da cui
+                       stiamo scappando; larga abbastanza per gli
+                       zigomi, e tutto il gruppo intorno alla bocca
+                       sparisce. Provate tutte e due guardando.
 
-                       Il mento c'era ed è stato tolto dal cliente.
-                       Al suo posto due zone che il disegno di prima
-                       non aveva: il filtro, la fascia fra base del
-                       naso e labbro superiore, e la mandibola sotto
-                       lo zigomo — dove il volume che scende va
-                       rimesso sul bordo osseo invece che sulla
-                       guancia. L'ordine dei `--i` è quello in cui i
-                       segni si posano, e va dall'alto al basso: è la
-                       stessa direzione della costruzione di CANONE,
-                       e non è un caso che le due scene si leggano
-                       nello stesso verso. -->
-                  <ellipse style="--i: 0" cx="305" cy="655" rx="74" ry="54" />
-                  <ellipse style="--i: 1" cx="693" cy="655" rx="74" ry="54" />
-                  <ellipse style="--i: 2" cx="500" cy="790" rx="68" ry="28" />
-                  <ellipse style="--i: 3" cx="500" cy="860" rx="88" ry="40" />
-                  <ellipse style="--i: 4" cx="398" cy="905" rx="26" ry="40" />
-                  <ellipse style="--i: 5" cx="599" cy="905" rx="26" ry="40" />
-                  <ellipse style="--i: 6; --rot: 38deg" cx="358" cy="950" rx="30" ry="20" />
-                  <ellipse style="--i: 7; --rot: -38deg" cx="639" cy="950" rx="30" ry="20" />
-                </g>
+                       La regione di ogni filtro è larga fra il 150% e
+                       il 180% del riquadro della forma — più larga
+                       quanto più la sfumatura è grande rispetto alla
+                       forma — perché la coda della gaussiana esce dal
+                       riquadro: al 120% di default il bordo della pozza
+                       verrebbe tagliato netto, che è di nuovo un
+                       segno. -->
+                  <filter
+                    id="tratt-sfuma-stretta"
+                    x="-40%" y="-40%" width="180%" height="180%"
+                    color-interpolation-filters="sRGB"
+                  >
+                    <feGaussianBlur stdDeviation="17" />
+                  </filter>
+                  <filter
+                    id="tratt-sfuma-media"
+                    x="-30%" y="-30%" width="160%" height="160%"
+                    color-interpolation-filters="sRGB"
+                  >
+                    <feGaussianBlur stdDeviation="24" />
+                  </filter>
+                  <filter
+                    id="tratt-sfuma-campo"
+                    x="-25%" y="-25%" width="150%" height="150%"
+                    color-interpolation-filters="sRGB"
+                  >
+                    <feGaussianBlur stdDeviation="48" />
+                  </filter>
 
-                <g data-zona="prx">
-                  <!-- il viso intero: un peeling non ha un bersaglio -->
-                  <ellipse style="--i: 0" cx="500" cy="580" rx="265" ry="445" />
-                </g>
+                  <!-- La maschera del velo. Bianco = velo pieno, nero
+                       = velo aperto: le zone sono buchi nell'ombra,
+                       non forme sopra la fotografia. I quattro gruppi
+                       stanno tutti qui dentro e si scambiano in
+                       dissolvenza; `data-attivo` lo mette la scena,
+                       che continua a trovarli con `[data-zona]`. -->
+                  <mask
+                    id="tratt-pozze"
+                    maskUnits="userSpaceOnUse"
+                    x="-120" y="-120" width="1240" height="1730"
+                  >
+                    <rect
+                      x="-120" y="-120" width="1240" height="1730"
+                      fill="#fff"
+                    />
 
-                <g data-zona="bio">
-                  <!-- viso, collo, décolleté -->
-                  <ellipse style="--i: 0" cx="500" cy="580" rx="265" ry="445" />
-                  <path style="--i: 1" d="M404 1030 C 396 1110 384 1195 374 1268 L626 1268 C 616 1195 604 1110 596 1030 Z" />
-                  <path style="--i: 2" d="M140 1410 C 244 1306 322 1274 374 1270 L626 1270 C 678 1274 756 1306 860 1410 Z" />
-                </g>
+                    <g data-zona="botox">
+                      <!-- fronte, zampe di gallina, masseteri.
+                           La glabella — le due rughe verticali fra le
+                           sopracciglia — c'era ed è stata tolta dal
+                           cliente. Al suo posto i masseteri, che sono
+                           il trattamento del bruxismo: stanno sotto
+                           l'orecchio, sopra l'angolo della mandibola,
+                           e sono gli unici due segni di questa scena
+                           che non riguardano una ruga. Sono inclinati
+                           di 19° perché il ramo della mandibola lo è:
+                           scende dall'orecchio in avanti, e un ovale a
+                           piombo finisce sulla guancia invece che
+                           sull'osso. Stanno dentro il contorno del
+                           volto e sono misurati sulla lastra, non
+                           specchiati a occhio: il volto non è
+                           simmetrico e l'asse cade a 498, non a 500. -->
+                      <ellipse cx="500" cy="328" rx="200" ry="88"
+                               filter="url(#tratt-sfuma-media)" />
+                      <ellipse cx="245" cy="575" rx="54" ry="46"
+                               filter="url(#tratt-sfuma-stretta)" />
+                      <ellipse cx="752" cy="575" rx="54" ry="46"
+                               filter="url(#tratt-sfuma-stretta)" />
+                      <ellipse
+                        cx="261" cy="842" rx="27.5" ry="36"
+                        transform="rotate(-19 261 842)"
+                        filter="url(#tratt-sfuma-stretta)"
+                      />
+                      <ellipse
+                        cx="736" cy="842" rx="27.5" ry="36"
+                        transform="rotate(19 736 842)"
+                        filter="url(#tratt-sfuma-stretta)"
+                      />
+                    </g>
+
+                    <g data-zona="filler">
+                      <!-- zigomi, filtro, labbra, rughe marionetta,
+                           linea della mandibola.
+
+                           Il mento c'era ed è stato tolto dal cliente.
+                           Al suo posto due zone che il disegno di
+                           prima non aveva: il filtro, la fascia fra
+                           base del naso e labbro superiore, e la
+                           mandibola sotto lo zigomo — dove il volume
+                           che scende va rimesso sul bordo osseo invece
+                           che sulla guancia. -->
+                      <ellipse cx="305" cy="655" rx="74" ry="54"
+                               filter="url(#tratt-sfuma-media)" />
+                      <ellipse cx="693" cy="655" rx="74" ry="54"
+                               filter="url(#tratt-sfuma-media)" />
+                      <ellipse cx="500" cy="790" rx="68" ry="28"
+                               filter="url(#tratt-sfuma-stretta)" />
+                      <ellipse cx="500" cy="860" rx="88" ry="40"
+                               filter="url(#tratt-sfuma-media)" />
+                      <ellipse cx="398" cy="905" rx="26" ry="40"
+                               filter="url(#tratt-sfuma-stretta)" />
+                      <ellipse cx="599" cy="905" rx="26" ry="40"
+                               filter="url(#tratt-sfuma-stretta)" />
+                      <ellipse
+                        cx="358" cy="950" rx="30" ry="20"
+                        transform="rotate(38 358 950)"
+                        filter="url(#tratt-sfuma-stretta)"
+                      />
+                      <ellipse
+                        cx="639" cy="950" rx="30" ry="20"
+                        transform="rotate(-38 639 950)"
+                        filter="url(#tratt-sfuma-stretta)"
+                      />
+                    </g>
+
+                    <g data-zona="prx">
+                      <!-- Il viso intero: un peeling non ha un
+                           bersaglio, e adesso questa non è più una
+                           mancanza — è tutta la lastra che si accende.
+
+                           PRIMA ERA cx 500, cy 580, rx 265, ry 445:
+                           l'ovale saliva a y 135, cioè quaranta unità
+                           dentro l'attaccatura dei capelli, e il suo
+                           punto più largo cadeva all'altezza degli
+                           occhi. Il mento — l'unica quota che il
+                           contorno del volto detta davvero — resta a
+                           1025. Sopra, il centro scende a 615 e il
+                           raggio a 410: la pozza parte appena sotto
+                           l'attaccatura e si allarga sugli zigomi,
+                           dove il volto è largo per davvero. Con la
+                           sfumatura del campo la luce arriva comunque
+                           a lambire i capelli, che è quello che fa una
+                           luce vera. -->
+                      <ellipse cx="500" cy="615" rx="265" ry="410"
+                               filter="url(#tratt-sfuma-campo)" />
+                    </g>
+
+                    <g data-zona="bio">
+                      <!-- Viso, collo e décolleté: la stessa pozza del
+                           viso, più una che scende.
+
+                           PRIMA ERANO DUE FORME separate — un trapezio
+                           sul collo e un ventaglio sul décolleté — che
+                           si toccavano a y 1268 lasciando una
+                           giuntura, e il ventaglio si chiudeva su una
+                           orizzontale a y 1410, ottanta unità sopra il
+                           bordo della lastra: una luce che finisce con
+                           una riga dritta in mezzo al petto.
+                           Qui sono una forma sola, sugli stessi punti
+                           misurati — i fianchi del collo a 374/626 in
+                           basso, il trapezio a 140/860 — e invece di
+                           chiudersi esce dal fotogramma. Una pozza di
+                           luce che esce dal bordo non dichiara nessun
+                           confine; una che si ferma prima sì, e sarebbe
+                           di nuovo un segno. -->
+                      <ellipse cx="500" cy="615" rx="265" ry="410"
+                               filter="url(#tratt-sfuma-campo)" />
+                      <path
+                        filter="url(#tratt-sfuma-campo)"
+                        d="M404 1030
+                           C 396 1110 384 1195 374 1266
+                           C 330 1276 250 1310 150 1412
+                           C 118 1445 104 1480 96 1560
+                           L 904 1560
+                           C 896 1480 882 1445 850 1412
+                           C 750 1310 670 1276 626 1266
+                           C 616 1195 604 1110 596 1030 Z"
+                      />
+                    </g>
+                  </mask>
+                </defs>
+
+                <!-- Il velo. Copre la lastra e si apre dove la zona è
+                     accesa. Il riquadro sborda di 120 unità per lato
+                     così il bordo del velo non si vede mai: quello che
+                     si deve vedere è dove si apre, non dove finisce. -->
+                <rect
+                  class="trattamenti__velo"
+                  x="-120" y="-120" width="1240" height="1730"
+                  mask="url(#tratt-pozze)"
+                />
               </svg>
             </div>
 
