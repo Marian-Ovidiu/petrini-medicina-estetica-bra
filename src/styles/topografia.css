@@ -13,20 +13,118 @@
      testo va a capo, e un contenuto più alto dello schermo centrato
      esce dall'alto, finendo sotto la testata. La campitura è già una
      dichiarazione per la sua larghezza — l'altezza la detta il
-     contenuto, con margini generosi. */
+     contenuto, con margini generosi.
+     Da 1000px in su «il contenuto» ha un nome: è la lastra, ed è
+     `--lastra-h` a dirgli quanto può essere alta. Il vincolo resta
+     lo stesso — la scena non si centra, quindi non può scivolare
+     sotto la testata — ma ora è una quota dichiarata invece che una
+     somma che viene fuori da sola. */
   padding: clamp(130px, 19vh, 220px) var(--gut) clamp(100px, 15vh, 190px);
   display: grid;
   gap: clamp(22px, 4vh, 54px);
 }
 
+/* ── desktop ───────────────────────────────────────────────────
+   Da 1000px in su la misura della scena è la lastra, non l'aria:
+   `--lastra-h` è l'unica quota dichiarata, e da lì scendono la
+   larghezza della fotografia (per rapporto), l'altezza dei
+   bersagli dei punti e la posa dell'ombra. */
 @media (min-width: 1000px) {
   .topografia {
-    /* Il dossier ha bisogno di larghezza vera: comprimerlo lo fa
-       andare a capo ogni tre parole e la scheda clinica diventa
-       una colonna di frammenti. */
-    grid-template-columns: minmax(0, 0.9fr) auto minmax(26ch, 1.15fr);
+    /* Il margine verticale valeva il 34% dello schermo, ed è la
+       ragione vera del terzo di pagina vuoto sotto il dossier: non
+       era respiro, era spazio comprato e non speso. Resta un quarto
+       dello schermo — generoso — e quello che cede lo prende la
+       lastra, che è la cosa che si è venuti a guardare. */
+    padding-block: clamp(110px, 14vh, 170px) clamp(90px, 11vh, 140px);
+    /* Una corsia a destra per la costolina «04 — Topografia», che
+       sta a `right: var(--gut)`. Finché il dossier si fermava a metà
+       della sua cella non si toccavano mai; ora che la cella vale
+       esattamente quanto il dossier, la macro in float arriva fino
+       al margine e le finiva sopra. La corsia è la sua, e nessun
+       altro ci entra. */
+    padding-inline: var(--gut) calc(var(--gut) + 40px);
     align-items: center;
     column-gap: clamp(28px, 3.4vw, 60px);
+  }
+}
+
+/* Fra 1000 e 1280 le tre colonne non ci stanno più. Con una lastra
+   vera il dossier scenderebbe sotto le 26ch e tornerebbe la colonna
+   di frammenti — che a 1000px è esattamente quello che succedeva già
+   prima, con la lastra piccola: la scheda andava a capo ogni tre
+   parole ed era alta 1041px.
+   Le colonne diventano due, e il titolo scende sopra la lastra
+   invece di finire in una colonna da 240px: dichiarazione e volto
+   sono la stessa cosa detta due volte, prima a parole e poi in
+   fotografia, e stanno bene incolonnate. Il dossier prende l'altra
+   colonna per intero.
+   Qui la lastra può salire più che a 1280 — 84vh invece di 80 — e
+   non costa niente: l'altezza della scena la detta la colonna di
+   sinistra, che è già più alta della scheda, e finché la lastra
+   resta sotto quel totale la sezione non cresce di un pixel. Nessun
+   termine in vw, perché in due colonne la lastra non contende
+   larghezza a nessuno: le bastano 470px sui 517 che ha a 1000. */
+@media (min-width: 1000px) and (max-width: 1279px) {
+  .topografia {
+    --lastra-h: min(84vh, 700px);
+    grid-template-columns: minmax(0, 1fr) minmax(26ch, 42ch);
+  }
+
+  .topografia__intro {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  /* Due classi, e non è un vezzo: `justify-self: center` sta nella
+     regola base di `.topografia__campo`, che in questo file viene
+     *dopo* questo blocco. A parità di specificità vince l'ultima
+     scritta, e un `justify-self` qui non arriverebbe mai a valere. */
+  .topografia .topografia__campo {
+    grid-column: 1;
+    grid-row: 2;
+    /* La lastra sta a filo del titolo, non centrata nella sua cella:
+       centrata lasciava settanta pixel di scarto fra il bordo sinistro
+       della dichiarazione e quello della fotografia — abbastanza da
+       leggersi come uno sfalsamento e non come una scelta. Titolo e
+       lastra hanno lo stesso bordo: è la colonna che li tiene
+       insieme. */
+    justify-self: start;
+  }
+
+  /* La scheda sta in riga 2, accanto alla sola lastra.
+     Scavalcava due righe e si allineava in testa al titolo: sembrava
+     la scelta giusta — filetto e dichiarazione sulla stessa linea — ma
+     l'altezza della scheda è prenotata dal JS sulla regione più lunga
+     e non cambia mai, mentre la colonna di sinistra è alta titolo più
+     lastra. Il conto non poteva tornare: la colonna destra finiva
+     269px prima, e sotto restava un rettangolo di lime vuoto grande
+     come un quarto di scena.
+     In riga 2 il filetto allinea col bordo alto della fotografia —
+     una riga e uno spigolo che cominciano insieme, che è un'altra
+     linea vera — e i due fondi cadono a 34px l'uno dall'altro. Quello
+     che resta scoperto è la banda accanto al titolo, in alto: più
+     piccola, e in alto un vuoto accanto a una dichiarazione è respiro,
+     non un buco. */
+  .topografia__dossier {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+  }
+}
+
+/* Da 1280 le tre colonne della scena: dichiarazione, volto, scheda.
+   Il dossier ha bisogno di larghezza vera — comprimerlo lo fa andare
+   a capo ogni tre parole — ma non di più delle sue 42ch: la cella
+   era `1.15fr` e da 1600px in su restavano 200–340px di cella vuota
+   alla sua destra, dove la macro in float andava a galleggiare
+   staccata dal testo. Ora la cella vale quanto il dossier, il titolo
+   si prende tutto quello che avanza (a 1600: da 472 a 527px) e in
+   mezzo la lastra si allarga per rapporto dall'altezza che chiede. */
+@media (min-width: 1280px) {
+  .topografia {
+    --lastra-h: min(80vh, 46vw, 800px);
+    grid-template-columns: minmax(0, 1fr) auto minmax(26ch, 42ch);
   }
 }
 
@@ -69,10 +167,13 @@
    separare soggetto e fondo, e sulla campitura lime ogni frangia di
    scontorno diventa un alone verde sulla testa.
    Il rettangolo netto è anche la stessa lingua di CANONE e STRATI —
-   fotografie appoggiate sul foglio, mai incollate. */
+   fotografie appoggiate sul foglio, mai incollate.
+   La misura non sta qui: mobile e desktop la dichiarano su assi
+   diversi — larghezza sotto i 1000px, altezza sopra — e una
+   larghezza di ripiego in questa regola sarebbe solo un numero che
+   non governa niente. */
 .topografia__finestra {
   position: relative;
-  width: min(34vw, 340px);
   /* Il rapporto è quello del tre quarti, la lastra presa in cambio
      dalla scena 02. Le percentuali dei punti sono lette su questa
      inquadratura: cambiando rapporto si scollano tutte insieme. */
@@ -80,6 +181,33 @@
   background: var(--pece);
   overflow: hidden;
   box-shadow: 0 30px 90px -50px rgb(14 18 7 / 0.7);
+}
+
+/* Su desktop la lastra si dichiara in altezza, non in larghezza.
+   Con rapporto 0,671 la larghezza è il lato corto e non dice niente
+   su quanto la fotografia occupi lo schermo: 340px lasciavano un
+   francobollo in mezzo a una campitura alta un viewport, e portarli
+   a 600 farebbe una lastra alta 894px, fuori da qualunque portatile.
+   Si dichiara il lato che decide se ci sta, e la larghezza scende
+   dal rapporto.
+   I tre termini, e perché ognuno serve:
+   · 80vh  — resta dentro lo schermo insieme ai suoi margini;
+   · 46vw  — su una finestra alta e stretta non si mangia la colonna
+             del titolo (a 1280 è questo termine a vincere);
+   · 800px — oltre non c'è sorgente: la più grande utile è 1080w, e
+             a 2× la larghezza che ne deriva (537px) la esaurisce. */
+@media (min-width: 1000px) {
+  .topografia__finestra {
+    width: auto;
+    height: var(--lastra-h);
+    /* L'ombra era tarata su 340px: a lastra doppia una posa da 30px
+       con 90 di sfocatura finisce sotto il bordo e sparisce. Cresce
+       con lo schermo per restare una posa e non diventare un alone,
+       e il colore viene dal token invece che da un esadecimale
+       ricopiato a mano. */
+    box-shadow: 0 clamp(34px, 5vh, 56px) clamp(96px, 14vh, 150px) -58px
+      color-mix(in srgb, var(--pece) 72%, transparent);
+  }
 }
 
 /* Su schermo stretto lastra e scheda stanno in colonna. La lastra
@@ -205,13 +333,17 @@
   top: var(--py);
   transform: translate(-50%, -50%);
   width: 44px;
-  /* I due punti più vicini — codice a barre e labbra — distano 31px:
-     bersagli quadrati da 44 si sovrapporrebbero, e nella zona comune
-     uno dei due diventerebbe irraggiungibile. Spostarli non si può,
-     sono il rilievo del medico. Si stringe l'altezza, che è l'asse
-     su cui sono vicini, e il tocco impreciso lo raccoglie comunque
-     la lastra: sotto c'è un gestore che sceglie la regione più
-     vicina al punto toccato. */
+  /* I due punti più vicini — codice a barre e labbra — distano il 5%
+     dell'altezza del telaio: è una percentuale, quindi la distanza
+     in pixel dipende da quanto è grande la lastra. Bersagli quadrati
+     da 44 si sovrapporrebbero, e nella zona comune uno dei due
+     diventerebbe irraggiungibile. Spostarli non si può, sono il
+     rilievo del medico. Si stringe l'altezza, che è l'asse su cui
+     sono vicini, e il tocco impreciso lo raccoglie comunque la
+     lastra: sotto c'è un gestore che sceglie la regione più vicina
+     al punto toccato.
+     Questo è il valore di ripiego; le due misure vere stanno nelle
+     media query qui sotto, ciascuna legata alla propria lastra. */
   height: 30px;
   display: grid;
   place-items: center;
@@ -243,6 +375,24 @@
   .topografia__punti button {
     width: 36px;
     height: 18px;
+  }
+}
+
+/* Su desktop il bersaglio cresce con la lastra, perché è la lastra a
+   dettare quanto distano i punti.
+   I 44px pieni non si possono dare, e il conto lo dice: fra codice a
+   barre e labbra corre il 5% dell'altezza del telaio, quindi 44px di
+   bersaglio pretenderebbero una lastra alta 880px — cioè una
+   finestra da 1100px di altezza utile, che sui portatili non
+   esiste. Il 4,6% sta invece sempre sotto il 5% che li separa: da
+   652px di lastra in su i bersagli smettono di toccarsi, mentre alla
+   lastra vecchia da 507px si sovrapponevano di 4,6px. In pratica
+   l'area passa da 44×30 a 44×33 (1600×900) e a 44×37 (1920×1080),
+   e il minimo di 30px garantisce che non si torni mai sotto quello
+   che c'era prima. */
+@media (min-width: 1000px) {
+  .topografia__punti button {
+    height: clamp(30px, calc(var(--lastra-h) * 0.046), 44px);
   }
 }
 
@@ -289,8 +439,15 @@
 
 /* ── dossier ─────────────────────────────────────────────────── */
 
+/* Niente `align-self` qui. Era `center`, cioè quello che il
+   contenitore già dice con `align-items` da 1000px in su, e sotto i
+   1000 la colonna è una sola e la riga è alta quanto la scheda: non
+   allineava niente che non fosse già allineato. Serviva però a
+   vincere sulla riga giusta — fra 1000 e 1280 il dossier scavalca due
+   righe e va allineato in testa — e una dichiarazione che non fa
+   niente ma blocca quella che deve fare qualcosa è peggio di
+   nessuna. */
 .topografia__dossier {
-  align-self: center;
   max-width: 42ch;
   border-top: 1px solid var(--rule);
   padding-top: 20px;

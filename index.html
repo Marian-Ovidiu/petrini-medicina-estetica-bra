@@ -576,6 +576,14 @@
                camera che spinge dentro, con origine sul landmark. Il
                volto resta lo stesso volto per tutta la scena. -->
           <div class="topografia__finestra" data-topo-finestra>
+            <!-- `sizes` ricalca i tre regimi del CSS. Da 1000px in su
+                 la lastra è dichiarata in altezza, e `sizes` non sa
+                 leggere le vh: qui sta la sua traduzione in larghezza,
+                 arrotondata per eccesso — sbagliare in eccesso costa
+                 un file più grande, sbagliare in difetto costa una
+                 fotografia sgranata. Il massimo è 537px, che a 2×
+                 chiede 1074px: la sorgente da 1080w basta, e per
+                 questo il tetto della lastra sta lì. -->
             <img
               class="topografia__profilo"
               data-topo-profilo
@@ -585,7 +593,12 @@
                 /media/img/volto-tre-quarti-1080.avif 1080w,
                 /media/img/volto-tre-quarti-1600.avif 1600w
               "
-              sizes="(max-width: 999px) 64vw, 34vw"
+              sizes="
+                (max-width: 999px) 64vw,
+                (max-width: 1279px) 470px,
+                (max-width: 1735px) 31vw,
+                537px
+              "
               alt="Ritratto in tre quarti, usato come mappa delle regioni di trattamento"
               width="1696" height="2528"
               loading="lazy" decoding="async"
